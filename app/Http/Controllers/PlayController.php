@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use App\Models\BlogPost;
 use App\Models\Author;
@@ -15,8 +16,9 @@ class PlayController extends Controller
         return $author->with('posts')->first();
     }
 
-    public function play() {
-        return BlogPost::onlyTrashed()->get()->pluck('id');
+    public function play()
+    {
+        return BlogPost::onlyTrashed()->restore();
     }
 
     public function showAllPosts()
@@ -30,4 +32,11 @@ class PlayController extends Controller
         $post->delete();
         //it will go the model and run the boot function
     }
+
+    public function restoreBlogPosts($id)
+    {
+        BlogPost::onlyTrashed()->findOrFail($id)->restore();
+        return 'BlogPost And Comments Are Restored Successfully';
+    }
+
 }

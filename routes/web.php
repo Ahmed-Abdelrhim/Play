@@ -23,6 +23,7 @@ Route::get('/', function () {
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('play',[PlayController::class,'play']);
 
+Route::get('restore/post/{id}',[PlayController::class , 'restoreBlogPosts']);
 Route::get('all/posts',[PlayController::class,'showAllPosts']);
 Route::get('posts/{id}' , [PlayController::class , 'showPosts']);
 Route::get('delete/post/{id}',[PlayController::class , 'destroy']);

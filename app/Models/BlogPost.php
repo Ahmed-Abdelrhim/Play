@@ -23,12 +23,14 @@ class BlogPost extends Model
         return $this->hasMany(Comment::class,'post_id','id');
     }
 
-//    public static function boot()
-//    {
-//        parent::boot();
-//        static::deleting(function(BlogPost $post) {
-//            $post->comments()->delete();
-//            dd('I Was Deleted');
-//        });
-//    }
+    public static function boot()
+    {
+        parent::boot();
+        static::deleting(function(BlogPost $post) {
+            $post->comments()->delete();
+        });
+        static::restoring(function (BlogPost $post){
+            $post->comments()->restore();
+        });
+    }
 }
