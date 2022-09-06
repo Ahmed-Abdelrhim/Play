@@ -4,6 +4,10 @@ namespace App\Providers;
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
+use App\Models\BlogPost;
+use App\Models\Author;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -14,6 +18,8 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         // 'App\Models\Model' => 'App\Policies\ModelPolicy',
+//        'App\Http\Controllers\PlayController' => 'App\Policies\BlogPostPolicy',
+        'App\Models\BlogPost' => 'App\Policies\BlogPostPolicy',
     ];
 
     /**
@@ -25,11 +31,29 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Gate::define('update-blogPost',function ($author , $post) {
-            return true;
-            return $author->id === $post->author_id;
+//        Gate::define('update-blogPost',function ($author , $post) {
+//            return true;
+//            return $author->id === $post->author_id;
 //                return true;
 //            return false;
+//        });
+
+//        Gate::define('update-blogPost', function ($user ,  $post) {
+//            return $user->id === $post->author_id;
+//        });
+//
+//        Gate::define('delete-blogPost',function($user,$post) {
+//            if($user->id === $post->author_id)
+//                return true;
+//            return false;
+//        });
+//
+        Gate::before(function($user,$ability) {
+            if($user->is_authorized === 1 && in_array($ability , ['update']))
+                return true;
         });
+
+
+        Gate::resource('posts','App\Policies\BlogPostPolicy');
     }
 }

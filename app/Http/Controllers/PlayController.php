@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Requests\BlogPostRequest;
 use App\Models\Comment;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -22,13 +23,39 @@ class PlayController extends Controller
         return $author->with('posts')->first();
     }
 
-    public function play()
+    public function play($id)
     {
+        $author = Auth::guard('author')->user();
+        $this->authorize('posts.play',$id);
+        return 'Completed Success';
         //return Auth::guard('author')->user();
-        if (Auth::guard('author')->check())
-            return 'true';
-        return 'false';
+        //if (Auth::guard('author')->check())
+        //    return 'true';
+        // return 'false';
         //return BlogPost::onlyTrashed()->restore();
+        // قَالَ يَبْنَؤُمَّ لَا تَأْخُذْ بِلِحْيَتِى وَلَا بِرَأْسِىٓ ۖ إِنِّى خَشِيتُ أَن تَقُولَ فَرَّقْتَ بَيْنَ بَنِىٓ إِسْرَٰٓءِيلَ وَلَمْ تَرْقُبْ قَوْلِى
+        //۞ إِنَّ ٱللَّهَ يَأْمُرُكُمْ أَن تُؤَدُّوا۟ ٱلْأَمَٰنَٰتِ إِلَىٰٓ أَهْلِهَا وَإِذَا حَكَمْتُم بَيْنَ ٱلنَّاسِ أَن تَحْكُمُوا۟ بِٱلْعَدْلِ ۚ إِنَّ ٱللَّهَ نِعِمَّا يَعِظُكُم بِهِۦٓ ۗ إِنَّ ٱللَّهَ كَانَ سَمِيعًۢا بَصِيرًۭا
+    }
+// showBlogPostForm
+    public function showBlogPostForm()
+    {
+        $this->authorize('posts.create');
+        return view('blogpost.create');
+    }
+
+    public function addBlogPost(BlogPostRequest $request)
+    {
+        $id = Auth::guard('author')->user()->id;
+        BlogPost::create([
+            'title' => $request->input('title'),
+            'content' =>$request->input('content'),
+            'author_id' => $id,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        $request->session()->flash('success' ,'BlogPost Inserted Successfully');
+        return redirect()->back();
     }
 
     public function showAllPosts()
@@ -40,10 +67,17 @@ class PlayController extends Controller
     {
         $post = BlogPost::findOrFail($id);
         $author = Auth::guard('author')->user();
-        $this->authorize('update-blogpost',[$author,$post]);
-//        if(Gate::denies('update-blogPost',$author,$post))
-//            return 'You Not Are Allowed To Edit Or Delete This Post';
-        return 'You  Are Allowed To Edit Or Delete This Post';
+        // return 'Post Author ID: ' .$post->author_id . '<br> Currently Authenticated User ID: '.$author->id;
+
+//        if (!Gate::allows('update-blogPost', $post)) {
+//            // abort(403);
+//            return 'Not Allowed To Edit Or Delete This Post';
+//        }
+        $this->authorize('update', $post);
+
+        // if(Gate::denies('update-blogPost',$author,$post))
+        //    return 'You Not Are Allowed To Edit Or Delete This Post';
+        return 'You Are Allowed To Edit & Update This Post';
         // return view('blogpost.update', compact('post'));
     }
 
@@ -57,7 +91,9 @@ class PlayController extends Controller
     public function destroy($id)
     {
         $post = BlogPost::findOrFail($id);
-        $post->delete();
+        $this->authorize('delete', $post);
+        return 'You Are Allowed To Delete This BlogPost';
+        // $post->delete();
         //it will go the model and run the boot function
     }
 

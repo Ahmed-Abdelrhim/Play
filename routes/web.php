@@ -25,7 +25,7 @@ Route::post('login',[CustomLoginController::class,'login'])->name('signIn')->mid
 Route::get('logout',[CustomLoginController::class,'logout']);
 
 
-Route::get('play',[PlayController::class,'play']);
+Route::get('play/{id}',[PlayController::class,'play']);
 
 
 Route::group(['middleware' => 'auth:author' ],function () {
@@ -37,9 +37,13 @@ Route::group(['middleware' => 'auth:author' ],function () {
     Route::get('all/posts',[PlayController::class,'showAllPosts']);
     Route::get('posts/{id}' , [PlayController::class , 'showPosts']);
 
+
+    Route::get('add/blogPost' , [PlayController::class,'showBlogPostForm']);
+    Route::get('adding/blogPost' , [PlayController::class,'addBlogPost'])->name('create.blogPost');
     Route::get('update/post/{id}',[PlayController::class,'updateBlogPost'])->name('update-post');
     Route::post('update/post/{id}',[PlayController::class,'storeBlogPost'])->name('update.post');
-    Route::get('delete/post/{id}',[PlayController::class , 'destroy']);
+    Route::get('delete/post/{id}',[PlayController::class , 'destroy'])->name('delete.post');
+
 });
 
 
