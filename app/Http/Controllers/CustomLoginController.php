@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+
 class CustomLoginController extends Controller
 {
     public function showLoginForm()
@@ -18,8 +19,11 @@ class CustomLoginController extends Controller
 //            $request->session()->regenerate();
             return view('home');
         }
+        $request->session()->flash('message', 'email or password is incorrect' );
         return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
+            'message ' => 'email or password is incorrect',
+            'email' => 'email or password is incorrect.',
+            'password' => 'wrong password'
         ]);
     }
 
@@ -35,7 +39,7 @@ class CustomLoginController extends Controller
 
     public function logout(): \Illuminate\Http\RedirectResponse
     {
-          Auth::guard('author')->logout();
+        Auth::guard('author')->logout();
 //        $user->logout();
 //        $author->logout();
         return redirect()->route('login');

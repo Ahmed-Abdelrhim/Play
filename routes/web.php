@@ -22,7 +22,7 @@ Route::get('/', function () {
 
 Route::get('login',[CustomLoginController::class,'showLoginForm'])->name('login')->middleware('guest:author');
 Route::post('login',[CustomLoginController::class,'login'])->name('signIn')->middleware('guest');
-Route::get('logout',[CustomLoginController::class,'logout']);
+Route::post('logout',[CustomLoginController::class,'logout']);
 
 
 Route::get('play/{id}',[PlayController::class,'play']);
@@ -33,6 +33,7 @@ Route::group(['middleware' => 'auth:author' ],function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 
+    Route::get('payment',[PlayController::class,'showPaymentForm'])->name('pay');
     Route::get('restore/post/{id}',[PlayController::class , 'restoreBlogPosts']);
     Route::get('all/posts',[PlayController::class,'showAllPosts']);
     Route::get('posts/{id}' , [PlayController::class , 'showPosts']);

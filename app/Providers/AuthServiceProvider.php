@@ -53,6 +53,11 @@ class AuthServiceProvider extends ServiceProvider
                 return true;
         });
 
+        Gate::define('play',function($user,$id) {
+            dd($user);
+            return $user->id == $id;
+        });
+
 
         Gate::resource('posts','App\Policies\BlogPostPolicy');
     }

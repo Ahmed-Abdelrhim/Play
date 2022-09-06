@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Requests\BlogPostRequest;
 use App\Models\Comment;
+use App\Models\Currency;
+use App\Models\PaymentPlatform;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\BlogPost;
@@ -25,18 +27,24 @@ class PlayController extends Controller
 
     public function play($id)
     {
+//        return 'Author ID = ' . Auth::guard('author')->user()->id . '<br> Current ID = ' . $id;
         $author = Auth::guard('author')->user();
-        $this->authorize('posts.play',$id);
+        $post = BlogPost::find(1);
+        // $this->authorize('update',$post);
+        //$this->authorize('play',$id);
+
+        if(!Gate::allows('play',$id))
+            return 'No';
         return 'Completed Success';
         //return Auth::guard('author')->user();
         //if (Auth::guard('author')->check())
         //    return 'true';
-        // return 'false';
+        //return 'false';
         //return BlogPost::onlyTrashed()->restore();
         // قَالَ يَبْنَؤُمَّ لَا تَأْخُذْ بِلِحْيَتِى وَلَا بِرَأْسِىٓ ۖ إِنِّى خَشِيتُ أَن تَقُولَ فَرَّقْتَ بَيْنَ بَنِىٓ إِسْرَٰٓءِيلَ وَلَمْ تَرْقُبْ قَوْلِى
         //۞ إِنَّ ٱللَّهَ يَأْمُرُكُمْ أَن تُؤَدُّوا۟ ٱلْأَمَٰنَٰتِ إِلَىٰٓ أَهْلِهَا وَإِذَا حَكَمْتُم بَيْنَ ٱلنَّاسِ أَن تَحْكُمُوا۟ بِٱلْعَدْلِ ۚ إِنَّ ٱللَّهَ نِعِمَّا يَعِظُكُم بِهِۦٓ ۗ إِنَّ ٱللَّهَ كَانَ سَمِيعًۢا بَصِيرًۭا
     }
-// showBlogPostForm
+
     public function showBlogPostForm()
     {
         $this->authorize('posts.create');
@@ -101,6 +109,13 @@ class PlayController extends Controller
     {
         BlogPost::onlyTrashed()->findOrFail($id)->restore();
         return 'BlogPost And Comments Are Restored Successfully';
+    }
+
+    public function showPaymentForm()
+    {
+        $currencies = Currency::get();
+        $paymentPlatforms = PaymentPlatform::get();
+        return view('payment.pay')->with(['currencies' => $currencies , 'plats' => $paymentPlatforms] );
     }
 
 }

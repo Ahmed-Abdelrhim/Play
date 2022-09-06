@@ -9,8 +9,12 @@
                         <div class="card-body ">
                             <h5 class="card-title">{{$post->title}}</h5>
                             <p class="card-text">{{$post->content}}</p>
-                            <a href="{{route('update-post',$post->id)}}" class="btn btn-primary mb-5">Update</a>
-                            <a href="{{route('delete.post',$post->id)}}" class="btn btn-danger mb-5">Delete</a>
+                            @can('update',$post)
+                                <a href="{{route('update-post',$post->id)}}" class="btn btn-primary mb-2">Update</a>
+                            @endcan
+                            @can('delete',$post)
+                                <a href="{{route('delete.post',$post->id)}}" class="btn btn-danger mb-2">Delete</a>
+                            @endcan
                         </div>
                     @endforeach
                 </div>

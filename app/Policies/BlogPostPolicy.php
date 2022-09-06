@@ -93,7 +93,7 @@ class BlogPostPolicy
         //
     }
 
-    public function play(Author $author,$id) {
+    public function play(Author $author,BlogPost $post ) {
         return true;
         return  $author->id === $id;
         //    return 'You Are Right';
