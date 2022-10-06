@@ -24,10 +24,10 @@ class PlayController extends Controller
         return $post->comments()->get();
 
 //        (new Carbon\Carbon() )
-        return Carbon::createFromDate($post->createdt_at)->diffForHumans();
-        $author = Author::findOrFail($id);
+//        return Carbon::createFromDate($post->createdt_at)->diffForHumans();
+//        $author = Author::findOrFail($id);
         //return $author->post()->get();
-        return $author->with('posts')->first();
+//        return $author->with('posts')->first();
     }
 
     public function play($id)
