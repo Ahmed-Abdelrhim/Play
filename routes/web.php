@@ -53,5 +53,6 @@ Route::get('hash',function (){
     return bcrypt('123456');
 });
 
+Route::get('most/active/last/month',[PlayController::class,'activeLastMonthAuthor'])->name('most.active.last.month');
 
 

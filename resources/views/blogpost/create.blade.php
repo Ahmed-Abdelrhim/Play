@@ -2,9 +2,15 @@
 @section('content')
     <div class="container">
         <div class="col-6 mx-auto">
-            @if(Session::has('success'))
-                <div class="alert alert-success">{{Session::get('success')}}</div>
+            {{-- Success Message --}}
+            @if (Session::has('success'))
+                <div class="row mr-2 ml-2">
+                    <a  class="btn btn-lg btn-block btn-outline-success mb-2"
+                        id="type-error">{{Session::get('success')}}
+                    </a>
+                </div>
             @endif
+
             <form method="GET" action="{{route('create.blogPost')}}">
                 @csrf
                 <div class="form-group">

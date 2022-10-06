@@ -32,15 +32,16 @@ class PlayController extends Controller
 
     public function play($id)
     {
-//        return 'Author ID = ' . Auth::guard('author')->user()->id . '<br> Current ID = ' . $id;
         $author = Auth::guard('author')->user();
         $post = BlogPost::find(1);
-        // $this->authorize('update',$post);
-        //$this->authorize('play',$id);
 
         if (!Gate::allows('play', $id))
             return 'No';
         return 'Completed Success';
+        // $this->authorize('update',$post);
+        //$this->authorize('play',$id);
+
+
         //return Auth::guard('author')->user();
         //if (Auth::guard('author')->check())
         //    return 'true';
@@ -56,7 +57,7 @@ class PlayController extends Controller
         return view('blogpost.create');
     }
 
-    public function addBlogPost(BlogPostRequest $request)
+    public function addBlogPost(BlogPostRequest $request): \Illuminate\Http\RedirectResponse
     {
         $id = Auth::guard('author')->user()->id;
         BlogPost::create([
@@ -73,7 +74,8 @@ class PlayController extends Controller
 
     public function showAllPosts()
     {
-        return view('blogpost.posts', ['posts' => BlogPost::withCount('comments')->get()]);
+        // return BlogPost::mostCommented()->take(6)->get();
+        return view('blogpost.posts', ['posts' => BlogPost::withCount('comments')->get(),'mostCommented'=> BlogPost::mostCommented()]);
     }
 
     public function updateBlogPostForm($id)
@@ -136,6 +138,12 @@ class PlayController extends Controller
         $currencies = Currency::get();
         $paymentPlatforms = PaymentPlatform::get();
         return view('payment.pay')->with(['currencies' => $currencies, 'plats' => $paymentPlatforms]);
+    }
+
+    public function activeLastMonthAuthor()
+    {
+        $authors = Author::mostActive()->take(5)->get();
+        return view('blogpost.authors',['authors' => $authors]);
     }
 
 }

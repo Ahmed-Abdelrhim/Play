@@ -11,10 +11,11 @@ class CommentFactory extends Factory
      *
      * @return array
      */
-    public function definition()
+    public function definition(): array
     {
         return [
             'content' => $this->faker->text(),
+            'post_id' => $this->faker->numberBetween(1,100),
             'created_at' => now(),
             'updated_at' => now(),
         ];

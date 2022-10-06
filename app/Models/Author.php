@@ -13,10 +13,30 @@ class Author extends Authenticatable
 {
     use HasFactory ;
     protected $fillable = ['name','email','password','phone','avatar','created_at','updated_at'];
-    protected $hidden = ['created_at','updated_at'];
+    protected $hidden = ['password','created_at','updated_at'];
     public $timestamps = true;
 
-    public function posts() {
+    public function posts(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
         return $this->hasMany(BlogPost::class,'author_id','id');
     }
+
+    public function scopeMostActive($query)
+    {
+        return $query->withCount(['posts' => function($query){
+            return $query->whereBetween(static::CREATED_AT,[now()->subMonths(3),now()]);
+        }])->having('posts_count','>=',15)->orderBy('posts_count','desc');
+    }
+
+//    public function scopeMostActiveLastMonth($query)
+//    {
+//        return $query->withCount(['posts' => function($query){
+//            return $query->whereBetween(static::CREATED_AT,[now()->subMonths(2),now()]);
+//        }])->having('posts_count','>=' , 2)
+//        ->orderBy('posts_count','desc');
+//    }
+
+
+
+
 }

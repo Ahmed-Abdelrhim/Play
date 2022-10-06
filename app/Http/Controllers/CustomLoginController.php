@@ -15,15 +15,10 @@ class CustomLoginController extends Controller
 
     public function login(Request $request)
     {
-        if (Auth::guard('author')->attempt($this->credentials($request))) {
-//            $request->session()->regenerate();
+        if (Auth::guard('author')->attempt($this->credentials($request)))
             return view('home');
-        }
-        $request->session()->flash('message', 'email or password is incorrect' );
-        return back()->withErrors([
-            'message ' => 'email or password is incorrect',
-            'email' => 'email or password is incorrect.',
-            'password' => 'wrong password'
+        return redirect()->back()->withErrors([
+            'errors' => 'Email Or Password Is Incorrect',
         ]);
     }
 

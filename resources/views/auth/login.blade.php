@@ -6,17 +6,16 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">{{ __('Login') }}</div>
-
                     <div class="card-body">
-                        @error('email')
-                        <div class="row mb-3">
-                            <div class="row alert alert-danger col-md-6 mx-auto">{{$message}}</div>
-                        </div>
-
-                        @enderror
                         <form method="POST" action="{{ route('signIn') }}">
                             @csrf
-
+                            @error('errors')
+                            <div class="row mr-2 ml-2 mb-3 " >
+                                <a  href="#" class="btn btn-lg btn-block btn-outline-danger mb-2"
+                                    id="type-error">{{$message}}
+                                </a>
+                            </div>
+                            @enderror
 
                             <div class="row mb-3">
                                 <label for="email"
