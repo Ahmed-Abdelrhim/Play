@@ -64,6 +64,12 @@ class AuthServiceProvider extends ServiceProvider
             // return $user->id == $id;
         });
 
+        Gate::define('delete',function($user,$blogpost){
+            if($user->id == $blogpost->author_id)
+                return true;
+            return false;
+        });
+
 
         Gate::resource('posts','App\Policies\BlogPostPolicy');
     }
