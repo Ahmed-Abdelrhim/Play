@@ -24,3 +24,4 @@ class PaymentPlatformSeeder extends Seeder
         ]);
     }
 }
+// composer require league/flysystem-aws-s3-v3 "~1.0"

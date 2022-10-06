@@ -48,6 +48,12 @@ class AuthServiceProvider extends ServiceProvider
 //            return false;
 //        });
 //
+        Gate::define('update-blog_post',function ($user,$blog_post){
+            if ($user->id == $blog_post->author_id)
+                return true;
+            return false;
+        });
+
         Gate::before(function($user,$ability) {
             if($user->is_authorized === 1 && in_array($ability , ['update']))
                 return true;
@@ -55,7 +61,7 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('play',function($user,$id) {
             dd($user);
-            return $user->id == $id;
+            // return $user->id == $id;
         });
 
 

@@ -12,12 +12,17 @@ use App\Models\BlogPost;
 use App\Models\Author;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Validator;
 
 class PlayController extends Controller
 {
     public function showPosts($id)
     {
-        $post = BlogPost::findOrFail($id);
+        $post = BlogPost::find($id);
+        if (!$post)
+            return 'BlogPost Not Found';
+        return $post->comments()->get();
+
 //        (new Carbon\Carbon() )
         return Carbon::createFromDate($post->createdt_at)->diffForHumans();
         $author = Author::findOrFail($id);
@@ -33,7 +38,7 @@ class PlayController extends Controller
         // $this->authorize('update',$post);
         //$this->authorize('play',$id);
 
-        if(!Gate::allows('play',$id))
+        if (!Gate::allows('play', $id))
             return 'No';
         return 'Completed Success';
         //return Auth::guard('author')->user();
@@ -56,13 +61,13 @@ class PlayController extends Controller
         $id = Auth::guard('author')->user()->id;
         BlogPost::create([
             'title' => $request->input('title'),
-            'content' =>$request->input('content'),
+            'content' => $request->input('content'),
             'author_id' => $id,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
 
-        $request->session()->flash('success' ,'BlogPost Inserted Successfully');
+        $request->session()->flash('success', 'BlogPost Inserted Successfully');
         return redirect()->back();
     }
 
@@ -71,7 +76,7 @@ class PlayController extends Controller
         return view('blogpost.posts', ['posts' => BlogPost::withCount('comments')->get()]);
     }
 
-    public function updateBlogPost($id)
+    public function updateBlogPostForm($id)
     {
         $post = BlogPost::findOrFail($id);
         $author = Auth::guard('author')->user();
@@ -81,19 +86,34 @@ class PlayController extends Controller
 //            // abort(403);
 //            return 'Not Allowed To Edit Or Delete This Post';
 //        }
-        $this->authorize('update', $post);
+
+
+        // $this->authorize('update', $post);
+
+        if (!Gate::allows('update-blog_post', $post))
+            return 'You are not allowed to update this blog post';
 
         // if(Gate::denies('update-blogPost',$author,$post))
         //    return 'You Not Are Allowed To Edit Or Delete This Post';
-        return 'You Are Allowed To Edit & Update This Post';
+        return view('blogpost.update', ['post' => $post]);
         // return view('blogpost.update', compact('post'));
     }
 
     public function storeBlogPost($id, Request $request)
     {
-        return $request;
-        //$post = BlogPost::findOrFail($id);
-
+        $request->validate([
+            'title' => 'required|string|min:4',
+            'content' => 'required|string|min:8',
+        ]);
+        $blog_post = BlogPost::find($id);
+        if (!$blog_post)
+            return 'BlogPost Not Found To Be Updated';
+        $blog_post->update([
+            'title' => $request->input('title'),
+            'content' => $request->input('content'),
+            'updated' => now(),
+        ]);
+        return redirect()->back()->with(['success' => 'BlogPost Updated Successfully']);
     }
 
     public function destroy($id)
@@ -115,7 +135,7 @@ class PlayController extends Controller
     {
         $currencies = Currency::get();
         $paymentPlatforms = PaymentPlatform::get();
-        return view('payment.pay')->with(['currencies' => $currencies , 'plats' => $paymentPlatforms] );
+        return view('payment.pay')->with(['currencies' => $currencies, 'plats' => $paymentPlatforms]);
     }
 
 }

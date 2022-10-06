@@ -14,7 +14,8 @@ class Comment extends Model
     protected $hidden = ['created_at','updated_at'];
     public $timestamps = true;
 
-    public function post() {
+    public function post(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
         return $this->belongsTo(BlogPost::class,'post_id','id');
     }
 }

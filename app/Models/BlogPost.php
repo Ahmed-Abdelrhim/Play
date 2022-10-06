@@ -10,26 +10,34 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class BlogPost extends Model
 {
-    use HasFactory , SoftDeletes;
-    protected $fillable = ['author_id','title','content','created_at','updated_at'];
-    protected $hidden = ['created_at','updated_at'];
+    use HasFactory, SoftDeletes;
+
+    protected $fillable = ['author_id', 'title', 'content', 'created_at', 'updated_at'];
+    protected $hidden = ['created_at', 'updated_at'];
     public $timestamps = true;
 
-    public function author() {
-        return $this->belongsTo(Author::class,'author_id','id');
+    public function author(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Author::class, 'author_id', 'id');
     }
 
-    public function comments() {
-        return $this->hasMany(Comment::class,'post_id','id');
+    public function comments(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Comment::class, 'post_id', 'id');
+    }
+
+    public function scopeLatest($query)
+    {
+        return $query->orderBy(static::CREATED_AT,'desc');
     }
 
     public static function boot()
     {
         parent::boot();
-        static::deleting(function(BlogPost $post) {
+        static::deleting(function (BlogPost $post) {
             $post->comments()->delete();
         });
-        static::restoring(function (BlogPost $post){
+        static::restoring(function (BlogPost $post) {
             $post->comments()->restore();
         });
     }

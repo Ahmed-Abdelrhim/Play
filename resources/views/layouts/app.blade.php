@@ -50,9 +50,7 @@
                     @guest('author')
                         @if (Route::has('login'))
                             <li class="nav-item">
-
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('login') }}</a>
-                                {{--                                    <a class="nav-link" href="{{ route('login') }}">{{ __(Auth::user()) }}</a>--}}
                             </li>
                         @endif
 
@@ -62,6 +60,15 @@
                             </li>
                         @endif
                     @else
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('blog_posts')}}">BlogPost</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('add.blog_post')}}">Add</a>
+                        </li>
+
+
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
                                aria-expanded="false">

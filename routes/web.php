@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MailController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
@@ -35,16 +36,21 @@ Route::group(['middleware' => 'auth:author' ],function () {
 
     Route::get('payment',[PlayController::class,'showPaymentForm'])->name('pay');
     Route::get('restore/post/{id}',[PlayController::class , 'restoreBlogPosts']);
-    Route::get('all/posts',[PlayController::class,'showAllPosts']);
-    Route::get('posts/{id}' , [PlayController::class , 'showPosts']);
+    Route::get('all/posts',[PlayController::class,'showAllPosts'])->name('blog_posts');
+    Route::get('posts/{id}' , [PlayController::class , 'showPosts'])->name('show.blog_post.by.id');
 
 
-    Route::get('add/blogPost' , [PlayController::class,'showBlogPostForm']);
+    Route::get('add/blogPost' , [PlayController::class,'showBlogPostForm'])->name('add.blog_post');
     Route::get('adding/blogPost' , [PlayController::class,'addBlogPost'])->name('create.blogPost');
-    Route::get('update/post/{id}',[PlayController::class,'updateBlogPost'])->name('update-post');
+    Route::get('update/post/{id}',[PlayController::class,'updateBlogPostForm'])->name('update.post.form');
     Route::post('update/post/{id}',[PlayController::class,'storeBlogPost'])->name('update.post');
     Route::get('delete/post/{id}',[PlayController::class , 'destroy'])->name('delete.post');
 
+    Route::get('send/message',[MailController::class,'sendEmail'])->name('send.gmail');
+
+});
+Route::get('hash',function (){
+    return bcrypt('123456');
 });
 
 
