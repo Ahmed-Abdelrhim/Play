@@ -13,13 +13,19 @@ class AddTasks extends Component
 
 //    public $name;
 //    public $email;
-//    protected function rules(): array
-//    {
-//        return [
-//            'name' => 'required|min:6',
-//            'email' => ['required', 'email', 'not_in:' . auth()->user()->email],
-//        ];
-//    }
+    protected function rules()
+    {
+        return [
+            'blogPostTitle' => 'required|string|min:4',
+            'blogPostContent' => 'required|string|min:8',
+            // 'email' => ['required', 'email', 'not_in:' . auth()->user()->email],
+        ];
+    }
+
+    public function updated($ahmed)
+    {
+        $this->validateOnly($ahmed);
+    }
 
     public function render()
     {
@@ -30,6 +36,7 @@ class AddTasks extends Component
     public function addBlogPost()
     {
         $user_id = auth()->user()->id;
+        $this->validate();
         BlogPost::create([
             'title' => $this->blogPostTitle,
             'content' => $this->blogPostContent,

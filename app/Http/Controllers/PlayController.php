@@ -133,12 +133,7 @@ class PlayController extends Controller
         return 'BlogPost And Comments Are Restored Successfully';
     }
 
-    public function showPaymentForm()
-    {
-        $currencies = Currency::get();
-        $paymentPlatforms = PaymentPlatform::get();
-        return view('payment.pay')->with(['currencies' => $currencies, 'plats' => $paymentPlatforms]);
-    }
+
 
     public function activeLastMonthAuthor()
     {

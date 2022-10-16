@@ -1,5 +1,6 @@
 <div>
-    <h3 class="h3" style="color: white">View BlogPosts Is Here</h3>
+{{--    style="color: white" --}}
+    <h3 class="h3" >View BlogPosts Is Here</h3>
 
     <table class="table table-dark ">
         <thead>

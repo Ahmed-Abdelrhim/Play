@@ -37,6 +37,11 @@
                                         </label>
                                     @endforeach
                                 </div>
+                                <div>
+                                    @foreach($plats as $plat)
+                                        @includeIf('components'.strtolower($plat->name).'-collapse')
+                                    @endforeach
+                                </div>
                             </div>
                         </div>
                     </div>

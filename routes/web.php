@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\MailController;
+use App\Http\Controllers\PaymentController;
+use App\Models\PaymentPlatform;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
@@ -34,7 +36,7 @@ Route::group(['middleware' => 'auth:author' ],function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 
-    Route::get('payment',[PlayController::class,'showPaymentForm'])->name('pay');
+    Route::get('payment',[PaymentController::class,'showPaymentForm'])->name('pay');
     Route::get('restore/post/{id}',[PlayController::class , 'restoreBlogPosts']);
     Route::get('all/posts',[PlayController::class,'showAllPosts'])->name('blog_posts');
     Route::get('posts/{id}' , [PlayController::class , 'showPosts'])->name('show.blog_post.by.id');
@@ -59,3 +61,5 @@ Route::get('hash',function (){
 Route::get('most/active/last/month',[PlayController::class,'activeLastMonthAuthor'])->name('most.active.last.month');
 
 
+// npm run watch
+// npm run development --watch
