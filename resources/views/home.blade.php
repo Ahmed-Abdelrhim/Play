@@ -21,6 +21,10 @@
                         @endguest
 {{--                            <div>Checking Here {{Auth::guard('author')->check()}}</div>--}}
                         {{ __('You are logged in!') }}
+{{--                        <div>--}}
+{{--                            <video src="{{asset('storage/third/1665768905.mp4')}}" type="mp4" controlsList="nodownload" controls >--}}
+{{--                            </video>--}}
+{{--                        </div>--}}
                     </div>
                 </div>
             </div>

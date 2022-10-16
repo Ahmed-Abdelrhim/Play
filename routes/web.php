@@ -47,10 +47,13 @@ Route::group(['middleware' => 'auth:author' ],function () {
     Route::get('delete/post/{id}',[PlayController::class , 'destroy'])->name('delete.post');
 
     Route::get('send/message',[MailController::class,'sendEmail'])->name('send.gmail');
+    Route::get('play/with/livewire',function(){
+        return view('play');
+    })->name('livewire');
 
 });
 Route::get('hash',function (){
-    return bcrypt('123456');
+    return bcrypt('12345678');
 });
 
 Route::get('most/active/last/month',[PlayController::class,'activeLastMonthAuthor'])->name('most.active.last.month');
