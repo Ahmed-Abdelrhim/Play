@@ -48,10 +48,22 @@ Route::group(['middleware' => 'auth:author' ],function () {
     Route::post('update/post/{id}',[PlayController::class,'storeBlogPost'])->name('update.post');
     Route::get('delete/post/{id}',[PlayController::class , 'destroy'])->name('delete.post');
 
+    Route::get('test',function () {
+        return view('test');
+    });
+    Route::get('test/test',[])->name('stripe.post');
+
     Route::get('send/message',[MailController::class,'sendEmail'])->name('send.gmail');
     Route::get('play/with/livewire',function(){
         return view('play');
     })->name('livewire');
+
+    Route::get('callback',function (){
+        return 'Success';
+    });
+    Route::get('error',function (){
+        return 'Error';
+    });
 
 });
 Route::get('hash',function (){
@@ -63,3 +75,4 @@ Route::get('most/active/last/month',[PlayController::class,'activeLastMonthAutho
 
 // npm run watch
 // npm run development --watch
+// 173704761160
