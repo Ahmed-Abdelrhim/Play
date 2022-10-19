@@ -24,20 +24,21 @@ class BlogPostRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required | string | min : 4',
-            'content' => 'required | string | min: 8 ',
+            'author_id' => 'required|numeric|exists:authors,id',
+            'title' => 'required|string|min:4',
+            'content' => 'required|string|min:8',
         ];
     }
 
     public function messages()
     {
         return [
-            'title.required' => 'Title Is Required',
-            'title.string' => 'Title Should be String',
-            'title.min' => 'Title cant be less than 4 chars',
-            'content.required' => 'Content Is Required',
-            'content.string' => 'Content Should be String',
-            'content.min' => 'Content be less than 8 chars',
+            'title.required' => 'عنوان البلوج بوست مطلوب',
+            'title.string' => 'عنوان البلوج بوست يجد ان يكون حروف',
+            'title.min' => 'عنوان البلوج بوست يجب الا يكون اقل من 4 حروف',
+            'content.required' => 'محتوي البلوج بوست مطلوب',
+            'content.string' => 'محتوي البلوج بوست يجب ان يكون حروف',
+            'content.min' => 'محتوي البلوج بوست يجب الا يكون اقل من 8 حروف',
         ];
     }
 }
