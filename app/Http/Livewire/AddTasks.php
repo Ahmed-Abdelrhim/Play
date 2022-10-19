@@ -13,7 +13,7 @@ class AddTasks extends Component
 
 //    public $name;
 //    public $email;
-    protected function rules()
+    protected function rules(): array
     {
         return [
             'blogPostTitle' => 'required|string|min:4',

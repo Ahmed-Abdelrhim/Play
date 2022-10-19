@@ -65,12 +65,24 @@ Route::group(['middleware' => 'auth:author' ],function () {
         return 'Error';
     });
 
+    Route::get('show/upload',[PlayController::class,'uploadForm'])->name('upload.form');
+    Route::post('upload',[PlayController::class,'upload'])->name('upload');
+
 });
 Route::get('hash',function (){
     return bcrypt('12345678');
 });
 
 Route::get('most/active/last/month',[PlayController::class,'activeLastMonthAuthor'])->name('most.active.last.month');
+Route::get('pp/{id}',function ($id){
+    $post =  \App\Models\BlogPost::find($id);
+    // return $post->images()->get();
+    if($post->images) {
+        return $posts = $post->images()->get();
+        return $posts[0]->src;
+    }
+    return 'false';
+});
 
 
 // npm run watch

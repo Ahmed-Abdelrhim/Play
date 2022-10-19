@@ -12,6 +12,7 @@ use App\Models\BlogPost;
 use App\Models\Author;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class PlayController extends Controller
@@ -75,7 +76,7 @@ class PlayController extends Controller
     public function showAllPosts()
     {
         // return BlogPost::mostCommented()->take(6)->get();
-        return view('blogpost.posts', ['posts' => BlogPost::withCount('comments')->get(),'mostCommented'=> BlogPost::mostCommented()]);
+        return view('blogpost.posts', ['posts' => BlogPost::withCount('comments')->get(), 'mostCommented' => BlogPost::mostCommented()]);
     }
 
     public function updateBlogPostForm($id)
@@ -120,9 +121,15 @@ class PlayController extends Controller
 
     public function destroy($id)
     {
-        $post = BlogPost::findOrFail($id);
+        $post = BlogPost::find($id);
+        if(!$post)
+            return 'post not found';
         $this->authorize('delete', $post);
-        return 'You Are Allowed To Delete This BlogPost';
+        $done = $post->delete();
+        if ($done)
+            session()->flash('success', 'Post Deleted Successfully');
+        return redirect()->route('upload.form');
+        // return 'You Are Allowed To Delete This BlogPost';
         // $post->delete();
         //it will go the model and run the boot function
     }
@@ -134,11 +141,30 @@ class PlayController extends Controller
     }
 
 
-
     public function activeLastMonthAuthor()
     {
         $authors = Author::mostActive()->take(5)->get();
-        return view('blogpost.authors',['authors' => $authors]);
+        return view('blogpost.authors', ['authors' => $authors]);
+    }
+
+    public function uploadForm()
+    {
+        return view('upload');
+    }
+
+    public function upload(Request $request): \Illuminate\Http\RedirectResponse
+    {
+        $image_name = time() . '.' . $request->file('image')->guessExtension();
+        $name = $request->file('image')->storeAs('thumbnails', $image_name);
+        $blogPost = BlogPost::find(11);
+        $done = $blogPost->images()->create([
+            'src' => $name,
+            'type' => 'image'
+        ]);
+        if ($done)
+            session()->flash('success', 'Image Uploaded Successfully');
+        return redirect()->back();
+        // dd(Storage::url($name));
     }
 
 }

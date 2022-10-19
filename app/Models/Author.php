@@ -12,6 +12,7 @@ use Laravel\Sanctum\HasApiTokens;
 class Author extends Authenticatable
 {
     use HasFactory ;
+    protected $table = 'authors';
     protected $fillable = ['name','email','password','phone','avatar','created_at','updated_at'];
     protected $hidden = ['password','created_at','updated_at'];
     public $timestamps = true;
@@ -28,6 +29,11 @@ class Author extends Authenticatable
         }])->having('posts_count','>=',15)->orderBy('posts_count','desc');
     }
 
+    public function images(): \Illuminate\Database\Eloquent\Relations\MorphMany
+    {
+        return $this->morphMany(Images::class,'imageable');
+    }
+
 //    public function scopeMostActiveLastMonth($query)
 //    {
 //        return $query->withCount(['posts' => function($query){
@@ -35,6 +41,8 @@ class Author extends Authenticatable
 //        }])->having('posts_count','>=' , 2)
 //        ->orderBy('posts_count','desc');
 //    }
+
+
 
 
 

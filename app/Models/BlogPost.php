@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class BlogPost extends Model
 {
     use HasFactory, SoftDeletes;
-
+    protected $table = 'blog_posts';
     protected $fillable = ['author_id', 'title', 'content', 'created_at', 'updated_at'];
     protected $hidden = ['created_at', 'updated_at'];
     public $timestamps = true;
@@ -41,9 +41,16 @@ class BlogPost extends Model
         parent::boot();
         static::deleting(function (BlogPost $post) {
             $post->comments()->delete();
+            $post->images()->delete();
         });
         static::restoring(function (BlogPost $post) {
             $post->comments()->restore();
         });
+    }
+
+
+    public function images(): \Illuminate\Database\Eloquent\Relations\MorphMany
+    {
+        return $this->morphMany(Images::class,'imageable');
     }
 }

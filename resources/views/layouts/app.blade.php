@@ -78,6 +78,12 @@
                             </li>
                         @endif
 
+                            @if(Route::current()->getName() != 'upload.form' )
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{route('upload.form')}}">Upload</a>
+                                </li>
+                            @endif
+
                         {{-- Route::current()->getName() --}}
                         {{-- Request::route()->getPrefix() --}}
 
