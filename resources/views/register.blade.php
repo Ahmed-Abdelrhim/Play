@@ -12,11 +12,11 @@
 
 
                             <div class="row mb-3">
-                                <label for="email"
+                                <label for="name"
                                        class="col-md-4 col-form-label text-md-end">Name</label>
 
                                 <div class="col-md-6">
-                                    <input id="name" type="text"
+                                    <input id="name" type="text" placeholder="full name"
                                            class="form-control @error('name') is-invalid @enderror" name="name"
                                            value="{{ old('name') }}" required autocomplete="email" autofocus>
                                     @error('name')
@@ -32,7 +32,7 @@
                                        class="col-md-4 col-form-label text-md-end">Email</label>
 
                                 <div class="col-md-6">
-                                    <input id="email" type="text"
+                                    <input id="email" type="text" placeholder="email address"
                                            class="form-control @error('email') is-invalid @enderror" name="email"
                                            value="{{ old('email') }}" required autocomplete="email" autofocus>
                                     @error('email')
@@ -47,7 +47,7 @@
                                 <label for="password"
                                        class="col-md-4 col-form-label text-md-end">Password</label>
                                 <div class="col-md-6">
-                                    <input id="password" type="password"
+                                    <input id="password" type="password" placeholder="password"
                                            class="form-control @error('password') is-invalid @enderror" name="password"
                                            autocomplete="current-password">
                                     @error('password')
@@ -62,10 +62,10 @@
 
 
                             <div class="row mb-3">
-                                <label for="password"
+                                <label for="phone"
                                        class="col-md-4 col-form-label text-md-end">Phone</label>
                                 <div class="col-md-6">
-                                    <input type="tel"
+                                    <input type="tel" id="phone" placeholder="phone number"
                                            class="form-control @error('phone') is-invalid @enderror" name="phone"
                                            autocomplete="current-password">
                                     @error('phone')

@@ -1,8 +1,13 @@
 <!doctype html>
-{{--<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">--}}
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@yield('title')</title>
+{{--    <link rel="apple-touch-icon" href="{{asset('assets/admin/images/ico/apple-icon-120.png')}}">--}}
+{{--    <link rel="apple-touch-icon" href="{{asset('storage/thumbnails/1666143280.webp')}}">--}}
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('storage/thumbnails/play-3.png')}}">
+
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -20,6 +25,18 @@
             integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+"
             crossorigin="anonymous"></script>
     @livewireStyles
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@1,200;1,300;1,400;1,500;1,700;1,800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        body {
+            font-family:'Nunito', 'Cairo', sans-serif ;
+        }
+    </style>
 
     {{--    <link rel="stylesheet" href="{{asset('css/style.css')}}">--}}
     @stack('styles')

@@ -23,11 +23,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('login',[CustomLoginController::class,'showLoginForm'])->name('login')->middleware('guest:author');
-Route::post('login',[CustomLoginController::class,'login'])->name('signIn')->middleware('guest');
-Route::post('logout',[CustomLoginController::class,'logout']);
-Route::get('register/now',[CustomLoginController::class,'showRegisterForm'])->name('register');
-Route::post('register/To/Login',[CustomLoginController::class,'register'])->name('register.post');
+Route::group(['middleware' => 'guest:author'] , function(){
+    Route::get('login',[CustomLoginController::class,'showLoginForm'])->name('login')->middleware('guest:author');
+    Route::post('login',[CustomLoginController::class,'login'])->name('signIn')->middleware('guest');
+    Route::post('logout',[CustomLoginController::class,'logout']);
+    Route::get('register/now',[CustomLoginController::class,'showRegisterForm'])->name('register');
+    Route::post('register/To/Login',[CustomLoginController::class,'register'])->name('register.post');
+});
 
 
 
