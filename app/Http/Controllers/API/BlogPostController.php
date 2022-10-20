@@ -108,8 +108,13 @@ class BlogPostController extends Controller
         return 'email';
     }
 
-    public function logout()
+    public function logout(Request $request): \Illuminate\Http\JsonResponse
     {
+        //$name = Auth::guard('author')->user()->name;
+        $name = $request->user()->name;
+        $request->user()->currentAccessToken()->delete();
+        $goodbye = $name.' Hope See You Soon GoodBye!';
+        return response()->json(['msg' => $goodbye,'status' => 200]);
 
     }
 }

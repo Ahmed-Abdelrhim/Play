@@ -23,7 +23,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 ################################ Auth  ################################
 Route::get('register',[BlogPostController::class,'register']);
 Route::post('login',[BlogPostController::class,'login']);
-Route::post('logout',[BlogPostController::class,'logout']);
 ################################ Auth  ################################
 
 Route::group(['middleware'=> 'auth:sanctum'],function() {
@@ -31,6 +30,9 @@ Route::group(['middleware'=> 'auth:sanctum'],function() {
     Route::get('post/{id}',[BlogPostController::class,'show']);
     Route::post('store/post',[BlogPostController::class,'storePost']);
     Route::post('update/post/{id}',[BlogPostController::class,'updateBlogPost']);
-});
+    Route::post('go/logout',[BlogPostController::class,'logout']);
 
+});
+// 3|Ewu2FDvbpvOhsSYwatsSQ4hGdymkAiVfHVLIHLVE
 // http://127.0.0.1:8000/api/store/post
+// Bearer 4|7q1NbSh0wuFSyXUEgukhkdsSqB0v63OYZlaDKnpG
