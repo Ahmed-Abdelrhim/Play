@@ -21,15 +21,23 @@
             crossorigin="anonymous"></script>
     @livewireStyles
 
+    {{--    <link rel="stylesheet" href="{{asset('css/style.css')}}">--}}
     @stack('styles')
 </head>
 <body>
 <div id="app">
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container">
-            <a class="navbar-brand" href="{{ url('/') }}">
-                {{ config('app.name', 'Laravel') }}
+            <a class="navbar-brand" href="{{route('home')}}">
+                {{--{{ config('app.name', 'Laravel') }}--}}
+                Play
             </a>
+            <img src="
+            @if(\App\Models\Images::where('imageable_id',Auth::guard('author')->user()->id)->first())
+            {{asset('storage/'.\App\Models\Images::where('imageable_id',Auth::guard('author')->user()->id)->first()->src)}}
+            @endif
+            " class="img-thumbnail" style="width: 55px; height: 55px; border-radius: 50%;"/>
+
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -78,11 +86,11 @@
                             </li>
                         @endif
 
-                            @if(Route::current()->getName() != 'upload.form' )
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{route('upload.form')}}">Upload</a>
-                                </li>
-                            @endif
+                        @if(Route::current()->getName() != 'upload.form' )
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{route('upload.form')}}">Upload</a>
+                            </li>
+                        @endif
 
                         {{-- Route::current()->getName() --}}
                         {{-- Request::route()->getPrefix() --}}

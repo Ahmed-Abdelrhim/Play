@@ -10,27 +10,30 @@
                         <form method="POST" action="{{ route('signIn') }}">
                             @csrf
                             @error('errors')
-                            <div class="row mr-2 ml-2 mb-3 " >
-                                <a  href="#" class="btn btn-lg btn-block btn-outline-danger mb-2"
-                                    id="type-error">{{$message}}
+                            <div class="row mr-2 ml-2 mb-3 col-7 mx-auto">
+                                <a href="#" class="btn btn-danger mb-2"
+                                   id="type-error">{{$message}}
                                 </a>
+
+                                {{--                                <span class="invalid-feedback mb-2" role="alert">--}}
+                                {{--                                        <strong>{{ $message }}</strong>--}}
+                                {{--                                    </span>--}}
                             </div>
                             @enderror
 
                             <div class="row mb-3">
                                 <label for="email"
-                                       class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
+                                       class="col-md-4 col-form-label text-md-end">{{ __('Email') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="email" type="email"
+                                    <input id="email" type="text"
                                            class="form-control @error('email') is-invalid @enderror" name="email"
                                            value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                                    {{--                                    @error('email')--}}
-                                    {{--                                    <span class="invalid-feedback" role="alert">--}}
-                                    {{--                                                                            <strong>{{ $message }}</strong>--}}
-                                    {{--                                                                        </span>--}}
-                                    {{--                                    @enderror--}}
+                                    @error('email')
+                                    <span class="invalid-feedback mb-2" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
                             </div>
 
@@ -41,7 +44,13 @@
                                 <div class="col-md-6">
                                     <input id="password" type="password"
                                            class="form-control @error('password') is-invalid @enderror" name="password"
-                                           required autocomplete="current-password">
+                                           autocomplete="current-password">
+                                    <p>dont have an account <a href="{{route('register')}}">sign up now!</a></p>
+                                    @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
 
                                     {{--                                @error('password')--}}
                                     {{--                                    <span class="invalid-feedback" role="alert">--}}
