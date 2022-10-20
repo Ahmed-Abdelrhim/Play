@@ -33,8 +33,10 @@
                 Play
             </a>
             <img src="
-            @if(\App\Models\Images::where('imageable_id',Auth::guard('author')->user()->id)->first())
+            @if(Auth::guard('author')->check() && \App\Models\Images::where('imageable_id',Auth::guard('author')->user()->id)->first())
             {{asset('storage/'.\App\Models\Images::where('imageable_id',Auth::guard('author')->user()->id)->first()->src)}}
+            @else
+            {{asset('storage/profiles/1666143280.webp')}}
             @endif
             " class="img-thumbnail" style="width: 55px; height: 55px; border-radius: 50%;"/>
 
