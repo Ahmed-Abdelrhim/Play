@@ -22,9 +22,10 @@ use App\Http\Controllers\CustomLoginController;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('playy',[PlayController::class,'play']);
 
 Route::group(['middleware' => 'guest:author'] , function(){
-    Route::get('login',[CustomLoginController::class,'showLoginForm'])->name('login')->middleware('guest:author');
+    Route::get('login',[CustomLoginController::class,'showLoginForm'])->name('login');
     Route::post('login',[CustomLoginController::class,'login'])->name('signIn')->middleware('guest');
     Route::post('logout',[CustomLoginController::class,'logout']);
     Route::get('register/now',[CustomLoginController::class,'showRegisterForm'])->name('register');
@@ -72,6 +73,9 @@ Route::group(['middleware' => 'auth:author' ],function () {
 
     Route::get('show/upload',[PlayController::class,'uploadForm'])->name('upload.form');
     Route::post('upload',[PlayController::class,'upload'])->name('upload');
+
+    Route::get('user/profile',[PlayController::class,'viewProfilePage'])->name('profile');
+    Route::post('save/profile/data',[PlayController::class,'storeUserProfileData'])->name('post.profile.data');
 
 });
 Route::get('hash',function (){

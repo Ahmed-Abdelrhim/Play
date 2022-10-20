@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title')</title>
-{{--    <link rel="apple-touch-icon" href="{{asset('assets/admin/images/ico/apple-icon-120.png')}}">--}}
-{{--    <link rel="apple-touch-icon" href="{{asset('storage/thumbnails/1666143280.webp')}}">--}}
+    {{--    <link rel="apple-touch-icon" href="{{asset('assets/admin/images/ico/apple-icon-120.png')}}">--}}
+    {{--    <link rel="apple-touch-icon" href="{{asset('storage/thumbnails/1666143280.webp')}}">--}}
     <link rel="shortcut icon" type="image/x-icon" href="{{asset('storage/thumbnails/play-3.png')}}">
 
     <!-- Fonts -->
@@ -32,9 +32,15 @@
         href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@1,200;1,300;1,400;1,500;1,700;1,800&display=swap"
         rel="stylesheet">
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <style>
         body {
-            font-family:'Nunito', 'Cairo', sans-serif ;
+            font-family: 'Nunito', 'Cairo', sans-serif;
         }
     </style>
 
@@ -47,15 +53,22 @@
         <div class="container">
             <a class="navbar-brand" href="{{route('home')}}">
                 {{--{{ config('app.name', 'Laravel') }}--}}
-                Play
+                Playing
             </a>
             @if(Auth::guard('author')->check())
-                <img src="@if(\App\Models\Images::where('imageable_id',Auth::guard('author')->user()->id)->first())
-            {{asset('storage/'.\App\Models\Images::where('imageable_id',Auth::guard('author')->user()->id)->first()->src)}}
-            @else
-            {{asset('storage/profiles/1666143280.webp')}}
-            @endif
-            " class="img-thumbnail" style="width: 55px; height: 55px; border-radius: 50%;"/>
+                {{-- <img src="@if(\App\Models\Images::where('imageable_id',Auth::guard('author')->user()->id)->first())--}}
+                {{--{{asset('storage/'.\App\Models\Images::where('imageable_id',Auth::guard('author')->user()->id)->first()->src)}}--}}
+                {{-- @else--}}
+                {{--{{asset('storage/profiles/1666143280.webp')}}--}}
+                {{-- @endif--}}
+                {{-- " class="img-thumbnail" style="width: 55px; height: 55px; border-radius: 50%;"/>--}}
+                @if(count(auth()->guard('author')->user()->image) > 0 )
+                    <img class="img-thumbnail" src="{{asset('storage/'.auth()->guard('author')->user()->image()->first()->src)}}"
+                         style="width: 55px; height: 55px; border-radius: 50%;"/>
+                @else
+                    <img class="img-thumbnail" src="{{asset('storage/profiles/pic-6.jpg')}}"
+                         style="width: 55px; height: 55px; border-radius: 50%;"/>
+                @endif
             @endif
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -128,9 +141,13 @@
                                 {{ Auth::guard('author')->user()->name }}
                             </a>
                             <div class="dropdown-menu">
+                                <a class="dropdown-item" href="{{ route('profile') }}" >
+                                    Profile
+                                </a>
+
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                     document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
+                                    Logout
                                 </a>
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

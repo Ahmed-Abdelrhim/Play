@@ -31,14 +31,21 @@ class PlayController extends Controller
 //        return $author->with('posts')->first();
     }
 
-    public function play($id)
+    public function play()
     {
-        $author = Auth::guard('author')->user();
-        $post = BlogPost::find(1);
-
-        if (!Gate::allows('play', $id))
-            return 'No';
-        return 'Completed Success';
+//        return auth()->guard('author')->user()->first();
+        $user = Auth::guard('author')->user();
+//        return $user->image;
+        if($user->image )
+            return count($user->image);
+//            return $user->image()->get();
+        return 'None';
+//        $author = Auth::guard('author')->user();
+//        $post = BlogPost::find(1);
+//
+//        if (!Gate::allows('play', $id))
+//            return 'No';
+//        return 'Completed Success';
         // $this->authorize('update',$post);
         //$this->authorize('play',$id);
 
@@ -165,6 +172,53 @@ class PlayController extends Controller
             session()->flash('success', 'Image Uploaded Successfully');
         return redirect()->back();
         // dd(Storage::url($name));
+    }
+
+    public function viewProfilePage()
+    {
+        $user = Auth::guard('author')->user();
+        $image = null;
+        if(count($user->image) > 0)
+            $image = $user->image()->first()->src;
+
+        return view('profile',['user' => $user,'image' => $image]);
+    }
+
+    public function storeUserProfileData(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|min:4',
+            'email' => 'required|email|unique:authors,email,'. Auth::guard('author')->user()->id,
+            'password' => 'nullable|string|min:6',
+            'phone' => 'nullable|regex:/(01)[0-9]{9}/',
+            'image' => 'nullable|mimes:jpg,jpeg,png,gif,webp|max:30000'
+        ]);
+        if ($validator->fails())
+            return redirect('user/profile')->withErrors($validator)->withInput();
+        $user = Auth::guard('author')->user();
+        if ($request->hasFile('image')) {
+            $image_name = time() . '.' . $request->file('image')->guessExtension();
+            $name = $request->file('image')->storeAs('profiles', $image_name);
+            if(count($user->image) > 0 )
+            {
+                $user->image()->update([
+                    'src' => $name
+                ]);
+            }
+            $user->image()->create([
+                'src' => $name,
+                'type' => 'avatar',
+            ]);
+        }
+
+        $user->update($request->except(['image','password']));
+        if($request->password != null)
+        {
+            $user->password = bcrypt($request->password);
+            $user->save();
+        }
+        $request->session()->flash('success', 'Profile Updated Successfully');
+        return redirect()->back();
     }
 
 }

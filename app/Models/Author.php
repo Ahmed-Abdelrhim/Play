@@ -30,7 +30,7 @@ class Author extends Authenticatable
         }])->having('posts_count','>=',15)->orderBy('posts_count','desc');
     }
 
-    public function images(): \Illuminate\Database\Eloquent\Relations\MorphMany
+    public function image(): \Illuminate\Database\Eloquent\Relations\MorphMany
     {
         return $this->morphMany(Images::class,'imageable');
     }
