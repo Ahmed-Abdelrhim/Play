@@ -32,13 +32,14 @@
                 {{--{{ config('app.name', 'Laravel') }}--}}
                 Play
             </a>
-            <img src="
-            @if(Auth::guard('author')->check() && \App\Models\Images::where('imageable_id',Auth::guard('author')->user()->id)->first())
+            @if(Auth::guard('author')->check())
+                <img src="@if(\App\Models\Images::where('imageable_id',Auth::guard('author')->user()->id)->first())
             {{asset('storage/'.\App\Models\Images::where('imageable_id',Auth::guard('author')->user()->id)->first()->src)}}
             @else
             {{asset('storage/profiles/1666143280.webp')}}
             @endif
             " class="img-thumbnail" style="width: 55px; height: 55px; border-radius: 50%;"/>
+            @endif
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"

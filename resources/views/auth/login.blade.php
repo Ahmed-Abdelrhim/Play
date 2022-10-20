@@ -15,9 +15,9 @@
                                    id="type-error">{{$message}}
                                 </a>
 
-                                {{--                                <span class="invalid-feedback mb-2" role="alert">--}}
-                                {{--                                        <strong>{{ $message }}</strong>--}}
-                                {{--                                    </span>--}}
+                                {{--<span class="invalid-feedback mb-2" role="alert">--}}
+                                {{--<strong>{{ $message }}</strong>--}}
+                                {{--</span>--}}
                             </div>
                             @enderror
 
@@ -52,11 +52,11 @@
                                     </span>
                                     @enderror
 
-                                    {{--                                @error('password')--}}
-                                    {{--                                    <span class="invalid-feedback" role="alert">--}}
-                                    {{--                                        <strong>{{ $message }}</strong>--}}
-                                    {{--                                    </span>--}}
-                                    {{--                                @enderror--}}
+                                    {{--@error('password')--}}
+                                    {{--<span class="invalid-feedback" role="alert">--}}
+                                    {{--<strong>{{ $message }}</strong>--}}
+                                    {{--</span>--}}
+                                    {{--@enderror--}}
                                 </div>
                             </div>
 
