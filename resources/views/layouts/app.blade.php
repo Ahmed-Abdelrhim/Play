@@ -32,11 +32,17 @@
         href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@1,200;1,300;1,400;1,500;1,700;1,800&display=swap"
         rel="stylesheet">
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"
+            integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+            integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
+          integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
 
     <style>
         body {
@@ -63,11 +69,16 @@
                 {{-- @endif--}}
                 {{-- " class="img-thumbnail" style="width: 55px; height: 55px; border-radius: 50%;"/>--}}
                 @if(count(auth()->guard('author')->user()->image) > 0 )
-                    <img class="img-thumbnail" src="{{asset('storage/'.auth()->guard('author')->user()->image()->first()->src)}}"
-                         style="width: 55px; height: 55px; border-radius: 50%;"/>
+                    <a href="{{route('home')}}">
+                        <img class="img-thumbnail"
+                             src="{{asset('storage/'.auth()->guard('author')->user()->image()->first()->src)}}"
+                             style="width: 55px; height: 55px; border-radius: 50%;"/>
+                    </a>
                 @else
-                    <img class="img-thumbnail" src="{{asset('storage/profiles/pic-6.jpg')}}"
-                         style="width: 55px; height: 55px; border-radius: 50%;"/>
+                    <a href="{{route('home')}}">
+                        <img class="img-thumbnail" src="{{asset('storage/profiles/pic-6.jpg')}}"
+                             style="width: 55px; height: 55px; border-radius: 50%;"/>
+                    </a>
                 @endif
             @endif
 
@@ -141,7 +152,7 @@
                                 {{ Auth::guard('author')->user()->name }}
                             </a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="{{ route('profile') }}" >
+                                <a class="dropdown-item" href="{{ route('profile') }}">
                                     Profile
                                 </a>
 
