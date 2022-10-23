@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title')</title>
     {{--    <link rel="apple-touch-icon" href="{{asset('assets/admin/images/ico/apple-icon-120.png')}}">--}}
-    {{--    <link rel="apple-touch-icon" href="{{asset('storage/thumbnails/1666143280.webp')}}">--}}
-    <link rel="shortcut icon" type="image/x-icon" href="{{asset('storage/thumbnails/play-3.png')}}">
+        <link rel="apple-touch-icon" href="{{asset('storage/thumbnails/play-1.png')}}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('storage/thumbnails/play-1.png')}}">
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -144,6 +144,12 @@
                                 <a class="nav-link" href="{{route('pay')}}">Payment</a>
                             </li>
                         @endif
+
+                            @if(Route::current()->getName() != 'js' )
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{route('js')}}">JS</a>
+                                </li>
+                            @endif
 
 
                         <li class="nav-item dropdown">

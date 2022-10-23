@@ -77,6 +77,10 @@ Route::group(['middleware' => 'auth:author' ],function () {
     Route::get('user/profile',[PlayController::class,'viewProfilePage'])->name('profile');
     Route::post('save/profile/data',[PlayController::class,'storeUserProfileData'])->name('post.profile.data');
 
+
+    ################### Custom Play
+    Route::get('asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdsadasd',[PlayController::class,'js'])->name('js');
+
 });
 Route::get('hash',function (){
     return bcrypt('12345678');

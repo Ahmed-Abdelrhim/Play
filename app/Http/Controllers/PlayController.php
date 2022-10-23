@@ -221,4 +221,9 @@ class PlayController extends Controller
         return redirect()->back();
     }
 
+    public function js()
+    {
+        return view('play_js');
+    }
+
 }
