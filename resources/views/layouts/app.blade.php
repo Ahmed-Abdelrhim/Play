@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title')</title>
     {{--    <link rel="apple-touch-icon" href="{{asset('assets/admin/images/ico/apple-icon-120.png')}}">--}}
-        <link rel="apple-touch-icon" href="{{asset('storage/thumbnails/play-1.png')}}">
+    <link rel="apple-touch-icon" href="{{asset('storage/thumbnails/play-1.png')}}">
     <link rel="shortcut icon" type="image/x-icon" href="{{asset('storage/thumbnails/play-1.png')}}">
 
     <!-- Fonts -->
@@ -62,22 +62,17 @@
                 Playing
             </a>
             @if(Auth::guard('author')->check())
-                {{-- <img src="@if(\App\Models\Images::where('imageable_id',Auth::guard('author')->user()->id)->first())--}}
-                {{--{{asset('storage/'.\App\Models\Images::where('imageable_id',Auth::guard('author')->user()->id)->first()->src)}}--}}
-                {{-- @else--}}
-                {{--{{asset('storage/profiles/1666143280.webp')}}--}}
-                {{-- @endif--}}
-                {{-- " class="img-thumbnail" style="width: 55px; height: 55px; border-radius: 50%;"/>--}}
-                @if(count(auth()->guard('author')->user()->image) > 0 )
+                {{--  @if( isset(auth()->guard('author')->user()->image) && count(auth()->guard('author')->user()->image) > 0 )  --}}
+                @if(auth()->guard('author')->user()->image != null)
                     <a href="{{route('home')}}">
                         <img class="img-thumbnail"
                              src="{{asset('storage/'.auth()->guard('author')->user()->image()->first()->src)}}"
-                             style="width: 55px; height: 55px; border-radius: 50%;"/>
+                             style="width: 55px; height: 55px; border-radius: 50%;" alt="loading..."/>
                     </a>
                 @else
                     <a href="{{route('home')}}">
-                        <img class="img-thumbnail" src="{{asset('storage/profiles/pic-6.jpg')}}"
-                             style="width: 55px; height: 55px; border-radius: 50%;"/>
+                        <img class="img-thumbnail" src="{{asset('storage/profiles/pic-6.webp')}}"
+                             style="width: 55px; height: 55px; border-radius: 50%;" alt="not-found"/>
                     </a>
                 @endif
             @endif
@@ -145,11 +140,11 @@
                             </li>
                         @endif
 
-                            @if(Route::current()->getName() != 'js' )
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{route('js')}}">JS</a>
-                                </li>
-                            @endif
+                        @if(Route::current()->getName() != 'js' )
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{route('js')}}">JS</a>
+                            </li>
+                        @endif
 
 
                         <li class="nav-item dropdown">
@@ -187,3 +182,9 @@
 @livewireScripts
 </body>
 </html>
+{{-- <img src="@if(\App\Models\Images::where('imageable_id',Auth::guard('author')->user()->id)->first())--}}
+{{--{{asset('storage/'.\App\Models\Images::where('imageable_id',Auth::guard('author')->user()->id)->first()->src)}}--}}
+{{-- @else--}}
+{{--{{asset('storage/profiles/1666143280.webp')}}--}}
+{{-- @endif--}}
+{{-- " class="img-thumbnail" style="width: 55px; height: 55px; border-radius: 50%;"/>--}}

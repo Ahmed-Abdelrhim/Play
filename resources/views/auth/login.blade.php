@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-6">
                 <div class="card">
                     <div class="card-header">{{ __('Login') }}</div>
                     <div class="card-body">
@@ -45,7 +45,7 @@
                                     <input id="password" type="password"
                                            class="form-control @error('password') is-invalid @enderror" name="password"
                                            autocomplete="current-password">
-                                    <p>dont have an account <a href="{{route('register')}}">sign up now!</a></p>
+                                    <p style="margin-top: 3px;">Don't have an account ! <a href="{{route('register')}}" style="color: grey; ">SignUp Now</a></p>
                                     @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

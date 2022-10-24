@@ -36,7 +36,7 @@ class PlayController extends Controller
 //        return auth()->guard('author')->user()->first();
         $user = Auth::guard('author')->user();
 //        return $user->image;
-        if($user->image )
+        if ($user->image)
             return count($user->image);
 //            return $user->image()->get();
         return 'None';
@@ -129,7 +129,7 @@ class PlayController extends Controller
     public function destroy($id)
     {
         $post = BlogPost::find($id);
-        if(!$post)
+        if (!$post)
             return 'post not found';
         $this->authorize('delete', $post);
         $done = $post->delete();
@@ -178,17 +178,18 @@ class PlayController extends Controller
     {
         $user = Auth::guard('author')->user();
         $image = null;
-        if(count($user->image) > 0)
+        // if (isset($user->image) && count($user->image) > 0)
+        if ($user->image != null)
             $image = $user->image()->first()->src;
 
-        return view('profile',['user' => $user,'image' => $image]);
+        return view('profile', ['user' => $user, 'image' => $image]);
     }
 
     public function storeUserProfileData(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|min:4',
-            'email' => 'required|email|unique:authors,email,'. Auth::guard('author')->user()->id,
+            'email' => 'required|email|unique:authors,email,' . Auth::guard('author')->user()->id,
             'password' => 'nullable|string|min:6',
             'phone' => 'nullable|regex:/(01)[0-9]{9}/',
             'image' => 'nullable|mimes:jpg,jpeg,png,gif,webp|max:30000'
@@ -199,8 +200,8 @@ class PlayController extends Controller
         if ($request->hasFile('image')) {
             $image_name = time() . '.' . $request->file('image')->guessExtension();
             $name = $request->file('image')->storeAs('profiles', $image_name);
-            if(count($user->image) > 0 )
-            {
+            // if (count($user->image) > 0) {
+            if ($user->image() != null) {
                 $user->image()->update([
                     'src' => $name
                 ]);
@@ -211,9 +212,8 @@ class PlayController extends Controller
             ]);
         }
 
-        $user->update($request->except(['image','password']));
-        if($request->password != null)
-        {
+        $user->update($request->except(['image', 'password']));
+        if ($request->password != null) {
             $user->password = bcrypt($request->password);
             $user->save();
         }
