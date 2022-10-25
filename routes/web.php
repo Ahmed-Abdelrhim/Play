@@ -19,6 +19,8 @@ use App\Http\Controllers\CustomLoginController;
 |
 */
 //Auth::routes();
+Route::get('not-found-page',[PlayController::class,'errorPage'])->name('error');
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -79,7 +81,6 @@ Route::group(['middleware' => 'auth:author' ],function () {
 
 
     ################### Custom Play
-    Route::get('asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdsadasd',[PlayController::class,'js'])->name('js');
 
 });
 Route::get('hash',function (){

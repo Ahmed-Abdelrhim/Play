@@ -226,4 +226,9 @@ class PlayController extends Controller
         return view('play_js');
     }
 
+    public function errorPage()
+    {
+        return view('error');
+    }
+
 }
