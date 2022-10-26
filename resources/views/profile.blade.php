@@ -33,7 +33,8 @@
                                 <div class="col-md-6">
                                     <input id="name" type="text" placeholder="full name"
                                            class="form-control @error('name') is-invalid @enderror" name="name"
-                                           value="{{$user->name}}" required autocomplete="email" autofocus>
+                                           value="{{ $user->name }}" required
+                                           autocomplete="email" autofocus>
                                     @error('name')
                                     <span class="invalid-feedback mb-2" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -49,7 +50,8 @@
                                 <div class="col-md-6">
                                     <input id="email" type="text" placeholder="email address"
                                            class="form-control @error('email') is-invalid @enderror" name="email"
-                                           value="{{ $user->email }}" required autocomplete="email" autofocus>
+                                           value="{{ $user->email }}" required
+                                           autocomplete="email" autofocus>
                                     @error('email')
                                     <span class="invalid-feedback mb-2" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -82,7 +84,9 @@
                                     <input type="tel" id="phone" placeholder="phone number"
                                            class="form-control @error('phone') is-invalid @enderror" name="phone"
                                            autocomplete="current-password"
-                                           @if($user->phone != null) value="{{$user->phone}}" @endif>
+                                           @if($user->phone != null)
+                                               value="{{ $user->phone }}"
+                                        @endif>
                                     @error('phone')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -97,10 +101,12 @@
                                 <label for="lang"
                                        class="col-md-4 col-form-label text-md-end">language</label>
                                 <div class="col-8">
-                                    <select id="lang" name="language" class="custom-select" style="width: 73%">
+                                    <select id="lang" name="locale" class="custom-select" style="width: 73%">
                                         @foreach(\App\Models\Author::LOCALES as $locale => $lang)
                                             <option
-                                                value="{{$locale}}" {{$user->locale != $locale ?: 'selected'}}>{{$lang}}</option>
+                                                value="{{$locale}}" {{ $user->locale != $locale ?: 'selected'}}>
+                                                {{$lang}}
+                                            </option>
                                         @endforeach
                                     </select>
                                     @error('language')

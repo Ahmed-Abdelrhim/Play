@@ -52,7 +52,7 @@ class BlogPostController extends Controller
             'content' => 'required|min:8',
         ]);
         if ($validate->fails())
-            return response()->json(['status' => 400 , 'msg' => 'error']);
+            return response()->json(['data' => $validate->errors(),'status' => 400 , 'msg' => 'error']);
             // return $this->apiResponse($validate->errors(), 400, 'Validation Error');
         $post = BlogPost::find($id);
         if (!$post)

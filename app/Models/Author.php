@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\BlogPost;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Laravel\Sanctum\HasApiTokens;
 
 //use Laravel\Sanctum\HasApiTokens;
@@ -51,6 +53,14 @@ class Author extends Authenticatable
 //        }])->having('posts_count','>=' , 2)
 //        ->orderBy('posts_count','desc');
 //    }
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::updating(function (Author $author) {
+        });
+    }
 
 
 }

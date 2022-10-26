@@ -140,11 +140,6 @@
                             </li>
                         @endif
 
-{{--                        @if(Route::current()->getName() != 'js' )--}}
-{{--                            <li class="nav-item">--}}
-{{--                                <a class="nav-link" href="{{route('js')}}">JS</a>--}}
-{{--                            </li>--}}
-{{--                        @endif--}}
 
 
                         <li class="nav-item dropdown">

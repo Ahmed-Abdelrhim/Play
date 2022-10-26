@@ -11,6 +11,8 @@ use Illuminate\Http\Request;
 use App\Models\BlogPost;
 use App\Models\Author;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -33,30 +35,7 @@ class PlayController extends Controller
 
     public function play()
     {
-//        return auth()->guard('author')->user()->first();
-        $user = Auth::guard('author')->user();
-//        return $user->image;
-        if ($user->image)
-            return count($user->image);
-//            return $user->image()->get();
-        return 'None';
-//        $author = Auth::guard('author')->user();
-//        $post = BlogPost::find(1);
-//
-//        if (!Gate::allows('play', $id))
-//            return 'No';
-//        return 'Completed Success';
-        // $this->authorize('update',$post);
-        //$this->authorize('play',$id);
-
-
-        //return Auth::guard('author')->user();
-        //if (Auth::guard('author')->check())
-        //    return 'true';
-        //return 'false';
-        //return BlogPost::onlyTrashed()->restore();
-        // قَالَ يَبْنَؤُمَّ لَا تَأْخُذْ بِلِحْيَتِى وَلَا بِرَأْسِىٓ ۖ إِنِّى خَشِيتُ أَن تَقُولَ فَرَّقْتَ بَيْنَ بَنِىٓ إِسْرَٰٓءِيلَ وَلَمْ تَرْقُبْ قَوْلِى
-        //۞ إِنَّ ٱللَّهَ يَأْمُرُكُمْ أَن تُؤَدُّوا۟ ٱلْأَمَٰنَٰتِ إِلَىٰٓ أَهْلِهَا وَإِذَا حَكَمْتُم بَيْنَ ٱلنَّاسِ أَن تَحْكُمُوا۟ بِٱلْعَدْلِ ۚ إِنَّ ٱللَّهَ نِعِمَّا يَعِظُكُم بِهِۦٓ ۗ إِنَّ ٱللَّهَ كَانَ سَمِيعًۢا بَصِيرًۭا
+        Cache::flush();
     }
 
     public function showBlogPostForm()
@@ -162,11 +141,14 @@ class PlayController extends Controller
     public function upload(Request $request): \Illuminate\Http\RedirectResponse
     {
         $image_name = time() . '.' . $request->file('image')->guessExtension();
-        $name = $request->file('image')->storeAs('thumbnails', $image_name);
-        $blogPost = BlogPost::find(11);
+        $name = $request->file('image')->storeAs('thumbnails', $image_name,'s3');
+        Storage::disk('s3')->setVisibility($name,'public');
+
+        $blogPost = BlogPost::find(1);
+
         $done = $blogPost->images()->create([
-            'src' => $name,
-            'type' => 'image'
+            'src' => Storage::disk('s3')->url($name),
+            'type' => 'BlogPost_Photo'
         ]);
         if ($done)
             session()->flash('success', 'Image Uploaded Successfully');
@@ -178,11 +160,10 @@ class PlayController extends Controller
     {
         $user = Auth::guard('author')->user();
         $image = null;
-        // if (isset($user->image) && count($user->image) > 0)
         if ($user->image != null)
             $image = $user->image()->first()->src;
 
-        return view('profile', ['user' => $user, 'image' => $image]);
+         return view('profile', ['user' => $user, 'image' => $image]);
     }
 
     public function storeUserProfileData(Request $request)
@@ -191,7 +172,7 @@ class PlayController extends Controller
             'name' => 'required|string|min:4',
             'email' => 'required|email|unique:authors,email,' . Auth::guard('author')->user()->id,
             'password' => 'nullable|string|min:6',
-            'phone' => 'nullable|regex:/(01)[0-9]{9}/',
+            'phone' => 'nullable|regex:/(01)[0-9]{9}/|min:10|max:11',
             'image' => 'nullable|mimes:jpg,jpeg,png,gif,webp|max:30000'
         ]);
         if ($validator->fails())
@@ -201,18 +182,22 @@ class PlayController extends Controller
             $image_name = time() . '.' . $request->file('image')->guessExtension();
             $name = $request->file('image')->storeAs('profiles', $image_name);
             // if (count($user->image) > 0) {
-            if ($user->image() != null) {
+            if ($user->image != null) {
                 $user->image()->update([
                     'src' => $name
                 ]);
+            } else {
+                $user->image()->create([
+                    'src' => $name,
+                    'type' => 'avatar',
+                ]);
             }
-            $user->image()->create([
-                'src' => $name,
-                'type' => 'avatar',
-            ]);
+            Cache::put('author-image', Auth::guard('author')->user()->image->src, now()->addMonth());
         }
 
-        $user->update($request->except(['image', 'password']));
+        $user->update($request->except(['image', 'password', 'locale']));
+        $user->locale = $request->get('locale');
+        $user->save();
         if ($request->password != null) {
             $user->password = bcrypt($request->password);
             $user->save();

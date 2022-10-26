@@ -24,7 +24,7 @@
 
             /*width: 200px;*/
             /*width: 100%;*/
-            height: 102vh;
+            height: 100vh;
         }
         @media (min-width: 700px) {
             .slideshow__slide {
@@ -213,8 +213,13 @@
     </script>
 </head>
 <body>
+<nav>
+</nav>
 
 <div class="background-image">
+    <a href="{{route('login')}}" style="color: white; font-size: 20px; margin-left: 20px; margin-top: 20px;" >login</a>
+    <a href="{{route('register')}}" style="color: white; font-size: 20px; margin-left: 20px; margin-top: 20px;" >register</a>
+
     <div class="slideshow__slide-caption-title" style="color: #ffffff; margin-top: -20px">
         <h1 class="h1" style="position: absolute; top: 40%; left: 20%; font-size: 55px">
             Everything broken can be repaired
