@@ -49,8 +49,8 @@ class BlogPost extends Model
     }
 
 
-    public function images(): \Illuminate\Database\Eloquent\Relations\MorphMany
+    public function image(): \Illuminate\Database\Eloquent\Relations\MorphOne
     {
-        return $this->morphMany(Images::class,'imageable');
+        return $this->morphOne(Images::class,'imageable');
     }
 }

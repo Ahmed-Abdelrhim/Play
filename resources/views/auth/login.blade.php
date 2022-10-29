@@ -213,7 +213,7 @@
                 @enderror
                 <div class="form">
                     <label for="email">Email</label>
-                    <input type="email" id="email" name="email">
+                    <input type="email" id="email" name="email" >
                     @error('email')
                     <span class="invalid-feedback mb-2" role="alert">
                         <strong>{{ $message }}</strong>

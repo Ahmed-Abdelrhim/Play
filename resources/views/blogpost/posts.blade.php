@@ -46,21 +46,22 @@
                     </div>
                 </div>
             </div>
-            <div class="col-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Most Commented</h5>
-                        <p class="card-subtitle text-muted mb-2">what people are currently talking about.</p>
-                        @foreach($mostCommented as $post)
-                            <li class="list-group-item">
-                                <a style=" color: gray"
-                                   href="{{route('show.blog_post.by.id',$post->id)}}">{{$post->title}}</a>
-                            </li>
-                        @endforeach
-                    </div>
-                </div>
-            </div>
+{{--            <div class="col-4">--}}
+{{--                <div class="card">--}}
+{{--                    <div class="card-body">--}}
+{{--                        <h5 class="card-title">Most Commented</h5>--}}
+{{--                        <p class="card-subtitle text-muted mb-2">what people are currently talking about.</p>--}}
+{{--                        @foreach($mostCommented as $post)--}}
+{{--                            <li class="list-group-item">--}}
+{{--                                <a style=" color: gray"--}}
+{{--                                   href="{{route('show.blog_post.by.id',$post->id)}}">{{$post->title}}</a>--}}
+{{--                            </li>--}}
+{{--                        @endforeach--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
 
         </div>
+       {{$posts->links()}}
     </div>
 @endsection

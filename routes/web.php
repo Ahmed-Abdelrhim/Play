@@ -28,7 +28,7 @@ Route::get('s3',function (){
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('play', [PlayController::class, 'play']);
+Route::get('play/{id}', [PlayController::class, 'play']);
 
 Route::group(['middleware' => 'guest:author'], function () {
     Route::get('login', [CustomLoginController::class, 'showLoginForm'])->name('login');
@@ -93,7 +93,6 @@ Route::get('hash', function () {
 Route::get('most/active/last/month', [PlayController::class, 'activeLastMonthAuthor'])->name('most.active.last.month');
 Route::get('pp/{id}', function ($id) {
     $post = \App\Models\BlogPost::find($id);
-    // return $post->images()->get();
     if ($post->images) {
         return $posts = $post->images()->get();
         return $posts[0]->src;

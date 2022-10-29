@@ -1,8 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
+
     <div class="container">
         <div class="row justify-content-center">
+{{--            <div class="d-flex flex-column col-6">--}}
+{{--                <img src="{{$image}}" class="img-thumbnail" style="width: 200px; height: 200px; border-radius: 50%;" alt="not-found"/>--}}
+{{--                <h3 class="h3" style="width: 200px; margin-left: 37px;">User Profile</h3>--}}
+{{--                <p class="mt-3" style="max-width: 100%;"> {{$image}} </p>--}}
+{{--            </div>--}}
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header h4 text-center">Update Profile</div>

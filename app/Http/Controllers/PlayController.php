@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Requests\BlogPostRequest;
 use App\Models\Comment;
 use App\Models\Currency;
+use App\Models\Images;
 use App\Models\PaymentPlatform;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -16,6 +17,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Nette\Utils\Image;
 
 class PlayController extends Controller
 {
@@ -24,7 +26,23 @@ class PlayController extends Controller
         $post = BlogPost::find($id);
         if (!$post)
             return 'BlogPost Not Found';
-        return $post->comments()->get();
+
+//        $image =  Storage::disk('s3')->response('thumbnails/' . '1666802816.jpg');
+//        $image =  Storage::disk('s3')->url('thumbnails/' . '1666802816.jpg');
+//        $image =  Storage::disk('s3')->temporaryUrl('thumbnails/' . '1666802816.jpg',now()->addMinutes(10));
+//        $image =  Storage::disk('s3')->url('thumbnails/' . $post->images()->first()->src);
+//        return $post->image != null ? $post->image()->first()->src : 'No Image';
+        if ($post->image != null) {
+            $image = $post->image()->first()->src;
+            return view('s3', compact('image'));
+        }
+        return $post;
+
+//        if ($post->images != null) {
+//            return $post->images()->first();
+//        }
+//        return 'Post Has No Images';
+        // return $post->comments()->get();
 
 //        (new Carbon\Carbon() )
 //        return Carbon::createFromDate($post->createdt_at)->diffForHumans();
@@ -33,9 +51,48 @@ class PlayController extends Controller
 //        return $author->with('posts')->first();
     }
 
-    public function play()
+    public function play($id)
     {
-        Cache::flush();
+        if (is_numeric($id)) {
+            $result = [];
+            for ($i = 1 ; $i <= $id ; $i++){
+                if ($i % 3 == 0 && $i % 5 == 0) {
+                    $result[] .= 'FizzBuzz';
+                } else if ($i % 3 == 0) {
+                    $result[] .= 'Fizz';
+                } else if ($i % 5 == 0) {
+                    $result[] .= 'Buzz';
+                } else {
+                    $result[] .= $i;
+                }
+            }
+            return $result;
+        }
+        return 'Please enter a number';
+
+
+
+
+//        $user = Author::find($id);
+//        if($user->image != null) {
+//            $string = $user->image()->first()->src;
+//            $image_time_name = substr($string, strpos($string, 'profiles/') + 9); // 9
+//            // return $image_time_name;
+//            $done= Storage::disk('s3')->delete('profiles' . '/' . $image_time_name);
+//            if ($done)
+//                return 'success';
+//            return 'not found image ';
+//        }
+//
+//
+//        $author = BlogPost::find($id);
+//        if ($author)
+//            //abort(400);
+//            if ($author->images != null) {
+//                dd('true');
+//                return $author->images->first();
+//            }
+//        return 'Author Has No Image';
     }
 
     public function showBlogPostForm()
@@ -62,7 +119,10 @@ class PlayController extends Controller
     public function showAllPosts()
     {
         // return BlogPost::mostCommented()->take(6)->get();
-        return view('blogpost.posts', ['posts' => BlogPost::withCount('comments')->get(), 'mostCommented' => BlogPost::mostCommented()]);
+        $posts = BlogPost::with('author:name')->paginate(15);
+        $mostCommented = BlogPost::mostCommented();
+        // return view('blogpost.posts', ['posts' => BlogPost::withCount('comments')->get(), 'mostCommented' => BlogPost::mostCommented()]);
+        return view('blogpost.posts', ['posts' => $posts, 'mostCommented' => $mostCommented]);
     }
 
     public function updateBlogPostForm($id)
@@ -141,12 +201,13 @@ class PlayController extends Controller
     public function upload(Request $request): \Illuminate\Http\RedirectResponse
     {
         $image_name = time() . '.' . $request->file('image')->guessExtension();
-        $name = $request->file('image')->storeAs('thumbnails', $image_name,'s3');
-        Storage::disk('s3')->setVisibility($name,'public');
+        $name = $request->file('image')->storeAs('thumbnails', $image_name, 's3');
+        // $name = Storage::disk('s3')->put('thumbnails/'.$image_name, $request->file('image') );
+        // Storage::disk('s3')->setVisibility($name,'public');
 
         $blogPost = BlogPost::find(1);
 
-        $done = $blogPost->images()->create([
+        $done = $blogPost->image()->create([
             'src' => Storage::disk('s3')->url($name),
             'type' => 'BlogPost_Photo'
         ]);
@@ -163,7 +224,7 @@ class PlayController extends Controller
         if ($user->image != null)
             $image = $user->image()->first()->src;
 
-         return view('profile', ['user' => $user, 'image' => $image]);
+        return view('profile', ['user' => $user, 'image' => $image]);
     }
 
     public function storeUserProfileData(Request $request)
@@ -180,19 +241,22 @@ class PlayController extends Controller
         $user = Auth::guard('author')->user();
         if ($request->hasFile('image')) {
             $image_name = time() . '.' . $request->file('image')->guessExtension();
-            $name = $request->file('image')->storeAs('profiles', $image_name);
+            $path = $request->file('image')->storeAs('profiles', $image_name, 's3');
             // if (count($user->image) > 0) {
             if ($user->image != null) {
+                $string = $user->image()->first()->src;
+                $image_time_name = substr($string, strpos($string, 'profiles/') + 9); // 9
+                // return $image_time_name;
+                Storage::disk('s3')->delete('profiles' . '/' . $image_time_name);
                 $user->image()->update([
-                    'src' => $name
+                    'src' => Storage::disk('s3')->url($path)
                 ]);
             } else {
                 $user->image()->create([
-                    'src' => $name,
+                    'src' => Storage::disk('s3')->url($path),
                     'type' => 'avatar',
                 ]);
             }
-            Cache::put('author-image', Auth::guard('author')->user()->image->src, now()->addMonth());
         }
 
         $user->update($request->except(['image', 'password', 'locale']));
@@ -203,7 +267,7 @@ class PlayController extends Controller
             $user->save();
         }
         $request->session()->flash('success', 'Profile Updated Successfully');
-        return redirect()->back();
+        return view('profile', compact('user'));
     }
 
     public function js()
@@ -214,6 +278,12 @@ class PlayController extends Controller
     public function errorPage()
     {
         return view('error');
+    }
+
+    public function show()
+    {
+        return Storage::disk('s3')->response('images/' . $image->filename);
+
     }
 
 }
