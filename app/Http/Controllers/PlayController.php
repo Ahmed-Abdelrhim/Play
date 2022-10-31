@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Requests\BlogPostRequest;
+use App\Jobs\PlayingTask;
 use App\Models\Comment;
 use App\Models\Currency;
 use App\Models\Images;
@@ -53,6 +54,7 @@ class PlayController extends Controller
 
     public function play($id)
     {
+        PlayingTask::dispatch()->delay(5);
         if (is_numeric($id)) {
             $result = [];
             for ($i = 1 ; $i <= $id ; $i++){
