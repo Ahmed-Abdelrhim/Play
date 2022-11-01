@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 class MailController extends Controller
 {
+    public function viewSendEmailForm()
+    {
+        return view('emails.send-email');
+    }
+
     public function sendEmail():string
     {
         $details = [
@@ -14,7 +19,7 @@ class MailController extends Controller
             'body' => 'Welcome From Ahmed Abdelrhim',
         ];
 
-        Mail::to('aabdelrhim974@gmail.com')->send(new GmailMail($details));
+        //Mail::to('aabdelrhim974@gmail.com')->send(new GmailMail($details));
         return 'Email Sent Successfully';
     }
 }

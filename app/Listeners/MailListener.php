@@ -26,6 +26,7 @@ class MailListener
      */
     public function handle(MailEvent $event)
     {
-        info('BlogPost Has Been Updated Successfully ' . $event->post->id);
+        // dd($event);
+        info('BlogPost Has Been Created Successfully ' . $event->post->id);
     }
 }

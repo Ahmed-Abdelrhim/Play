@@ -10,15 +10,15 @@ use Illuminate\Queue\SerializesModels;
 class GmailMail extends Mailable
 {
     use Queueable, SerializesModels;
-    public $details;
+    //public $details;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($details)
+    public function __construct()
     {
-        $this->details =$details;
+        // $this->details =$details;
     }
 
     /**
@@ -28,7 +28,9 @@ class GmailMail extends Mailable
      */
     public function build(): GmailMail
     {
-        return $this->subject('Laravel Email')->view('emails.gmail');
+
+
+        return $this->from('laravel team')->to();
     }
 }
 // uxnsrtnhpyyhuzpn 587

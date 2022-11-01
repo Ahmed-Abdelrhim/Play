@@ -19,6 +19,7 @@ class BlogPost extends Model
 
     protected $dispatchesEvents = [
         'created' => MailEvent::class,
+        'updated' => MailEvent::Class,
     ];
 
     public function author(): \Illuminate\Database\Eloquent\Relations\BelongsTo
