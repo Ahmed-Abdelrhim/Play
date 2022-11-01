@@ -64,7 +64,7 @@ Route::group(['middleware' => 'auth:author'], function () {
     });
     Route::get('test/test', [])->name('stripe.post');
 
-    Route::get('email-send',[MailController::class,'viewSendEmailForm']);
+    Route::get('email-send',[MailController::class,'viewSendEmailForm'])->name('sending-email');
     Route::post('send/message', [MailController::class, 'sendEmail'])->name('send.gmail');
     Route::get('play/with/livewire', function () {
         return view('play');

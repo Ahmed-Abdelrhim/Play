@@ -16,7 +16,7 @@ class GmailMail extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(public $email)
     {
         // $this->details =$details;
     }
@@ -30,7 +30,9 @@ class GmailMail extends Mailable
     {
 
 
-        return $this->from('laravel team')->to();
+        return $this->from('aabdelrhim974@gmail.com')->to($this->email)
+            ->subject('Your Order Was Shipped')
+            ->view('emails.shipped-order');
     }
 }
 // uxnsrtnhpyyhuzpn 587

@@ -12,15 +12,19 @@ class MailController extends Controller
         return view('emails.send-email');
     }
 
-    public function sendEmail():string
+    public function sendEmail(Request $request):string
     {
         $details = [
             'title' => 'This Email Is From Laravel Application',
             'body' => 'Welcome From Ahmed Abdelrhim',
         ];
+        $email = $request->get('email');
 
-        //Mail::to('aabdelrhim974@gmail.com')->send(new GmailMail($details));
-        return 'Email Sent Successfully';
+        Mail::send(new GmailMail($email));
+        $request->session()->flash('success' , 'Email Sent Successfully');
+        return redirect()->back();
+        //return 'Email Sent Successfully';
+
     }
 }
 // anas.rabea1000@gmail.com aabdelrhim974  form('ahmedabdelrhim92@gmail.com')->
