@@ -4,6 +4,6 @@
         more details
     @endcomponent
 
-    Thanks , <br>
+    Thanks
     Laravel Team
 @endcomponent
