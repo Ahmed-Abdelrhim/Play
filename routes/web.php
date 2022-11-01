@@ -107,3 +107,4 @@ Route::get('pp/{id}', function ($id) {
 // 173704761160
 
 
+// MAIL_ENCRYPTION=null From .env file to send mails to smtp.mailtrap.io

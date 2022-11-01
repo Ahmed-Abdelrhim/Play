@@ -30,7 +30,7 @@ class GmailMail extends Mailable
     {
 
 
-        return $this->from('aabdelrhim974@gmail.com')->to($this->email)
+        return $this->from('laravel.team@mail.com')->to($this->email)
             ->subject('Your Order Was Shipped')
             ->view('emails.shipped-order');
     }
