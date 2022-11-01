@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\MailEvent;
 use App\Http\Requests\Requests\BlogPostRequest;
 use App\Jobs\PlayingTask;
 use App\Models\Comment;
@@ -106,7 +107,7 @@ class PlayController extends Controller
     public function addBlogPost(BlogPostRequest $request): \Illuminate\Http\RedirectResponse
     {
         $id = Auth::guard('author')->user()->id;
-        BlogPost::create([
+        $post = BlogPost::create([
             'title' => $request->input('title'),
             'content' => $request->input('content'),
             'author_id' => $id,
@@ -114,6 +115,7 @@ class PlayController extends Controller
             'updated_at' => now(),
         ]);
 
+//        MailEvent::dispatch($post);
         $request->session()->flash('success', 'BlogPost Inserted Successfully');
         return redirect()->back();
     }
@@ -182,7 +184,7 @@ class PlayController extends Controller
         //it will go the model and run the boot function
     }
 
-    public function restoreBlogPosts($id)
+    public function restoreBlogPosts($id): string
     {
         BlogPost::onlyTrashed()->findOrFail($id)->restore();
         return 'BlogPost And Comments Are Restored Successfully';

@@ -24,7 +24,7 @@ class BlogPostRequest extends FormRequest
     public function rules()
     {
         return [
-            'author_id' => 'required|numeric|exists:authors,id',
+            //'author_id' => 'required|numeric',
             'title' => 'required|string|min:4',
             'content' => 'required|string|min:8',
         ];

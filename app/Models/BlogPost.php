@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\MailEvent;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Author;
@@ -15,6 +16,10 @@ class BlogPost extends Model
     protected $fillable = ['author_id', 'title', 'content', 'created_at', 'updated_at'];
     protected $hidden = ['created_at', 'updated_at'];
     public $timestamps = true;
+
+    protected $dispatchesEvents = [
+        'created' => MailEvent::class,
+    ];
 
     public function author(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
