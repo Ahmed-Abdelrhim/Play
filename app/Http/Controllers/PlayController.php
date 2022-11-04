@@ -301,7 +301,7 @@ class PlayController extends Controller
 
     public function getDataTablesIndex()
     {
-        $posts = BlogPost::select('*');
+        $posts = BlogPost::all();
         return  DataTables::of($posts)->addIndexColumn()->make(true);
         // dd($users);
     }
