@@ -52,6 +52,9 @@ Route::group(['middleware' => 'auth:author'], function () {
     Route::get('all/posts', [PlayController::class, 'showAllPosts'])->name('blog_posts');
     Route::get('posts/{id}', [PlayController::class, 'showPosts'])->name('show.blog_post.by.id');
 
+    Route::get('show/dataTables/blogposts',[PlayController::class,'showDataTablesIndex'])->name('dataTables');
+    Route::get('get/dataTables/blogposts/all',[PlayController::class,'getDataTablesIndex'])->name('dataTables.all');
+
 
     Route::get('add/blogPost', [PlayController::class, 'showBlogPostForm'])->name('add.blog_post');
     Route::get('adding/blogPost', [PlayController::class, 'addBlogPost'])->name('create.blogPost');
@@ -95,14 +98,14 @@ Route::get('hash', function () {
 });
 
 Route::get('most/active/last/month', [PlayController::class, 'activeLastMonthAuthor'])->name('most.active.last.month');
-Route::get('pp/{id}', function ($id) {
-    $post = \App\Models\BlogPost::find($id);
-    if ($post->images) {
-        return $posts = $post->images()->get();
-        return $posts[0]->src;
-    }
-    return 'false';
-});
+//Route::get('pp/{id}', function ($id) {
+//    $post = \App\Models\BlogPost::find($id);
+//    if ($post->images) {
+//        return $posts = $post->images()->get();
+//        return $posts[0]->src;
+//    }
+//    return 'false';
+//});
 
 
 // npm run watch

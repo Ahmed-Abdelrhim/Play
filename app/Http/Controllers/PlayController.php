@@ -10,6 +10,8 @@ use App\Models\Currency;
 use App\Models\Images;
 use App\Models\PaymentPlatform;
 use Carbon\Carbon;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use App\Models\BlogPost;
 use App\Models\Author;
@@ -20,6 +22,8 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Nette\Utils\Image;
+
+use Yajra\DataTables\Facades\DataTables;
 
 class PlayController extends Controller
 {
@@ -288,6 +292,18 @@ class PlayController extends Controller
     {
         return Storage::disk('s3')->response('images/' . $image->filename);
 
+    }
+
+    public function showDataTablesIndex(): View
+    {
+        return view('datatables');
+    }
+
+    public function getDataTablesIndex()
+    {
+        $posts = BlogPost::select('*');
+        return  DataTables::of($posts)->addIndexColumn()->make(true);
+        // dd($users);
     }
 
 }

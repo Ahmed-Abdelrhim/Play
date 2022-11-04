@@ -37,6 +37,8 @@
           integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
 
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css" />
+
     <style>
         body {
             font-family: 'Nunito', 'Cairo', sans-serif;
@@ -140,6 +142,12 @@
                             </li>
                         @endif
 
+                            @if(Route::current()->getName() != 'dataTables' )
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{route('dataTables')}}">dataTables</a>
+                                </li>
+                            @endif
+
                         {{-- Route::current()->getName() --}}
                         {{-- Request::route()->getPrefix() --}}
 
@@ -182,7 +190,7 @@
         @yield('content')
     </main>
 </div>
-@stack('scripts')
+
 @livewireScripts
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
@@ -193,6 +201,12 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"
         integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+"
         crossorigin="anonymous"></script>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.js" ></script>
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" defer></script>
+
+@stack('scripts')
 </body>
 </html>
 {{-- <img src="@if(\App\Models\Images::where('imageable_id',Auth::guard('author')->user()->id)->first())--}}
