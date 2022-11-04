@@ -24,7 +24,7 @@ class MailListener
      * @param  \App\Events\MailEvent  $event
      * @return void
      */
-    public function handle(MailEvent $event)
+    public function handle(MailEvent $event): void
     {
         // dd($event);
         info('BlogPost Has Been Created Successfully ' . $event->post->id);

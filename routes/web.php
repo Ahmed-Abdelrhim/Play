@@ -66,6 +66,9 @@ Route::group(['middleware' => 'auth:author'], function () {
 
     Route::get('email-send',[MailController::class,'viewSendEmailForm'])->name('sending-email');
     Route::post('send/message', [MailController::class, 'sendEmail'])->name('send.gmail');
+    Route::get('check-verified-code',[MailController::class,'checkVerificationCodeForm'])->name('check.verification.code');
+    Route::post('check/verification/code',[MailController::class,'checkVerificationCode'])->name('check.code');
+
     Route::get('play/with/livewire', function () {
         return view('play');
     })->name('livewire');

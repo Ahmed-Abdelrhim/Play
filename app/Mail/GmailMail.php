@@ -7,18 +7,20 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class GmailMail extends Mailable
+class GmailMail extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
+
+    public $code;
     //public $details;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(public $email)
+    public function __construct(public $msg , $code)
     {
-        // $this->details =$details;
+         $this->code = $code;
     }
 
     /**
@@ -30,8 +32,8 @@ class GmailMail extends Mailable
     {
 
 
-        return $this->from('laravel.team@mail.com')->to($this->email)
-            ->subject('Your Order Was Shipped')
+        return $this->from('laravel.team@mail.com')
+            ->subject($this->msg)
             ->markdown('emails.shipped-order');
     }
 }

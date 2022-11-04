@@ -1,7 +1,9 @@
 @component('mail::message')
-    Your order was shipped  wait for a phone call to receive it.
-    @component('mail::button',['url' => 'https://www.google.com'])
-        more details
+    {{$msg}}.
+    Here is Your Code
+    {{$code}}
+    @component('mail::button',['url' => 'http://127.0.0.1:8000/check-verified-code'])
+        reset password
     @endcomponent
 
     Thanks

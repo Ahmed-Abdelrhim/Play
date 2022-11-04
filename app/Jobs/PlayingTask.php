@@ -31,7 +31,6 @@ class PlayingTask implements ShouldQueue
      */
     public function handle()
     {
-        sleep(5);
 
 //        if (is_numeric($this->id)) {
 //            $result = [];

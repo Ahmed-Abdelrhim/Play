@@ -114,6 +114,14 @@
                             </li>
                         @endif
 
+                            @if(Route::current()->getName() != 'check.verification.code')
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{route('check.verification.code')}}">Check mail</a>
+                                </li>
+                            @endif
+
+
+
                         @if(Route::current()->getName() != 'add.blog_post' )
                             <li class="nav-item">
                                 <a class="nav-link" href="{{route('add.blog_post')}}">Add</a>
