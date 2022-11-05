@@ -22,9 +22,9 @@ class AddTasks extends Component
         ];
     }
 
-    public function updated($ahmed)
+    public function updated($variable)
     {
-        $this->validateOnly($ahmed);
+        $this->validateOnly($variable);
     }
 
     public function render()

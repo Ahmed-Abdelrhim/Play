@@ -124,7 +124,7 @@ class PlayController extends Controller
         return redirect()->back();
     }
 
-    public function showAllPosts()
+    public function showAllPosts(): \Illuminate\Contracts\View\Factory|View|Application
     {
         // return BlogPost::mostCommented()->take(6)->get();
         $posts = BlogPost::with('author:name')->paginate(15);
@@ -133,7 +133,7 @@ class PlayController extends Controller
         return view('blogpost.posts', ['posts' => $posts, 'mostCommented' => $mostCommented]);
     }
 
-    public function updateBlogPostForm($id)
+    public function updateBlogPostForm($id): View|\Illuminate\Contracts\View\Factory|string|Application
     {
         $post = BlogPost::findOrFail($id);
         $author = Auth::guard('author')->user();
