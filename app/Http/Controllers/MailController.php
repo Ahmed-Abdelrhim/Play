@@ -33,7 +33,7 @@ class MailController extends Controller
             return redirect('email-send')->withErrors($validate)->withInput();
         $email = $request->get('email');
 
-        $code = VerificationCode::inRandomOrder()->first()->code;
+        $code = VerificationCode::query()->inRandomOrder()->first()->code;
         $msg = $request->get('msg');
 
         Mail::to($email)->send(new GmailMail($msg , $code));

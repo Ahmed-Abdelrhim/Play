@@ -20,7 +20,7 @@ class MailEvent
      *
      * @return void
      */
-    public function __construct(public BlogPost $post)
+    public function __construct()
     {
         //
     }

@@ -45,6 +45,10 @@ class BlogPost extends Model
     public static function boot()
     {
         parent::boot();
+        static::updating(function (BlogPost $post){
+
+        });
+
         static::deleting(function (BlogPost $post) {
             $post->comments()->delete();
             $post->images()->delete();

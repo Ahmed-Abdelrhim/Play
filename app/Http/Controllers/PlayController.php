@@ -119,6 +119,7 @@ class PlayController extends Controller
             'updated_at' => now(),
         ]);
 
+
 //        MailEvent::dispatch($post);
         $request->session()->flash('success', 'BlogPost Inserted Successfully');
         return redirect()->back();
@@ -127,10 +128,21 @@ class PlayController extends Controller
     public function showAllPosts(): \Illuminate\Contracts\View\Factory|View|Application
     {
         // return BlogPost::mostCommented()->take(6)->get();
-        $posts = BlogPost::with('author:name')->paginate(15);
-        $mostCommented = BlogPost::mostCommented();
-        // return view('blogpost.posts', ['posts' => BlogPost::withCount('comments')->get(), 'mostCommented' => BlogPost::mostCommented()]);
-        return view('blogpost.posts', ['posts' => $posts, 'mostCommented' => $mostCommented]);
+
+        MailEvent::dispatch();
+//        $posts = cache('posts',function(){
+//            return Cache::get('posts');
+//        });
+        $posts = Cache::get('posts');
+        //$mostCommented = BlogPost::mostCommented();
+//        return view('blogpost.posts' ,['posts' => $posts, 'mostCommented' => $mostCommented]);
+        return view('blogpost.posts' ,['posts' => $posts]);
+
+//        $posts = BlogPost::with('author:name')->paginate(15);
+//
+//        $mostCommented = BlogPost::mostCommented();
+//        // return view('blogpost.posts', ['posts' => BlogPost::withCount('comments')->get(), 'mostCommented' => BlogPost::mostCommented()]);
+//        return view('blogpost.posts', ['posts' => $posts, 'mostCommented' => $mostCommented]);
     }
 
     public function updateBlogPostForm($id): View|\Illuminate\Contracts\View\Factory|string|Application
