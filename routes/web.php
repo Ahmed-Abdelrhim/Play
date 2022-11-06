@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\BlogPostController;
+use App\Http\Controllers\LearnController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\PaymentController;
 use App\Models\PaymentPlatform;
@@ -90,7 +92,13 @@ Route::group(['middleware' => 'auth:author'], function () {
     Route::post('save/profile/data', [PlayController::class, 'storeUserProfileData'])->name('post.profile.data');
 
 
-    ################### Custom Play
+    ################### Custom Play  ###################
+
+    Route::get('all-posts',[BlogPostController::class,'index'])->name('all-posts');
+    Route::get('show/{id}',[BlogPostController::class,'show'])->name('only.show');
+    Route::post('update/{id}',[BlogPostController::class,'update'])->name('only.update');
+
+    Route::get('excel',[LearnController::class,'playWithExcel']);
 
 });
 Route::get('hash', function () {

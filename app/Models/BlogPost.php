@@ -22,6 +22,23 @@ class BlogPost extends Model
         'updated' => MailEvent::Class,
     ];
 
+    public function format(): array
+    {
+        return [
+            'head' => $this->title,
+            'body' => $this->content,
+            'created_by' => $this->author->name,
+            'comments' => $this->comments,
+        ];
+    }
+
+    public function getComments($comments)
+    {
+        foreach ($comments as $comment) {
+            return $comment;
+        }
+    }
+
     public function author(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Author::class, 'author_id', 'id');

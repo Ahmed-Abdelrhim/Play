@@ -7,7 +7,7 @@
                 <div class="card">
                     <div class="card-header">Update BlogPots</div>
                     <div class="card-body">
-                        <form action="{{route('update.post',$post->id)}}" method="POST">
+                        <form action="{{route('only.update',$post->id)}}" method="POST">
                             {{-- Success Message --}}
                             @if (Session::has('success'))
                                 <div class="row mr-2 ml-2">
