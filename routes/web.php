@@ -31,6 +31,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('play/{id}', [PlayController::class, 'play']);
+Route::get('solve',[BlogPostController::class,'problemSolving']);
 
 Route::group(['middleware' => 'guest:author'], function () {
     Route::get('login', [CustomLoginController::class, 'showLoginForm'])->name('login');
@@ -122,3 +123,4 @@ Route::get('most/active/last/month', [PlayController::class, 'activeLastMonthAut
 
 
 // MAIL_ENCRYPTION=null From .env file to send mails to smtp.mailtrap.io
+

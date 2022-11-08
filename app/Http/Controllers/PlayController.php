@@ -228,7 +228,8 @@ class PlayController extends Controller
         $blogPost = BlogPost::find(1);
 
         $done = $blogPost->image()->create([
-            'src' => Storage::disk('s3')->url($name),
+//            'src' => Storage::disk('s3')->url($name),
+            'src' => $image_name,
             'type' => 'BlogPost_Photo'
         ]);
         if ($done)
@@ -237,7 +238,7 @@ class PlayController extends Controller
         // dd(Storage::url($name));
     }
 
-    public function viewProfilePage()
+    public function viewProfilePage(): \Illuminate\Contracts\View\Factory|View|Application
     {
         $user = Auth::guard('author')->user();
         $image = null;
@@ -269,11 +270,12 @@ class PlayController extends Controller
                 // return $image_time_name;
                 Storage::disk('s3')->delete('profiles' . '/' . $image_time_name);
                 $user->image()->update([
-                    'src' => Storage::disk('s3')->url($path)
+                    // 'src' => Storage::disk('s3')->url($path)
+                    'src' => $image_name
                 ]);
             } else {
                 $user->image()->create([
-                    'src' => Storage::disk('s3')->url($path),
+                    'src' => $image_name,
                     'type' => 'avatar',
                 ]);
             }
@@ -290,21 +292,20 @@ class PlayController extends Controller
         return view('profile', compact('user'));
     }
 
-    public function js()
+    public function js(): View
     {
         return view('play_js');
     }
 
-    public function errorPage()
+    public function errorPage(): View
     {
         return view('error');
     }
 
-    public function show()
-    {
-        return Storage::disk('s3')->response('images/' . $image->filename);
-
-    }
+//    public function show()
+//    {
+//        return Storage::disk('s3')->response('images/' . $image->filename);
+//    }
 
     public function showDataTablesIndex(): View
     {
