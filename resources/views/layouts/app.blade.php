@@ -41,7 +41,7 @@
 
     <style>
         body {
-            font-family: 'Nunito', 'Cairo', sans-serif;
+            font-family: 'Cairo' , 'Nunito' , sans-serif;
         }
     </style>
 

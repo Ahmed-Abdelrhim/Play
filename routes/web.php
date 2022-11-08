@@ -23,9 +23,9 @@ use App\Http\Controllers\CustomLoginController;
 */
 //Auth::routes();
 Route::get('not-found-page', [PlayController::class, 'errorPage'])->name('error');
-Route::get('s3',function (){
-    return view('s3');
-});
+//Route::get('s3',function (){
+//    return view('s3');
+//});
 
 Route::get('/', function () {
     return view('welcome');
@@ -124,3 +124,5 @@ Route::get('most/active/last/month', [PlayController::class, 'activeLastMonthAut
 
 // MAIL_ENCRYPTION=null From .env file to send mails to smtp.mailtrap.io
 
+// https://uoplaod-laravel-files.s3.amazonaws.com/thumbnails/https%3A//uoplaod-laravel-files.s3.amazonaws.com/profiles/1666814035.jpg
+// https://uoplaod-laravel-files.s3.amazonaws.com/profiles/1666814035.jpg

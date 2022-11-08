@@ -29,17 +29,19 @@ class PlayController extends Controller
 {
     public function showPosts($id)
     {
-        $post = BlogPost::find($id);
-        if (!$post)
-            return 'BlogPost Not Found';
+        $post = BlogPost::findOrFail($id);
+        $author = Author::findOrFail($id);
+
 
 //        $image =  Storage::disk('s3')->response('thumbnails/' . '1666802816.jpg');
 //        $image =  Storage::disk('s3')->url('thumbnails/' . '1666802816.jpg');
 //        $image =  Storage::disk('s3')->temporaryUrl('thumbnails/' . '1666802816.jpg',now()->addMinutes(10));
 //        $image =  Storage::disk('s3')->url('thumbnails/' . $post->images()->first()->src);
 //        return $post->image != null ? $post->image()->first()->src : 'No Image';
-        if ($post->image != null) {
-            $image = $post->image()->first()->src;
+        if ($author->image != null) {
+            $name = $author->image()->first()->src;
+            $image_time_name = substr($name, strpos($name, 'profiles/') + 9); // 9
+            $image = Storage::disk('s3')->url('profiles/' . $image_time_name);
             return view('s3', compact('image'));
         }
         return $post;
