@@ -7,6 +7,7 @@ use App\Http\Requests\Requests\BlogPostRequest;
 use App\Http\Resources\BlogPostResource;
 use App\Models\Author;
 use App\Models\BlogPost;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -63,7 +64,7 @@ class BlogPostController extends Controller
 
     }
 
-    public function register(Request $request): \Illuminate\Http\JsonResponse
+    public function register(Request $request): JsonResponse
     {
         $validator = Validator::make($request->all(),[
             'name' => 'required|min:4',
@@ -79,10 +80,10 @@ class BlogPostController extends Controller
         return response()->json(['status' => 200 , 'msg' => 'Successfully Created User']);
     }
 
-    public function login(Request $request): \Illuminate\Http\JsonResponse
+    public function login(Request $request): JsonResponse
     {
         $validator = Validator::make($request->all(),[
-            'email' =>'required',
+            'email' =>'required|email',
             'password'=>'required',
         ]);
 
@@ -108,7 +109,7 @@ class BlogPostController extends Controller
         return 'email';
     }
 
-    public function logout(Request $request): \Illuminate\Http\JsonResponse
+    public function logout(Request $request): JsonResponse
     {
         //$name = Auth::guard('author')->user()->name;
         $name = $request->user()->name;

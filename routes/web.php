@@ -55,8 +55,8 @@ Route::group(['middleware' => 'auth:author'], function () {
     Route::get('all/posts', [PlayController::class, 'showAllPosts'])->name('blog_posts');
     Route::get('posts/{id}', [PlayController::class, 'showPosts'])->name('show.blog_post.by.id');
 
-    Route::get('show/dataTables/blogposts',[PlayController::class,'showDataTablesIndex'])->name('dataTables');
-    Route::get('get/dataTables/blogposts/all',[PlayController::class,'getDataTablesIndex'])->name('dataTables.all');
+    Route::get('show/dataTables/blogposts',[LearnController::class,'showDataTablesIndex'])->name('dataTables');
+    Route::get('get/dataTables/blogposts/all',[LearnController::class,'getDataTablesIndex'])->name('dataTables.all');
 
 
     Route::get('add/blogPost', [PlayController::class, 'showBlogPostForm'])->name('add.blog_post');

@@ -14,7 +14,8 @@ class BlogPost extends Model
     use HasFactory, SoftDeletes;
     protected $table = 'blog_posts';
     protected $fillable = ['author_id', 'title', 'content', 'created_at', 'updated_at'];
-    protected $hidden = ['created_at', 'updated_at'];
+//    protected $hidden = ['created_at', 'updated_at'];
+    protected $hidden = [];
     public $timestamps = true;
 
     protected $dispatchesEvents = [

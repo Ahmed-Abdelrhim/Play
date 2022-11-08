@@ -1,28 +1,31 @@
 @extends('layouts.app')
 @section('content')
+    <div class="scroller"></div>
     <div class="container">
         <table class="table table-dark" id="datatable-example">
             <thead>
             <tr>
-                <th scope="col">id</th>
-                <th scope="col">title</th>
-                <th scope="col">content</th>
-                <th scope="col">author_id</th>
+                <th scope="col">ID</th>
+                <th scope="col">Title</th>
+                <th scope="col">Content</th>
+                <th scope="col">Name</th>
+                <th scope="col">Time</th>
+                <th scope="col">Action</th>
             </tr>
             </thead>
             <tbody>
-{{--            <tr>--}}
-{{--                <th scope="row">1</th>--}}
-{{--                <td>Mark</td>--}}
-{{--                <td>Otto</td>--}}
-{{--                <td>@mdo</td>--}}
-{{--            </tr>--}}
-{{--            <tr>--}}
-{{--                <th scope="row">2</th>--}}
-{{--                <td>Jacob</td>--}}
-{{--                <td>Thornton</td>--}}
-{{--                <td>@fat</td>--}}
-{{--            </tr>--}}
+            {{--            <tr>--}}
+            {{--                <th scope="row">1</th>--}}
+            {{--                <td>Mark</td>--}}
+            {{--                <td>Otto</td>--}}
+            {{--                <td>@mdo</td>--}}
+            {{--            </tr>--}}
+            {{--            <tr>--}}
+            {{--                <th scope="row">2</th>--}}
+            {{--                <td>Jacob</td>--}}
+            {{--                <td>Thornton</td>--}}
+            {{--                <td>@fat</td>--}}
+            {{--            </tr>--}}
 
             </tbody>
         </table>
@@ -35,6 +38,9 @@
             var table = $('#datatable-example').DataTable({
                 processing: true,
                 serverSide: true,
+                pagingType: 'full_numbers',
+                paging: true,
+                pagingTypeSince: 'numbers',
                 order: [
                     [0, 'desc']
                 ],
@@ -52,12 +58,21 @@
                         name: 'content',
                     },
                     {
-                        data: 'author_id',
-                        name: 'author_id',
+                        data: 'author',
+                        name: 'author',
                     },
+                    {
+                        data: 'created_at',
+                        name: 'created_at'
+                    },
+                    {
+                        data: 'action',
+                        name: 'action'
+                    }
 
                 ]
             });
         });
     </script>
+    <script src="{{asset('js/datatable.js')}}"></script>
 @endpush

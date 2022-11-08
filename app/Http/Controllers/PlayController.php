@@ -162,7 +162,7 @@ class PlayController extends Controller
         // $this->authorize('update', $post);
 
         if (!Gate::allows('update-blog_post', $post))
-            return 'You are not allowed to update this blog post';
+            return view('errors.403');
 
         // if(Gate::denies('update-blogPost',$author,$post))
         //    return 'You Not Are Allowed To Edit Or Delete This Post';
@@ -309,16 +309,7 @@ class PlayController extends Controller
 //        return Storage::disk('s3')->response('images/' . $image->filename);
 //    }
 
-    public function showDataTablesIndex(): View
-    {
-        return view('datatables');
-    }
 
-    public function getDataTablesIndex()
-    {
-        $posts = BlogPost::all();
-        return  DataTables::of($posts)->addIndexColumn()->make(true);
-        // dd($users);
-    }
+
 
 }

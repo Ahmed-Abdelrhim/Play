@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>404</title>
+    <title>403</title>
     <style>
         @import url(https://fonts.googleapis.com/css?family=Dancing+Script:400,700);
 
@@ -210,8 +210,9 @@
     <span class="door left"></span>
     <span class="door right"></span>
 </nav>
-<h1>Error 403</h1>
-<p>Not Authorized To View This Page</p>
+<h1>Not Authorized To View This Page</h1>
+<p>Error 403</p>
+
 
 </body>
 </html>
