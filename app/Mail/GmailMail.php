@@ -13,14 +13,15 @@ class GmailMail extends Mailable implements ShouldQueue
 
     public $code;
     //public $details;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(public $msg , $code)
+    public function __construct(public $msg, $code)
     {
-         $this->code = $code;
+        $this->code = $code;
     }
 
     /**
@@ -30,8 +31,6 @@ class GmailMail extends Mailable implements ShouldQueue
      */
     public function build(): GmailMail
     {
-
-
         return $this->from('laravel.team@mail.com')
             ->subject($this->msg)
             ->markdown('emails.shipped-order');
