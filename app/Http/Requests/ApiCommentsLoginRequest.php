@@ -24,7 +24,8 @@ class ApiCommentsLoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => 'required|email|unique:users',
-            'password' => 'required|string|min:6',        ];
+            'email' => 'required|email',
+            'password' => 'required|string|min:6'
+        ];
     }
 }

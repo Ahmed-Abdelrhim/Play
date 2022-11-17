@@ -92,7 +92,7 @@ class BlogPostController extends Controller
         $credentials = request(['email','password']);
         if(Auth::guard('author')->attempt($this->credentials($request)))
         {
-            $user = Author::where('email',$request->email)->first();
+            $user = Author::query()->where('email',$request->email)->first();
             $token = $user->createToken('authToken')->plainTextToken;
             return response()->json(['token' => $token, 'status' => 200 , 'msg' => 'Login Success']);
         }

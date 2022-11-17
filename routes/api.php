@@ -38,11 +38,12 @@ Route::group(['middleware'=> 'auth:sanctum'],function() {
     Route::post('update/post/{id}',[BlogPostController::class,'updateBlogPost']);
     Route::post('go/logout',[BlogPostController::class,'logout']);
 
+    Route::get('comments/all' , [CommentsController::class,'index']);
+
     ########################## Comments Controller  ##########################
 
     ########################## Comments Controller  ##########################
 
 });
-// 3|Ewu2FDvbpvOhsSYwatsSQ4hGdymkAiVfHVLIHLVE
-// http://127.0.0.1:8000/api/store/post
-// Bearer 4|7q1NbSh0wuFSyXUEgukhkdsSqB0v63OYZlaDKnpG
+
+// Bearer 8|bvdJN5psvglirLsO2DVWWm84tMCOGNwUHumxElpy
