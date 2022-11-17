@@ -16,13 +16,13 @@ class BlogPostController extends Controller
 {
     use BlogPostTrait;
 
-    public function index()
+    public function index(): \Illuminate\Http\Response|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory
     {
         $posts = BlogPost::all();
         return $this->apiResponse($posts, 200, 'Success');
     }
 
-    public function show($id)
+    public function show($id): \Illuminate\Http\Response|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory
     {
         $post = BlogPost::find($id);
         if (!$post)
@@ -31,7 +31,7 @@ class BlogPostController extends Controller
         return $this->apiResponse($blog, 200, 'Success');
     }
 
-    public function storePost(Request $request)
+    public function storePost(Request $request): \Illuminate\Http\Response|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory
     {
         $validate = Validator::make($request->all(), [
             'author_id' => 'required|exists:authors,id',
@@ -45,7 +45,7 @@ class BlogPostController extends Controller
         return $this->apiResponse($post, 201, 'Post Inserted Successfully Into DataBase');
     }
 
-    public function updateBlogPost(Request $request, $id)
+    public function updateBlogPost(Request $request, $id): \Illuminate\Http\Response|JsonResponse|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory
     {
         $validate = Validator::make($request->all(), [
             'author_id' => 'required|exists:authors,id',

@@ -71,4 +71,9 @@ class LearnController extends Controller
             ->make(true);
         // dd($users);
     }
+
+    public function play()
+    {
+        return 'Authenticated';
+    }
 }

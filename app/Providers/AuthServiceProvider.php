@@ -70,6 +70,12 @@ class AuthServiceProvider extends ServiceProvider
             return false;
         });
 
+        Gate::define('play',function($user) {
+            if($user->name === 'Ahmed Abdelrhim')
+                return true;
+            return false;
+        });
+
 
         Gate::resource('posts','App\Policies\BlogPostPolicy');
     }

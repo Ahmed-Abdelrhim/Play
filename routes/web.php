@@ -102,6 +102,8 @@ Route::group(['middleware' => 'auth:author'], function () {
 
     Route::get('excel',[LearnController::class,'playWithExcel']);
 
+    Route::get('playy',[LearnController::class,'play'])->middleware('can:play');
+
 });
 Route::get('hash', function () {
     return bcrypt('12345678');
