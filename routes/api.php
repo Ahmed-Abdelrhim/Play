@@ -3,6 +3,7 @@
 use App\Http\Controllers\API\BlogPostController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\CommentsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 ################################ Auth  ################################
 Route::get('register',[BlogPostController::class,'register']);
 Route::post('login',[BlogPostController::class,'login']);
+
+Route::post('register/comments',[CommentsController::class,'register']);
+Route::post('login/comments',[CommentsController::class,'login']);
+
+
 ################################ Auth  ################################
 
 Route::group(['middleware'=> 'auth:sanctum'],function() {
@@ -31,6 +37,10 @@ Route::group(['middleware'=> 'auth:sanctum'],function() {
     Route::post('store/post',[BlogPostController::class,'storePost']);
     Route::post('update/post/{id}',[BlogPostController::class,'updateBlogPost']);
     Route::post('go/logout',[BlogPostController::class,'logout']);
+
+    ########################## Comments Controller  ##########################
+
+    ########################## Comments Controller  ##########################
 
 });
 // 3|Ewu2FDvbpvOhsSYwatsSQ4hGdymkAiVfHVLIHLVE
