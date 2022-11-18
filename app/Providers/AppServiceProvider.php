@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-
+use Illuminate\Http\Resources\Json\ResourceCollection;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -23,7 +23,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        ResourceCollection::withoutWrapping();
     }
 
 

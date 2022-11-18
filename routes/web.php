@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BlogPostController;
+use App\Http\Controllers\Comments\CommentsController;
 use App\Http\Controllers\LearnController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\PaymentController;
@@ -99,6 +100,9 @@ Route::group(['middleware' => 'auth:author'], function () {
     Route::get('all-posts',[BlogPostController::class,'index'])->name('all-posts');
     Route::get('show/{id}',[BlogPostController::class,'show'])->name('only.show');
     Route::post('update/{id}',[BlogPostController::class,'update'])->name('only.update');
+
+    Route::get('add/comment',[CommentsController::class,'addCommentForm'])->name('add.comment');
+    Route::post('store/comment',[CommentsController::class,'storeComment'])->name('store.comment');
 
     Route::get('excel',[LearnController::class,'playWithExcel']);
 

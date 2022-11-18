@@ -30,7 +30,8 @@ class CommentsController
 
     public function index()
     {
-        return CommentsResource::Collection(Comment::query()->paginate(15));
+
+        return CommentsResource::Collection(Comment::query()->paginate(2));
     }
 
     public function store()
