@@ -17,6 +17,7 @@ class ImagesController extends Controller
     {
 //        return uniqid('',false);
 //        $images = [];
+
 //
 //        foreach($request->images as $image  ) {
 //            $image_name = uniqid('',);

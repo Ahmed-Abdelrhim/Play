@@ -139,3 +139,23 @@ Route::get('most/active/last/month', [PlayController::class, 'activeLastMonthAut
 
 // https://uoplaod-laravel-files.s3.amazonaws.com/thumbnails/https%3A//uoplaod-laravel-files.s3.amazonaws.com/profiles/1666814035.jpg
 // https://uoplaod-laravel-files.s3.amazonaws.com/profiles/1666814035.jpg
+
+
+
+//AJAX
+//var formData = new FormData( JQuery('')[0] );
+//=> will give all the information from the form
+//$.ajax({
+//	url : "{{ route('') }}",
+//	type: 'POST',
+//	data: formData,
+//	contentType: false,
+//	processData: false,
+//	success: function(data) {},
+//	error: function(xhr,status,errors) {
+//		errors here inside => xhr.responseJSON.errors
+//		$.each(xhr.responseJSON.errors , function(key,item){
+//				$('.errors').append('<p class="alert alert-danger" >' + item '</p>');
+//			})
+//	}
+//});
