@@ -21,7 +21,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 use Nette\Utils\Image;
+
 
 use Yajra\DataTables\Facades\DataTables;
 
@@ -263,24 +265,26 @@ class PlayController extends Controller
             return redirect('user/profile')->withErrors($validator)->withInput();
         $user = Auth::guard('author')->user();
         if ($request->hasFile('image')) {
-            $image_name = time() . '.' . $request->file('image')->guessExtension();
-            $path = $request->file('image')->storeAs('profiles', $image_name, 's3');
+            $image_name = Str::random(4) .time() . '.' . $request->file('image')->guessExtension();
+            $path = $request->file('image')->storeAs('profiles', $image_name, 'public');
+            $user->avatar = $image_name;
+            $user->save();
             // if (count($user->image) > 0) {
-            if ($user->image != null) {
-                $string = $user->image()->first()->src;
-                $image_time_name = substr($string, strpos($string, 'profiles/') + 9); // 9
-                // return $image_time_name;
-                Storage::disk('s3')->delete('profiles' . '/' . $image_time_name);
-                $user->image()->update([
-                    // 'src' => Storage::disk('s3')->url($path)
-                    'src' => $image_name
-                ]);
-            } else {
-                $user->image()->create([
-                    'src' => $image_name,
-                    'type' => 'avatar',
-                ]);
-            }
+//            if ($user->image != null) {
+//                $string = $user->image()->first()->src;
+//                $image_time_name = substr($string, strpos($string, 'profiles/') + 9); // 9
+//                // return $image_time_name;
+//                Storage::disk('s3')->delete('profiles' . '/' . $image_time_name);
+//                $user->image()->update([
+//                    // 'src' => Storage::disk('s3')->url($path)
+//                    'src' => $image_name
+//                ]);
+//            } else {
+//                $user->image()->create([
+//                    'src' => $image_name,
+//                    'type' => 'avatar',
+//                ]);
+//            }
         }
 
         $user->update($request->except(['image', 'password', 'locale']));

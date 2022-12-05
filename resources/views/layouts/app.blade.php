@@ -72,11 +72,11 @@
             @if(Auth::guard('author')->check())
                 {{--  @if( isset(auth()->guard('author')->user()->image) && count(auth()->guard('author')->user()->image) > 0 )  --}}
                 {{--      Storage::disk('s3')->url()      --}}
-                @if(auth()->guard('author')->user()->image != null)
+                @if(auth()->guard('author')->user()->avatar != null)
                     <a href="{{route('home')}}">
                         <img class="img-thumbnail"
 
-                             src="{{ auth()->guard('author')->user()->image()->first()->src }}"
+                             src="{{ asset('storage/profiles/' . auth()->guard('author')->user()->avatar)}}"
                              style="width: 55px; height: 55px; border-radius: 50%;" alt="loading..."/>
                     </a>
                 @else
