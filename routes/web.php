@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PlayController;
 use App\Http\Controllers\CustomLoginController;
-
+use App\Http\Controllers\ProblemsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -107,6 +107,7 @@ Route::group(['middleware' => 'auth:author'], function () {
     Route::get('excel',[LearnController::class,'playWithExcel']);
 
     Route::get('playy',[LearnController::class,'play'])->middleware('can:play');
+    Route::get('problem',[ProblemsController::class,'solveFirst']);
 
 });
 Route::get('hash', function () {
