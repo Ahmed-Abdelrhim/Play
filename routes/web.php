@@ -12,6 +12,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PlayController;
 use App\Http\Controllers\CustomLoginController;
 use App\Http\Controllers\ProblemsController;
+use App\Http\Controllers\Files\ImagesController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -108,6 +109,10 @@ Route::group(['middleware' => 'auth:author'], function () {
 
     Route::get('playy',[LearnController::class,'play'])->middleware('can:play');
     Route::get('problem',[ProblemsController::class,'solveFirst']);
+
+    Route::get('many',[ImagesController::class,'uploadForm']);
+
+    Route::post('upload-multiple',[ImagesController::class,'uploadMultipleImages'])->name('multiple.images');
 
 });
 Route::get('hash', function () {
