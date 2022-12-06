@@ -119,7 +119,13 @@ Route::get('hash', function () {
     return bcrypt('12345678');
 });
 
+Route::get('sweet',[ImagesController::class,'sweet']);
+
 Route::get('most/active/last/month', [PlayController::class, 'activeLastMonthAuthor'])->name('most.active.last.month');
+
+    Route::get('send/gmail',[MailController::class,'sendMailForm']);
+Route::post('send/gmail/msg',[MailController::class,'send'])->name('email.send');
+
 //Route::get('pp/{id}', function ($id) {
 //    $post = \App\Models\BlogPost::find($id);
 //    if ($post->images) {
@@ -159,3 +165,16 @@ Route::get('most/active/last/month', [PlayController::class, 'activeLastMonthAut
 //			})
 //	}
 //});
+
+
+
+// TO Determine What To Buy
+// Request Buy For Example
+// Firs Is QR By Email
+// Send Email TO Server And Server Respond With Response , I Need TO Make An Integration
+// Because Every Thing Has Integration Alone  time is : 3:31 pm. and it's passing very slowly and mo:sab doesn't
+// Need TO Go TO His Home Play
+// He Is Searching for help . he needs anyone to help him . he is telling him the story now to give him an answer
+// determine the product and the parking way . he doesn't need the website anymore .
+// he needs every thing through when it comes 4 o'clock
+//

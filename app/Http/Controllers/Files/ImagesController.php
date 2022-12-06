@@ -5,12 +5,21 @@ namespace App\Http\Controllers\Files;
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ImagesController extends Controller
 {
     public function uploadForm(): View
     {
         return view('files.images');
+    }
+
+    public function sweet()
+    {
+        session()->flash('success', "Welcome ");
+        Alert::info('Info Title', 'Info Message');
+        toast(session('success'), 'success');
+        // return back();
     }
 
     public function uploadMultipleImages(Request $request)

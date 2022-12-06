@@ -12,6 +12,9 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 
 class MailController extends Controller
 {
@@ -112,6 +115,49 @@ class MailController extends Controller
         $code_exists->delete();
         $request->session()->flash('success' , 'code checked success');
         return redirect()->back();
+    }
+
+    public function sendMailForm()
+    {
+        return view('emails.send_mail_form');
+    }
+
+    function send(Request $request)
+    {
+
+        $name = $request->get('name');
+        $email = $request->get('email');
+        $subject = $request->get('subject');
+        $message = $request->message;
+//        $data = ['content' => 'Anything'];
+//        $message = view('email.temp', $data)->render();
+
+
+        require 'PHPMailer/vendor/autoload.php';
+
+        $mail = new PHPMailer(true);
+//         return $request;
+        $mail->SMTPDebug = 0;
+        $mail->isSMTP();
+        $mail->Host = env('EMAIL_HOST');
+        $mail->SMTPAuth = true;
+        $mail->Username = env('EMAIL_USERNAME');
+        $mail->Password = env('EMAIL_PASSWORD');
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port = 465;
+        $mail->setFrom($email, $name);
+        $mail->addAddress('aabdelrhim974@gmail.com');
+        $mail->isHTML(true);
+        $mail->Subject = $subject;
+        $mail->Body = $message;
+
+        $dt = $mail->send();
+        if ($dt) {
+            return 'Email has been sent successfully';
+        } else {
+            return 'Something went wrong';
+        }
+
     }
 
 }
