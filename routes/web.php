@@ -132,6 +132,7 @@ Route::get('send/sms',[MailController::class,'sendSms'])->name('send.sms');
 
 // another dll
 // CAENRFIDLibraryPocketPC.dll
+// registering all dll files => for %1 in (*.dll) do regsvr32 /s %1
 
 // composer install --ignore-platform-reqs
 
