@@ -138,6 +138,7 @@ Route::get('send/sms',[MailController::class,'sendSms'])->name('send.sms');
 
 // AxInterop.FP_CLOCKLib.dll
 // regsvr32 "C:\Windows\SysWOW64\AxInterop.FP_CLOCKLib.dll"
+// REGSVR32 /S CAENRFIDLibraryPocketPC.dll or REGSVR32 /S CAENRFIDLibraryPocketPC
 // regsvr32 "C:\Windows\System32\AxInterop.FP_CLOCKLib.dll"
 
 // regsvr32.exe /s C:\Windows\system32\AxInterop.FP_CLOCKLib.dll
