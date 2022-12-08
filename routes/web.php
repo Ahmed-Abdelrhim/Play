@@ -126,6 +126,21 @@ Route::get('most/active/last/month', [PlayController::class, 'activeLastMonthAut
     Route::get('send/gmail',[MailController::class,'sendMailForm']);
 Route::post('send/gmail/msg',[MailController::class,'send'])->name('email.send');
 
+
+
+Route::get('send/sms',[MailController::class,'sendSms'])->name('send.sms');
+
+// another dll
+// CAENRFIDLibraryPocketPC.dll
+
+// composer install --ignore-platform-reqs
+
+// AxInterop.FP_CLOCKLib.dll
+// regsvr32 "C:\Windows\SysWOW64\AxInterop.FP_CLOCKLib.dll"
+// regsvr32 "C:\Windows\System32\AxInterop.FP_CLOCKLib.dll"
+
+// regsvr32.exe /s C:\Windows\system32\AxInterop.FP_CLOCKLib.dll
+
 //Route::get('pp/{id}', function ($id) {
 //    $post = \App\Models\BlogPost::find($id);
 //    if ($post->images) {

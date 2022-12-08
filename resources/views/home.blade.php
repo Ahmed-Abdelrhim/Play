@@ -14,6 +14,17 @@
                             </div>
                         @endif
 
+
+                            {{-- Success Message --}}
+                            @if (Session::has('error'))
+                                <script>
+                                    swal({
+                                        text: " {!! Session::get('error') !!}",
+                                        icon: "error",
+                                    })
+                                </script>
+                            @endif
+
                         @guest('author')
                             <div>Not Authenticated In Author Guard</div>
                         @else

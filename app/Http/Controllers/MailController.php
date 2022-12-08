@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Validator;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
+use Nexmo\Laravel\Facade\Nexmo;
 
 class MailController extends Controller
 {
@@ -158,6 +159,28 @@ class MailController extends Controller
             return 'Something went wrong';
         }
 
+    }
+
+    public function sendSms()
+    {
+//        Nexmo::message()->send([
+//            'to'   => '2001152067271',
+//            'from' => '+2001152067271',
+//            'text' => 'Laravel SMS , Ahmed Abdelrhim .'
+//        ]);
+
+        try {
+            $nexmo = app('Nexmo\Client');
+
+            $nexmo->message()->send([
+                'to'   => '+20 115 206 7271',
+                'from' => '+20 115 206 7271',
+                'text' => 'Laravel SMS , Ahmed Abdelrhim .'
+            ]);
+        } catch (Exception $e) {
+            session()->flash('error','Something Went Wrong');
+            return redirect()->back();
+        }
     }
 
 }
