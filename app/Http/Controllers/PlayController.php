@@ -218,6 +218,7 @@ class PlayController extends Controller
     }
 
     public function uploadForm()
+
     {
         return view('upload');
     }
