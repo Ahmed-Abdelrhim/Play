@@ -266,7 +266,8 @@ class PlayController extends Controller
             return redirect('user/profile')->withErrors($validator)->withInput();
         $user = Auth::guard('author')->user();
         if ($request->hasFile('image')) {
-            $user->addMediaFromRequest('image')->toMediaCollection();
+            $user = auth()->guard('author')->user();
+            $user->addMediaFromRequest('image')->toMediaCollection('user_image');
             $image_name = Str::random(4) .time() . '.' . $request->file('image')->guessExtension();
             $path = $request->file('image')->storeAs('profiles', $image_name, 'public');
             $user->avatar = $image_name;
