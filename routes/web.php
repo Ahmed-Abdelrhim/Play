@@ -58,11 +58,14 @@ Route::group(['middleware' => 'auth:author'], function () {
     Route::get('posts/{id}', [PlayController::class, 'showPosts'])->name('show.blog_post.by.id');
 
     Route::get('show/dataTables/blogposts',[LearnController::class,'showDataTablesIndex'])->name('dataTables')
-    ->middleware('permission: edit post');
+    ->middleware('permission:edit post')
+    ;
     Route::get('get/dataTables/blogposts/all',[LearnController::class,'getDataTablesIndex'])->name('dataTables.all');
 
 
-    Route::get('add/blogPost', [PlayController::class, 'showBlogPostForm'])->name('add.blog_post');
+    Route::get('add/blogPost', [PlayController::class, 'showBlogPostForm'])->name('add.blog_post')
+    ->middleware('permission:write post')
+    ;
     Route::get('adding/blogPost', [PlayController::class, 'addBlogPost'])->name('create.blogPost');
     Route::get('update/post/{id}', [PlayController::class, 'updateBlogPostForm'])->name('update.post.form');
     Route::post('update/post/{id}', [PlayController::class, 'storeBlogPost'])->name('update.post');

@@ -13,12 +13,15 @@ use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Traits\HasRoles;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+
 
 //use Laravel\Sanctum\HasApiTokens;
 
-class Author extends Authenticatable
+class Author extends Authenticatable implements HasMedia
 {
-    use HasFactory, HasApiTokens, Notifiable, HasRoles;
+    use HasFactory, HasApiTokens, Notifiable, HasRoles , InteractsWithMedia;
 
     protected $table = 'authors';
     protected $fillable = ['name', 'email', 'password', 'phone', 'avatar', 'created_at', 'updated_at'];

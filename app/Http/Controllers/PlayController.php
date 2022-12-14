@@ -108,7 +108,7 @@ class PlayController extends Controller
 
     public function showBlogPostForm()
     {
-        $this->authorize('posts.create');
+        // $this->authorize('posts.create');
         return view('blogpost.create');
     }
 
@@ -266,6 +266,7 @@ class PlayController extends Controller
             return redirect('user/profile')->withErrors($validator)->withInput();
         $user = Auth::guard('author')->user();
         if ($request->hasFile('image')) {
+            $user->addMediaFromRequest('image')->toMediaCollection();
             $image_name = Str::random(4) .time() . '.' . $request->file('image')->guessExtension();
             $path = $request->file('image')->storeAs('profiles', $image_name, 'public');
             $user->avatar = $image_name;
