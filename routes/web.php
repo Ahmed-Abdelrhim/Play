@@ -57,7 +57,8 @@ Route::group(['middleware' => 'auth:author'], function () {
     Route::get('all/posts', [PlayController::class, 'showAllPosts'])->name('blog_posts');
     Route::get('posts/{id}', [PlayController::class, 'showPosts'])->name('show.blog_post.by.id');
 
-    Route::get('show/dataTables/blogposts',[LearnController::class,'showDataTablesIndex'])->name('dataTables');
+    Route::get('show/dataTables/blogposts',[LearnController::class,'showDataTablesIndex'])->name('dataTables')
+    ->middleware('permission: edit post');
     Route::get('get/dataTables/blogposts/all',[LearnController::class,'getDataTablesIndex'])->name('dataTables.all');
 
 
@@ -129,6 +130,7 @@ Route::post('send/gmail/msg',[MailController::class,'send'])->name('email.send')
 
 
 Route::get('send/sms',[MailController::class,'sendSms'])->name('send.sms');
+
 
 // another dll
 // CAENRFIDLibraryPocketPC.dll

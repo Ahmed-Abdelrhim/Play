@@ -156,13 +156,15 @@
                             </li>
                         @endif
 
-                            @if(Route::current()->getName() != 'dataTables' )
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{route('dataTables')}}">dataTables</a>
-                                </li>
-                            @endif
+{{--                            @can('edit post')--}}
+                                @if(Route::current()->getName() != 'dataTables' )
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{route('dataTables')}}">dataTables</a>
+                                    </li>
+                                @endif
+{{--                            @endcan--}}
 
-                        {{-- Route::current()->getName() --}}
+                        {{-- Route::current()->getName()   show/dataTables/blogposts    --}}
                         {{-- Request::route()->getPrefix() --}}
 
                         @if(Route::current()->getName() != 'pay' )

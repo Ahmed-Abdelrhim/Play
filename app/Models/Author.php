@@ -10,12 +10,15 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Traits\HasRoles;
 
 //use Laravel\Sanctum\HasApiTokens;
 
 class Author extends Authenticatable
 {
-    use HasFactory, HasApiTokens, Notifiable;
+    use HasFactory, HasApiTokens, Notifiable, HasRoles;
 
     protected $table = 'authors';
     protected $fillable = ['name', 'email', 'password', 'phone', 'avatar', 'created_at', 'updated_at'];
