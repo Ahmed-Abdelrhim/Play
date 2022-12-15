@@ -13,6 +13,8 @@ use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Traits\HasRoles;
+
+
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
@@ -21,10 +23,10 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Author extends Authenticatable implements HasMedia
 {
-    use HasFactory, HasApiTokens, Notifiable, HasRoles , InteractsWithMedia;
+    use HasFactory, HasApiTokens, Notifiable, HasRoles , InteractsWithMedia ;
 
     protected $table = 'authors';
-    protected $fillable = ['name', 'email', 'password', 'phone', 'avatar', 'created_at', 'updated_at'];
+    protected $fillable = ['name', 'email', 'password', 'phone', 'avatar', 'locale','created_at', 'updated_at'];
     protected $hidden = ['password', 'created_at', 'updated_at'];
     public $timestamps = true;
 

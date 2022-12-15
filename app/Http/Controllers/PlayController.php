@@ -255,6 +255,14 @@ class PlayController extends Controller
 
     public function storeUserProfileData(Request $request)
     {
+//        $user = Auth::guard('author')->user();
+//        $user->addMediaFromRequest('image')->toMediaCollection('images');
+//        return back();
+//        dd($request->image);
+//        $user = auth()->guard('author')->user();
+//        return $request->image;
+////        $user->addMedia($request->get('image'))->toMediaCollection();
+////        return redirect()->back();
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|min:4',
             'email' => 'required|email|unique:authors,email,' . Auth::guard('author')->user()->id,
@@ -266,10 +274,10 @@ class PlayController extends Controller
             return redirect('user/profile')->withErrors($validator)->withInput();
         $user = Auth::guard('author')->user();
         if ($request->hasFile('image')) {
-            $user = auth()->guard('author')->user();
-            $user->addMediaFromRequest('image')->toMediaCollection('user_image');
-            $image_name = Str::random(4) .time() . '.' . $request->file('image')->guessExtension();
+            $image_name = Str::random(4) . time() . '.' . $request->file('image')->guessExtension();
             $path = $request->file('image')->storeAs('profiles', $image_name, 'public');
+            $user = auth()->guard('author')->user();
+            $user->addMediaFromRequest('image')->toMediaCollection('images');
             $user->avatar = $image_name;
             $user->save();
             // if (count($user->image) > 0) {

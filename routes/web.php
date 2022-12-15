@@ -13,6 +13,7 @@ use App\Http\Controllers\PlayController;
 use App\Http\Controllers\CustomLoginController;
 use App\Http\Controllers\ProblemsController;
 use App\Http\Controllers\Files\ImagesController;
+use App\Http\Controllers\SpatieController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -98,6 +99,7 @@ Route::group(['middleware' => 'auth:author'], function () {
 
     Route::get('user/profile', [PlayController::class, 'viewProfilePage'])->name('profile');
     Route::post('save/profile/data', [PlayController::class, 'storeUserProfileData'])->name('post.profile.data');
+    Route::get('spatie',[SpatieController::class,'handle'])->name('spatie-media');
 
 
     ################### Custom Play  ###################
