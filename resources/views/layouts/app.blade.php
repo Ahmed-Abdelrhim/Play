@@ -37,7 +37,7 @@
           integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
 
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css"/>
 
     @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
 
@@ -45,8 +45,9 @@
         * {
             box-sizing: border-box;
         }
+
         body {
-            font-family: 'Cairo' , 'Nunito' , sans-serif;
+            font-family: 'Cairo', 'Nunito', sans-serif;
         }
 
         .scroller {
@@ -81,6 +82,7 @@
                              src="{{ asset('storage/profiles/' . auth()->guard('author')->user()->avatar)}}"
                              style="width: 55px; height: 55px; border-radius: 50%;" alt="loading..."/>
                     </a>
+                    {{-- Pepole Are Saying To Each Other --}}
                 @else
                     <a href="{{route('home')}}">
                         <img class="img-thumbnail" src="{{asset('storage/profiles/pic-6.webp')}}"
@@ -130,11 +132,11 @@
                             </li>
                         @endif
 
-                            @if(Route::current()->getName() != 'check.verification.code')
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{route('check.verification.code')}}">Check mail</a>
-                                </li>
-                            @endif
+                        @if(Route::current()->getName() != 'check.verification.code')
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{route('check.verification.code')}}">Check mail</a>
+                            </li>
+                        @endif
 
 
 
@@ -156,13 +158,13 @@
                             </li>
                         @endif
 
-{{--                            @can('edit post')--}}
-                                @if(Route::current()->getName() != 'dataTables' )
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{route('dataTables')}}">dataTables</a>
-                                    </li>
-                                @endif
-{{--                            @endcan--}}
+                        {{--                            @can('edit post')--}}
+                        @if(Route::current()->getName() != 'dataTables' )
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{route('dataTables')}}">dataTables</a>
+                            </li>
+                        @endif
+                        {{--                            @endcan--}}
 
                         {{-- Route::current()->getName()   show/dataTables/blogposts    --}}
                         {{-- Request::route()->getPrefix() --}}
@@ -219,7 +221,7 @@
         crossorigin="anonymous"></script>
 
 
-<script src="https://code.jquery.com/jquery-3.3.1.js" ></script>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" defer></script>
 
 @stack('scripts')

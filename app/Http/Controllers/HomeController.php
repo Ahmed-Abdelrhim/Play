@@ -62,6 +62,9 @@ class HomeController extends Controller
         // Anas is Publisher
         // $anas = Author::query()->where('email' , 'anas@gmail.com')->first();
         // $anas->assignRole('publisher');
+
+        // $author = Author::query()->where('email','abdelrhim.admin@gmail.com')->first();
+        // $author->assignRole('admin');
         return view('home');
     }
 }

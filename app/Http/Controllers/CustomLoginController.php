@@ -38,11 +38,13 @@ class CustomLoginController extends Controller
         $user->save();
         if ($request->has('image')) {
             $image_name = time() . '.' . $request->file('image')->guessExtension();
-            $name = $request->file('image')->storeAs('profiles', $image_name);
+            $name = $request->file('image')->storeAs('profiles', $image_name,'public');
             $user->image()->create([
                 'src' => $name,
                 'type' => 'avatar',
             ]);
+            $user->avatar = $image_name;
+            $user->save();
 
             return redirect()->route('login');
         }

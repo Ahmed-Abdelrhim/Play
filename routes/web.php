@@ -115,6 +115,7 @@ Route::group(['middleware' => 'auth:author'], function () {
 
     Route::get('playy',[LearnController::class,'play'])->middleware('can:play');
     Route::get('problem',[ProblemsController::class,'solveFirst']);
+    Route::get('temp',[ProblemsController::class,'tempProblem']);
 
     Route::get('many',[ImagesController::class,'uploadForm']);
 
