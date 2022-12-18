@@ -57,11 +57,12 @@ class ProblemsController extends Controller
     {
         $strs = ["flower","flow","flight",'ahmed'];
         $chars = [];
+        $arr = [];
 //        return $strs[0][1];
 
         for ($i = 0 ; $i < count($strs) ; $i++) {
             // $digits = strlen($strs[$i]);
-            $arr = [];
+
             for ($j = 0; $j < strlen($strs[$i]) ; $j++) {
                 $arr[] .= $strs[$i][$j];
             }
