@@ -212,7 +212,7 @@
                 </div>
                 @enderror
                 <div class="form">
-                    <label for="email">Email</label>
+                    <label for="email">Email , Name , Phone</label>
                     <input type="text" id="email" name="email" class=" @error('email') is-invalid @enderror  @error('name') is-invalid @enderror">
 
 
