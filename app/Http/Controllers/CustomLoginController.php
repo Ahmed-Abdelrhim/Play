@@ -93,34 +93,46 @@ class CustomLoginController extends Controller
         $field = 'name';
         if (is_numeric($value)) {
             $field = 'phone';
-            // request()->merge([$field => $value]);
-            // return ['phone' => $request->get('email'), 'password' => $request->get('password')];
         } elseif (filter_var($value, FILTER_VALIDATE_EMAIL)) {
             $field = 'email';
-            // request()->merge([$field => $value]);
-            // return ['email' => $request->get('email'), 'password'=>$request->get('password')];
         }
-        //        else {
-        //            $field = 'name';
-        //            request()->merge([$field => $value]);
-        //        }
         request()->merge([$field => $value]);
         return $field;
-
-        //        return ['username' => $request->get('email'), 'password'=>$request->get('password')];
-        //        return 'email';
     }
 
     public function logout(): \Illuminate\Http\RedirectResponse
     {
         Auth::guard('author')->logout();
-//        $user->logout();
-//        $author->logout();
+        //        $user->logout();
+        //        $author->logout();
         return redirect()->route('login');
-
     }
 
     // he is coming right now because his phone is ringing
     // I can hear his voice coming
+
+    //        public function username($request): string
+    //    {
+    //        $value = $request->get('email');
+    //        $field = 'name';
+    //        if (is_numeric($value)) {
+    //            $field = 'phone';
+    //            // request()->merge([$field => $value]);
+    //            // return ['phone' => $request->get('email'), 'password' => $request->get('password')];
+    //        } elseif (filter_var($value, FILTER_VALIDATE_EMAIL)) {
+    //            $field = 'email';
+    //            // request()->merge([$field => $value]);
+    //            // return ['email' => $request->get('email'), 'password'=>$request->get('password')];
+    //        }
+    //        //        else {
+    //        //            $field = 'name';
+    //        //            request()->merge([$field => $value]);
+    //        //        }
+    //        request()->merge([$field => $value]);
+    //        return $field;
+    //
+    //        //        return ['username' => $request->get('email'), 'password'=>$request->get('password')];
+    //        //        return 'email';
+    //    }
 
 }
