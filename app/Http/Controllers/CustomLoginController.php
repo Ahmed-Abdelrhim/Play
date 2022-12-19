@@ -95,18 +95,21 @@ class CustomLoginController extends Controller
     public function username($request): string
     {
         $value = $request->get('email');
+        $field = 'name';
         if (is_numeric($request->get('email'))) {
             $field = 'phone';
-            request()->merge([$field => $value]);
+            // request()->merge([$field => $value]);
             // return ['phone' => $request->get('email'), 'password' => $request->get('password')];
         } elseif (filter_var($request->get('email'), FILTER_VALIDATE_EMAIL)) {
             $field = 'email';
-            request()->merge([$field => $value]);
+            // request()->merge([$field => $value]);
             // return ['email' => $request->get('email'), 'password'=>$request->get('password')];
-        } else {
-            $field = 'name';
-            request()->merge([$field => $value]);
         }
+        //        else {
+        //            $field = 'name';
+        //            request()->merge([$field => $value]);
+        //        }
+        request()->merge([$field => $value]);
         return $field;
 
         //        return ['username' => $request->get('email'), 'password'=>$request->get('password')];
