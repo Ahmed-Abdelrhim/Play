@@ -89,15 +89,24 @@ class CustomLoginController extends Controller
 
     public function username($request): string
     {
+//        $value = $request->get('email');
+//        $field = 'name';
+//        if (is_numeric($value)) {
+//            $field = 'phone';
+//        } elseif (filter_var($value, FILTER_VALIDATE_EMAIL)) {
+//            $field = 'email';
+//        }
+//        request()->merge([$field => $value]);
+//        return $field;
+
         $value = $request->get('email');
-        $field = 'name';
-        if (is_numeric($value)) {
-            $field = 'phone';
-        } elseif (filter_var($value, FILTER_VALIDATE_EMAIL)) {
-            $field = 'email';
-        }
-        request()->merge([$field => $value]);
-        return $field;
+        $login = 'name';
+        if (is_numeric($value))
+            $login = 'phone';
+        if (filter_var($value,FILTER_VALIDATE_EMAIL))
+            $login = 'email';
+        request()->merge([$login => $value]);
+        return $login;
     }
 
     public function logout(): \Illuminate\Http\RedirectResponse
