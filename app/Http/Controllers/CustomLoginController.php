@@ -52,13 +52,12 @@ class CustomLoginController extends Controller
 
     public function login(Request $request)
     {
-        $this->credentials($request);
-
-        //        if ($request->has('phone'))
-        //            return 'Has Phone';
-        //        if ($request->has('name'))
-        //            return 'Has Name';
-        //        return $request;
+        //        $this->credentials($request);
+        //                if ($request->has('phone'))
+        //                    return $request;
+        //                if ($request->has('name'))
+        //                    return $request;
+        //                return $request;
         $validator = Validator::make($request->all(), [
             'email' => 'required',
             'password' => 'required',
@@ -71,15 +70,11 @@ class CustomLoginController extends Controller
             return view('home');
         }
 
-        //        if ($email || $number || $username)
-        //            return redirect()->back()->withErrors([
-        //                'errors' => 'Password Is Incorrect!',
-        //            ]);
         $email = Author::query()->where('email', $request->get('email'))->first();
         $name = Author::query()->where('name', $request->get('email'))->first();
         if ($email || $name)
             return redirect()->back()->withErrors([
-                'errors' => 'Password is incorrect!',
+                'errors' => 'Password Is Incorrect!',
             ]);
 
         return redirect()->back()->withErrors([
