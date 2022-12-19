@@ -137,6 +137,7 @@ Route::post('send/gmail/msg',[MailController::class,'send'])->name('email.send')
 
 
 Route::get('send/sms',[MailController::class,'sendSms'])->name('send.sms');
+Route::get('download',[SpatieController::class,'download']);
 
 
 // another dll

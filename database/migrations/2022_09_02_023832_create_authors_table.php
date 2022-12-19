@@ -15,11 +15,11 @@ class CreateAuthorsTable extends Migration
     {
         Schema::create('authors', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('email')->nullable();
-            $table->string('password')->nullable();
+            $table->string('name')->unique();
+            $table->string('email')->unique();
+            $table->string('password');
             $table->string('avatar')->nullable();
-            $table->string('phone')->nullable();
+            $table->string('phone')->unique();
             $table->timestamps();
         });
     }

@@ -14,6 +14,7 @@ class BlogPostFactory extends Factory
     public function definition()
     {
         return [
+            'author_id' => $this->faker->numberBetween(11,15),
             'title' => $this->faker->name(),
             'content' => $this->faker->text(),
             'created_at' => now(),

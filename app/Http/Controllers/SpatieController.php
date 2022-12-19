@@ -17,4 +17,11 @@ class SpatieController extends Controller
         // return $avatars = $author->getMedia();
         // return view('spatie.index',['avatars' => $avatars]);
     }
+
+    public function download()
+    {
+        $user = auth()->guard('author')->user();
+        return $user->getFirstMedia('images');
+            //->toMediaCollection();
+    }
 }

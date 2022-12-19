@@ -213,12 +213,16 @@
                 @enderror
                 <div class="form">
                     <label for="email">Email</label>
-                    <input type="email" id="email" name="email" >
+                    <input type="text" id="email" name="email" class=" @error('email') is-invalid @enderror  @error('name') is-invalid @enderror">
+
+
                     @error('email')
-                    <span class="invalid-feedback mb-2" role="alert">
+                    <span class="invalid-feedback mb-2 aaa" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
                     @enderror
+
+
                     <label for="password">Password</label>
                     <input type="password" id="password" name="password">
 

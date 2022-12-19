@@ -38,14 +38,13 @@ class CustomLoginController extends Controller
         $user->save();
         if ($request->has('image')) {
             $image_name = time() . '.' . $request->file('image')->guessExtension();
-            $name = $request->file('image')->storeAs('profiles', $image_name,'public');
-            $user->image()->create([
-                'src' => $name,
-                'type' => 'avatar',
-            ]);
+            $name = $request->file('image')->storeAs('profiles', $image_name, 'public');
+            //            $user->image()->create([
+            //                'src' => $name,
+            //                'type' => 'avatar',
+            //            ]);
             $user->avatar = $image_name;
             $user->save();
-
             return redirect()->route('login');
         }
 
@@ -53,35 +52,65 @@ class CustomLoginController extends Controller
 
     public function login(Request $request)
     {
-        // return $request;
+        $this->credentials($request);
+
+        //        if ($request->has('phone'))
+        //            return 'Has Phone';
+        //        if ($request->has('name'))
+        //            return 'Has Name';
+        //        return $request;
         $validator = Validator::make($request->all(), [
-            'email' => 'required|email',
+            'email' => 'required',
             'password' => 'required',
         ]);
-        if ($validator->fails())
+        if ($validator->fails()) {
+            // return $validator->errors();
             return redirect('login')->withErrors($validator)->withInput();
+        }
         if (Auth::guard('author')->attempt($this->credentials($request))) {
             return view('home');
         }
-        $email = Author::where('email', $request->email)->first();
-        if ($email)
+
+        //        if ($email || $number || $username)
+        //            return redirect()->back()->withErrors([
+        //                'errors' => 'Password Is Incorrect!',
+        //            ]);
+        $email = Author::query()->where('email', $request->get('email'))->first();
+        $name = Author::query()->where('name', $request->get('email'))->first();
+        if ($email || $name)
             return redirect()->back()->withErrors([
-                'errors' => 'Password Is Incorrect!',
+                'errors' => 'Password is incorrect!',
             ]);
+
         return redirect()->back()->withErrors([
             'errors' => 'Email does not exist. sign up now!',
         ]);
-
     }
 
     public function credentials($request)
     {
-        return $request->only($this->username(), 'password');
+        return $request->only($this->username($request), 'password');
     }
 
-    public function username(): string
+    public function username($request): string
     {
-        return 'email';
+        $value = $request->get('email');
+        if (is_numeric($request->get('email'))) {
+            $field = 'phone';
+            request()->merge([$field => $value]);
+            // return ['phone' => $request->get('email'), 'password' => $request->get('password')];
+        } elseif (filter_var($request->get('email'), FILTER_VALIDATE_EMAIL)) {
+            $field = 'email';
+            request()->merge([$field => $value]);
+            // return ['email' => $request->get('email'), 'password'=>$request->get('password')];
+        } else {
+            $field = 'name';
+            request()->merge([$field => $value]);
+        }
+        return $field;
+
+        //        return ['username' => $request->get('email'), 'password'=>$request->get('password')];
+        //        return 'email';
     }
 
     public function logout(): \Illuminate\Http\RedirectResponse
@@ -92,5 +121,8 @@ class CustomLoginController extends Controller
         return redirect()->route('login');
 
     }
+
+    // he is coming right now because his phone is ringing
+    // I can hear his voice coming
 
 }
