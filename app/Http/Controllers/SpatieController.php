@@ -24,4 +24,10 @@ class SpatieController extends Controller
         return $user->getFirstMedia('images');
             //->toMediaCollection();
     }
+
+    public function downloadImageProfile()
+    {
+        return $user = auth()->guard('author')->user();
+        return auth()->guard('author')->user()->getFirstMedia('images');
+    }
 }

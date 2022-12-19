@@ -141,6 +141,13 @@
                             </div>
 
 
+                            {{-- download Image --}}
+
+
+
+                            {{-- download Image --}}
+
+
                             <div class="row mb-0">
                                 <div class="col-md-8 offset-md-4">
                                     <button type="submit" class="btn btn-primary">
@@ -150,9 +157,25 @@
                                 </div>
                             </div>
                         </form>
+
+{{--                        <div class="row mb-3 col-3 mx-auto">--}}
+{{--                            <a class="btn btn-primary" href="{{route('download.profile.image')}}"--}}
+{{--                               onclick="event.preventDefault();--}}
+{{--                                    document.getElementById('download-image').submit();">--}}
+{{--                                download--}}
+{{--                            </a>--}}
+{{--                        </div>--}}
+
+{{--                        <form action="{{route('download.profile.image')}}" method="POST" class="d-none">--}}
+{{--                            @csrf--}}
+{{--                        </form>--}}
+
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+
 @endsection

@@ -99,6 +99,8 @@ Route::group(['middleware' => 'auth:author'], function () {
 
     Route::get('user/profile', [PlayController::class, 'viewProfilePage'])->name('profile');
     Route::post('save/profile/data', [PlayController::class, 'storeUserProfileData'])->name('post.profile.data');
+    Route::post('download/profile/image',[SpatieController::class,'downloadImageProfile'])->name('download.profile.image');
+
     Route::get('spatie',[SpatieController::class,'handle'])->name('spatie-media');
 
 
