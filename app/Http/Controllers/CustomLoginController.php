@@ -71,7 +71,7 @@ class CustomLoginController extends Controller
             return view('home');
         }
 
-        //        if ($email || $number || $username)
+        //        if ($email || $number || $username) .
         //            return redirect()->back()->withErrors([
         //                'errors' => 'Password Is Incorrect!',
         //            ]);
