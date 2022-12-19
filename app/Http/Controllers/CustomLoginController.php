@@ -118,7 +118,7 @@ class CustomLoginController extends Controller
     }
 
     // he is coming right now because his phone is ringing
-    // I can hear his voice coming .
+    // I can hear his voice coming
 
     //        public function username($request): string
     //    {
