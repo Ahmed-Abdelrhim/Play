@@ -37,7 +37,7 @@ class AddTasks extends Component
     {
         $user_id = auth()->user()->id;
         $this->validate();
-        BlogPost::create([
+        BlogPost::query()->create([
             'title' => $this->blogPostTitle,
             'content' => $this->blogPostContent,
             'author_id' => $user_id,

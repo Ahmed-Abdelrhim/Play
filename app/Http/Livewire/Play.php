@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\BlogPost;
 use Livewire\Component;
 use Livewire\WithPagination;
+
 class Play extends Component
 {
     use WithPagination;

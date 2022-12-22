@@ -142,10 +142,9 @@
 
 
                             {{-- download Image --}}
-
-
-
+                                download your image here
                             {{-- download Image --}}
+
 
 
                             <div class="row mb-0">
@@ -176,6 +175,4 @@
             </div>
         </div>
     </div>
-
-
 @endsection
