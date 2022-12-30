@@ -37,6 +37,13 @@ class Author extends Authenticatable implements HasMedia
         'de' => 'Deutsch'
     ];
 
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'phone' => 'integer',
+        'created_at' => 'time:H:i',
+        'updated_at' => 'time:H:i',
+    ];
+
     public function posts(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(BlogPost::class, 'author_id', 'id');
