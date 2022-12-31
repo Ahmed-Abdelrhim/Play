@@ -30,7 +30,7 @@ class UserExport implements
     public function headings(): array
     {
         return [
-            'ID', 'NAME', 'EMAIL', 'CREATED_AT'
+            'ID', 'NAME', 'EMAIL', 'CREATED_AT',
         ];
     }
 
