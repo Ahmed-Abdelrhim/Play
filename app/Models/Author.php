@@ -40,8 +40,8 @@ class Author extends Authenticatable implements HasMedia
     protected $casts = [
         'email_verified_at' => 'datetime',
         'phone' => 'integer',
-        'created_at' => 'time:H:i',
-        'updated_at' => 'time:H:i',
+        'created_at' => 'date:Y-m-d H:00',
+        'updated_at' => 'date:Y-m-d H:00',
     ];
 
     public function posts(): \Illuminate\Database\Eloquent\Relations\HasMany
