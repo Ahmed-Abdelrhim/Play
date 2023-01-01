@@ -29,9 +29,7 @@ class UserExport implements
 
     public function headings(): array
     {
-        return [
-            'ID', 'NAME', 'EMAIL', 'CREATED_AT',
-        ];
+        return ['ID', 'NAME', 'EMAIL', 'CREATED_AT',];
     }
 
     public function map($author): array
@@ -55,5 +53,5 @@ class UserExport implements
         ];
     }
 
-
+// return DateTime::createFromFormat('!m' , $this->month)->format('F');
 }

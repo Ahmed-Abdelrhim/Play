@@ -144,6 +144,8 @@ Route::get('download',[SpatieController::class,'download']);
 
 Route::get('export',[FilesController::class,'export'])->name('export.excel');
 
+Route::get('sub',[FilesController::class,'subMonth'])->name('sub');
+
 /*
  * ----------------------------------------------------------------------------------------------------
  * -                         -                                    -                                   -
