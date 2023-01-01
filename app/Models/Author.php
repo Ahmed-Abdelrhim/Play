@@ -39,7 +39,7 @@ class Author extends Authenticatable implements HasMedia
 
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'phone' => 'integer',
+        'phone' => 'string',
         'created_at' => 'date:Y-m-d H:00',
         'updated_at' => 'date:Y-m-d H:00',
     ];
