@@ -25,18 +25,18 @@ class LearnController extends Controller
 
     public function showDataTablesIndex(): View
     {
-//        return $posts = BlogPost::with(['author' => function ($q) {
-//            $q->select('id','name');
-//        }])
-//            ->get();
+        //        return $posts = BlogPost::with(['author' => function ($q) {
+        //            $q->select('id','name');
+        //        }])
+        //            ->get();
         return view('datatables');
     }
 
     public function getDataTablesIndex()
     {
-//        $posts = BlogPost::with(['author' => function ($query) {
-//            return $query->select('id','name');
-//        }])->get();
+        //        $posts = BlogPost::with(['author' => function ($query) {
+        //            return $query->select('id','name');
+        //        }])->get();
 
         $posts = BlogPost::query()->get();
 
@@ -47,11 +47,11 @@ class LearnController extends Controller
             ->setRowClass(function ($row) {
                 return $row->id % 2 == 0 ? 'alert-primary' : 'alert-warning ' . $row->id;
             })
-//            ->setRowAttr([
-//                'style'=> function ($row) {
-//                return $row->id %2 == 0 ? 'color:white' :  'color:red';
-//                },
-//            ])
+            //            ->setRowAttr([
+            //                'style'=> function ($row) {
+            //                return $row->id %2 == 0 ? 'color:white' :  'color:red';
+            //                },
+            //            ])
             ->setRowId(function ($row) {
                 return $row->id;
             })
@@ -63,6 +63,9 @@ class LearnController extends Controller
             })
             ->addColumn('author', function (BlogPost $author) {
                 return $author->author->name;
+            })
+            ->addColumn('difference',function(BlogPost $post) {
+                return $post->updated_at->diffForHumans() ;
             })
             ->editColumn('created_at' , function(BlogPost $post) {
                 return $post->created_at->diffForHumans();

@@ -9,6 +9,7 @@
                 <th scope="col">Title</th>
                 <th scope="col">Content</th>
                 <th scope="col">Name</th>
+                <th scope="col">Diff</th>
                 <th scope="col">Time</th>
                 <th scope="col">Action</th>
             </tr>
@@ -51,6 +52,10 @@
                     {
                         data: 'created_at',
                         name: 'created_at'
+                    },
+                    {
+                        data : 'difference',
+                        name : 'difference'
                     },
                     {
                         data: 'action',
