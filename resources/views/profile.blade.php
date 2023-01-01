@@ -11,7 +11,7 @@
             {{--            </div>--}}
             <div class="col-md-6">
                 <div class="card">
-                    <div class="card-header h4 text-center">Update Profile</div>
+                    <div class="card-header h4 text-center">{{__('msg.Update Profile')}}</div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('post.profile.data') }}" enctype="multipart/form-data">
                             @csrf
@@ -34,7 +34,7 @@
 
                             <div class="row mb-3">
                                 <label for="name"
-                                       class="col-md-4 col-form-label text-md-end">Name</label>
+                                       class="col-md-4 col-form-label text-md-end">{{__('msg.Name')}}</label>
 
                                 <div class="col-md-6">
                                     <input id="name" type="text" placeholder="full name"
@@ -51,7 +51,7 @@
 
                             <div class="row mb-3">
                                 <label for="email"
-                                       class="col-md-4 col-form-label text-md-end">Email</label>
+                                       class="col-md-4 col-form-label text-md-end">{{__('msg.Email')}}</label>
 
                                 <div class="col-md-6">
                                     <input id="email" type="text" placeholder="email address"
@@ -68,7 +68,7 @@
 
                             <div class="row mb-3">
                                 <label for="password"
-                                       class="col-md-4 col-form-label text-md-end">Password</label>
+                                       class="col-md-4 col-form-label text-md-end">{{__('msg.Password')}}</label>
                                 <div class="col-md-6">
                                     <input id="password" type="password" placeholder="password"
                                            class="form-control @error('password') is-invalid @enderror" name="password"
@@ -85,7 +85,7 @@
 
                             <div class="row mb-3">
                                 <label for="phone"
-                                       class="col-md-4 col-form-label text-md-end">Phone</label>
+                                       class="col-md-4 col-form-label text-md-end">{{__('msg.Phone')}}</label>
                                 <div class="col-md-6">
                                     <input type="tel" id="phone" placeholder="phone number"
                                            class="form-control @error('phone') is-invalid @enderror" name="phone"
@@ -105,7 +105,7 @@
 
                             <div class="row mb-3">
                                 <label for="lang"
-                                       class="col-md-4 col-form-label text-md-end">language</label>
+                                       class="col-md-4 col-form-label text-md-end">{{__('msg.language')}}</label>
                                 <div class="col-8">
                                     <select id="lang" name="locale" class="custom-select" style="width: 73%">
                                         @foreach(\App\Models\Author::LOCALES as $locale => $lang)
@@ -126,7 +126,7 @@
 
                             <div class="row mb-3">
                                 <label for="password"
-                                       class="col-md-4 col-form-label text-md-end">Image</label>
+                                       class="col-md-4 col-form-label text-md-end">{{__('msg.Image')}}</label>
                                 <div class="col-md-6">
                                     <input id="image" type="file"
                                            class="form-control @error('image') is-invalid @enderror" name="image"
@@ -142,32 +142,31 @@
 
 
                             {{-- download Image --}}
-                                download your image here
+                            {{--download your image here--}}
                             {{-- download Image --}}
-
 
 
                             <div class="row mb-0">
                                 <div class="col-md-8 offset-md-4">
                                     <button type="submit" class="btn btn-primary">
-                                        Update
+                                        {{__('msg.Update')}}
                                     </button>
 
                                 </div>
                             </div>
                         </form>
 
-{{--                        <div class="row mb-3 col-3 mx-auto">--}}
-{{--                            <a class="btn btn-primary" href="{{route('download.profile.image')}}"--}}
-{{--                               onclick="event.preventDefault();--}}
-{{--                                    document.getElementById('download-image').submit();">--}}
-{{--                                download--}}
-{{--                            </a>--}}
-{{--                        </div>--}}
+                        {{--                        <div class="row mb-3 col-3 mx-auto">--}}
+                        {{--                            <a class="btn btn-primary" href="{{route('download.profile.image')}}"--}}
+                        {{--                               onclick="event.preventDefault();--}}
+                        {{--                                    document.getElementById('download-image').submit();">--}}
+                        {{--                                download--}}
+                        {{--                            </a>--}}
+                        {{--                        </div>--}}
 
-{{--                        <form action="{{route('download.profile.image')}}" method="POST" class="d-none">--}}
-{{--                            @csrf--}}
-{{--                        </form>--}}
+                        {{--                        <form action="{{route('download.profile.image')}}" method="POST" class="d-none">--}}
+                        {{--                            @csrf--}}
+                        {{--                        </form>--}}
 
 
                     </div>

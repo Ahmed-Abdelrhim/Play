@@ -23,8 +23,8 @@ class LocaleLanguage
         //If Request Doesn't have locale lang set => session to the value in database
         if (Auth::guard('author')->check() && !Session::has('locale')) {
             // $locale = $request->user()->locale;
-            $locale = Auth::guard('author')->user()->locale;
-            Session::put('locale',$locale);
+            // $locale = Auth::guard('author')->user()->locale;
+            Session::put('locale','en');
         }
 
         //If Request has locale lang set => session to user preferred language
