@@ -14,10 +14,12 @@
 
 <!-- sweetalert -->
 <link rel="stylesheet" href="{{asset('plugins/sweet-alert/sweetalert.css')}}">
+<link rel="stylesheet" href="{{ asset('css/toastr.min.css')}}">
+
 
 <!-- Font Awesome  -->
-
 <link rel="stylesheet" href="{{asset('plugins/fontawesome-free/css/all.min.css')}}">
+
 
 <!-- Styles -->
 <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -35,16 +37,18 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
-        integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
-      integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
-      crossorigin="anonymous" referrerpolicy="no-referrer"/>
+{{--<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"--}}
+{{--        integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="--}}
+{{--        crossorigin="anonymous" referrerpolicy="no-referrer"></script>--}}
+
+
+{{--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"--}}
+{{--      integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="--}}
+{{--      crossorigin="anonymous" referrerpolicy="no-referrer"/>--}}
 
 <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css"/>
 
-@include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
+{{--@include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])--}}
 
 @include('layouts.style')
 

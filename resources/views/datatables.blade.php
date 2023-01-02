@@ -34,22 +34,22 @@
                 buttons: [
                     {
                         extend: 'copyHtml5',
-                        text: '<i class="fas fa-copy"></i> ' ,
+                        text: '<i class="fas fa-copy"></i> ',
                         titleAttr: 'Copy'
                     },
                     {
                         extend: 'excelHtml5',
-                        text: '<i class="fas fa-file-excel"></i> ' ,
+                        text: '<i class="fas fa-file-excel"></i> ',
                         titleAttr: 'Excel'
                     },
                     {
                         extend: 'csvHtml5',
-                        text: '<i class="fas fa-file-csv"></i> ' ,
+                        text: '<i class="fas fa-file-csv"></i> ',
                         titleAttr: 'CSV'
                     },
                     {
                         extend: 'pdfHtml5',
-                        text: '<i class="fas fa-file-pdf"></i> ' ,
+                        text: '<i class="fas fa-file-pdf"></i> ',
                         titleAttr: 'PDF'
                     },
                     {
@@ -71,9 +71,9 @@
                 ajax: "{{Route('dataTables.all')}}",
                 columns: [
                     {
-                    data: 'id',
-                    name: 'id',
-                },
+                        data: 'id',
+                        name: 'id',
+                    },
                     {
                         data: 'title',
                         name: 'title',
@@ -91,8 +91,8 @@
                         name: 'created_at'
                     },
                     {
-                        data : 'difference',
-                        name : 'difference'
+                        data: 'difference',
+                        name: 'difference'
                     },
                     {
                         data: 'action',
@@ -114,18 +114,21 @@
                         cancelButtonText: "Cancel",
                         closeOnConfirm: false
                     }
-                    ,
-                    function () {
-                        // $(el).parent().submit();
-                    }
-
-                    );
+                    // , function () {
+                    //     $(el).parent().submit();
+                    // }
+                );
             });
-
+            $(document).on('click','.swal-button',function(e) {
+                // e.preventDefault();
+                // var el = $(this);
+                // $(el).parent().submit();
+                $('#destroy-post').submit();
+            });
 
         });
     </script>
     <script src="{{asset('js/datatable.js')}}"></script>
-{{--    <script src="{{asset('js/datatable.js')}}"></script>--}}
+    {{--    <script src="{{asset('js/datatable.js')}}"></script>--}}
 
 @endpush

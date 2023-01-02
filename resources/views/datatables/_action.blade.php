@@ -6,7 +6,8 @@
     @endcan
 
     @can('edit post')
-        <form method="POST" action="{{route('delete.post',$row->id)}}" class="d-inline">
+        <form method="POST" action="{{route('delete.post',$row->id)}}" class="d-inline" id="destroy-post">
+            @csrf
             <input type="hidden" name="_method" value="delete">
             <button type="submit" class="btn btn-danger btn-sm delete_patient">
                 <i class="fa fa-trash"></i>

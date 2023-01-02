@@ -69,7 +69,7 @@ class BlogPost extends Model
 
         static::deleting(function (BlogPost $post) {
             $post->comments()->delete();
-            $post->images()->delete();
+            // $post->images()->delete();
         });
         static::restoring(function (BlogPost $post) {
             $post->comments()->restore();
