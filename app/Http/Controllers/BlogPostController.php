@@ -25,7 +25,7 @@ class BlogPostController extends Controller
         return $this->postRepo->show($id);
     }
 
-    public function update($id, Request $request)
+    public function update($id, Request $request): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Routing\Redirector|\Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|null
     {
         return $this->postRepo->update($id, $request);
     }

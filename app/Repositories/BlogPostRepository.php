@@ -25,13 +25,14 @@ class BlogPostRepository
 
     public function update($id , $request)
     {
-        $post =  BlogPost::find($id);
+        $post =  BlogPost::query()->find($id);
         if(!$post)
             return view('errors.404');
         $done = $post->update($request->all());
+        $name = auth()->guard('author')->user()->name;
         if ($done)
         {
-            session()->flash('success','updated success');
+            session()->flash('success','BlogPost Updated Successfully By ' . $name );
             return redirect('show/'.$id);
         }
     }

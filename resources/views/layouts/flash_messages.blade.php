@@ -9,6 +9,18 @@
 @endif
 
 
+{{--@if(session()->has('success'))--}}
+{{--    <div class="callout callout-success">--}}
+{{--        <h5 class="text-success">--}}
+{{--            <i class="fa fa-check"></i> {{__('Success')}}--}}
+{{--        </h5>--}}
+{{--        <p>--}}
+{{--            {{session()->get('success')}}--}}
+{{--        </p>--}}
+{{--    </div>--}}
+{{--@endif--}}
+
+
 {{-- Error Message --}}
 @if (Session::has('error'))
     <script>
@@ -18,6 +30,9 @@
         })
     </script>
 @endif
+
+
+
 
 {{-- Error Message --}}
 @if (Session::has('wrong'))

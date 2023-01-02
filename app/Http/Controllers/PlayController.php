@@ -202,7 +202,7 @@ class PlayController extends Controller
         // $this->authorize('delete', $post);
         $done = $post->delete();
         if ($done)
-            session()->flash('success', 'Post Deleted Successfully');
+            session()->flash('success', 'BlogPost Deleted Successfully By ' . auth()->guard('author')->user()->name );
         return redirect()->route('dataTables');
         // return redirect()->route('upload.form');
         // return 'You Are Allowed To Delete This BlogPost';

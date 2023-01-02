@@ -26,6 +26,10 @@ use App\Http\Controllers\Files\FilesController;
 |
 */
 //Auth::routes();
+Route::group(['middleware' => 'disable_back_btn'], function () {
+
+
+
 Route::get('not-found-page', [PlayController::class, 'errorPage'])->name('error');
 //Route::get('s3',function (){
 //    return view('s3');
@@ -167,3 +171,4 @@ Route::get('sub',[FilesController::class,'subMonth'])->name('sub');
  * -                         -                                    -                                   -                                    -                                   -
  * ----------------------------------------------------------------------------------------------------
  */
+});
