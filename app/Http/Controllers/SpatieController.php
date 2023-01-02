@@ -13,9 +13,9 @@ class SpatieController extends Controller
     {
         $author = Auth::guard('author')->user()->getMedia('images');
 
-        $permission = Permission::query()->create(['name' => 'delete post']);
+        $permission = Permission::query()->find(4);
 
-        $role = Role::query()->find(4)->first();
+        $role = Role::query()->find(4);
 
         $role->givePermissionTo($permission);
 
