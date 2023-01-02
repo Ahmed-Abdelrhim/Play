@@ -101,7 +101,31 @@
 
                 ]
             });
+
+            $(document).on('click', '.delete_patient', function (e) {
+                e.preventDefault();
+                var el = $(this);
+                swal({
+                        title: "Are you sure to delete patient ?",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonClass: "btn-danger",
+                        confirmButtonText: "Delete",
+                        cancelButtonText: "Cancel",
+                        closeOnConfirm: false
+                    }
+                    ,
+                    function () {
+                        // $(el).parent().submit();
+                    }
+
+                    );
+            });
+
+
         });
     </script>
     <script src="{{asset('js/datatable.js')}}"></script>
+{{--    <script src="{{asset('js/datatable.js')}}"></script>--}}
+
 @endpush

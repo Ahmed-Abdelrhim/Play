@@ -55,11 +55,14 @@ class LearnController extends Controller
             ->setRowId(function ($row) {
                 return $row->id;
             })
-            ->addColumn('action', function ($row) {
-                return $btn = '
-                <a href="' . Route('update.post', $row->id) . '" class="btn btn-primary">Update</a>
-                <a href="' . Route('delete.post', $row->id) . '" class="btn btn-danger mt-2">Delete</a>
-                ';
+            //            ->addColumn('action', function ($row) {
+            //                return $btn = '
+            //                <a href="' . Route('update.post', $row->id) . '" class="btn btn-primary">Update</a>
+            //                <a href="' . Route('delete.post', $row->id) . '" class="btn btn-danger mt-2">Delete</a>
+            //                ';
+            //            })
+            ->addColumn('action',function ($row) {
+                return view('datatables._action',['row' => $row]);
             })
             ->addColumn('author', function (BlogPost $author) {
                 return $author->author->name;
