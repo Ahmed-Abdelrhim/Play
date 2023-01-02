@@ -1,7 +1,7 @@
 <div style="display: flex;justify-content: space-between;">
     @can('edit post')
         <a class="btn btn-primary btn-sm" href="{{route('update.post',$row['id'])}}">
-            <i class="fa fa-edit" aria-hidden="true"></i>
+            <i class="fa fa-edit" ></i>
         </a>
     @endcan
 
@@ -14,5 +14,4 @@
             </button>
         </form>
     @endcan
-
 </div>

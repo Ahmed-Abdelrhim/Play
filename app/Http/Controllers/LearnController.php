@@ -61,7 +61,7 @@ class LearnController extends Controller
             //                <a href="' . Route('delete.post', $row->id) . '" class="btn btn-danger mt-2">Delete</a>
             //                ';
             //            })
-            ->addColumn('action',function ($row) {
+            ->addColumn('action', function ($row) {
                 return view('datatables._action',['row' => $row]);
             })
             ->addColumn('author', function (BlogPost $author) {
