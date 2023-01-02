@@ -7,6 +7,7 @@
 <body>
 <div id="app">
     @include('layouts.navbar')
+    @include('layouts.flash_messages')
     <main class="py-4">
         @yield('content')
     </main>

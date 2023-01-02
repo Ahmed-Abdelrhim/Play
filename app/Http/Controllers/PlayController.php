@@ -11,10 +11,13 @@ use App\Models\Images;
 use App\Models\PaymentPlatform;
 use Carbon\Carbon;
 use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\BlogPost;
 use App\Models\Author;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
@@ -112,7 +115,7 @@ class PlayController extends Controller
         return view('blogpost.create');
     }
 
-    public function addBlogPost(BlogPostRequest $request): \Illuminate\Http\RedirectResponse
+    public function addBlogPost(BlogPostRequest $request): RedirectResponse
     {
         $id = Auth::guard('author')->user()->id;
         $post = BlogPost::create([
@@ -129,7 +132,7 @@ class PlayController extends Controller
         return redirect()->back();
     }
 
-    public function showAllPosts(): \Illuminate\Contracts\View\Factory|View|Application
+    public function showAllPosts(): Factory|View|Application
     {
         // return BlogPost::mostCommented()->take(6)->get();
 
@@ -149,36 +152,38 @@ class PlayController extends Controller
 //        return view('blogpost.posts', ['posts' => $posts, 'mostCommented' => $mostCommented]);
     }
 
-    public function updateBlogPostForm($id): View|\Illuminate\Contracts\View\Factory|string|Application
+    public function updateBlogPostForm($id): View|Factory|string|Application
     {
-        $post = BlogPost::findOrFail($id);
-        $author = Auth::guard('author')->user();
+        $post = BlogPost::query()->findOrFail($id);
+        return view('blogpost.update', ['post' => $post]);
+        // $author = Auth::guard('author')->user();
+
         // return 'Post Author ID: ' .$post->author_id . '<br> Currently Authenticated User ID: '.$author->id;
 
-//        if (!Gate::allows('update-blogPost', $post)) {
-//            // abort(403);
-//            return 'Not Allowed To Edit Or Delete This Post';
-//        }
+        //        if (!Gate::allows('update-blogPost', $post)) {
+        //            // abort(403);
+        //            return 'Not Allowed To Edit Or Delete This Post';
+        //        }
 
 
         // $this->authorize('update', $post);
 
-        if (!Gate::allows('update-blog_post', $post))
-            return view('errors.403');
+        //        if (!Gate::allows('update-blog_post', $post))
+        //            return view('errors.403');
 
         // if(Gate::denies('update-blogPost',$author,$post))
         //    return 'You Not Are Allowed To Edit Or Delete This Post';
-        return view('blogpost.update', ['post' => $post]);
+
         // return view('blogpost.update', compact('post'));
     }
 
-    public function storeBlogPost($id, Request $request)
+    public function storeBlogPost($id, Request $request): string|RedirectResponse
     {
         $request->validate([
             'title' => 'required|string|min:4',
             'content' => 'required|string|min:8',
         ]);
-        $blog_post = BlogPost::find($id);
+        $blog_post = BlogPost::query()->find($id);
         if (!$blog_post)
             return 'BlogPost Not Found To Be Updated';
         $blog_post->update([
@@ -189,16 +194,17 @@ class PlayController extends Controller
         return redirect()->back()->with(['success' => 'BlogPost Updated Successfully']);
     }
 
-    public function destroy($id)
+    public function destroy($id): string|RedirectResponse
     {
-        $post = BlogPost::find($id);
+        $post = BlogPost::query()->find($id);
         if (!$post)
             return 'post not found';
-        $this->authorize('delete', $post);
+        // $this->authorize('delete', $post);
         $done = $post->delete();
         if ($done)
             session()->flash('success', 'Post Deleted Successfully');
-        return redirect()->route('upload.form');
+        return redirect()->route('dataTables');
+        // return redirect()->route('upload.form');
         // return 'You Are Allowed To Delete This BlogPost';
         // $post->delete();
         //it will go the model and run the boot function
@@ -211,26 +217,26 @@ class PlayController extends Controller
     }
 
 
-    public function activeLastMonthAuthor()
+    public function activeLastMonthAuthor(): Factory|View|Application
     {
-        $authors = Author::mostActive()->take(5)->get();
+        $authors = Author::query()->mostActive()->take(5)->get();
         return view('blogpost.authors', ['authors' => $authors]);
     }
 
-    public function uploadForm()
+    public function uploadForm(): Factory|View|Application
 
     {
         return view('upload');
     }
 
-    public function upload(Request $request): \Illuminate\Http\RedirectResponse
+    public function upload(Request $request): RedirectResponse
     {
         $image_name = time() . '.' . $request->file('image')->guessExtension();
         $name = $request->file('image')->storeAs('thumbnails', $image_name, 's3');
         // $name = Storage::disk('s3')->put('thumbnails/'.$image_name, $request->file('image') );
         // Storage::disk('s3')->setVisibility($name,'public');
 
-        $blogPost = BlogPost::find(1);
+        $blogPost = BlogPost::query()->find(1);
 
         $done = $blogPost->image()->create([
 //            'src' => Storage::disk('s3')->url($name),
@@ -243,7 +249,7 @@ class PlayController extends Controller
         // dd(Storage::url($name));
     }
 
-    public function viewProfilePage(): \Illuminate\Contracts\View\Factory|View|Application
+    public function viewProfilePage(): Factory|View|Application
     {
         $user = Auth::guard('author')->user();
         $image = null;
@@ -253,16 +259,16 @@ class PlayController extends Controller
         return view('profile', ['user' => $user, 'image' => $image]);
     }
 
-    public function storeUserProfileData(Request $request)
+    public function storeUserProfileData(Request $request): View|Factory|Redirector|RedirectResponse|Application
     {
-//        $user = Auth::guard('author')->user();
-//        $user->addMediaFromRequest('image')->toMediaCollection('images');
-//        return back();
-//        dd($request->image);
-//        $user = auth()->guard('author')->user();
-//        return $request->image;
-////        $user->addMedia($request->get('image'))->toMediaCollection();
-////        return redirect()->back();
+        //        $user = Auth::guard('author')->user();
+        //        $user->addMediaFromRequest('image')->toMediaCollection('images');
+        //        return back();
+        //        dd($request->image);
+        //        $user = auth()->guard('author')->user();
+        //        return $request->image;
+        ////        $user->addMedia($request->get('image'))->toMediaCollection();
+        ////        return redirect()->back();
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|min:4',
             'email' => 'required|email|unique:authors,email,' . Auth::guard('author')->user()->id,
@@ -281,21 +287,21 @@ class PlayController extends Controller
             $user->avatar = $image_name;
             $user->save();
             // if (count($user->image) > 0) {
-//            if ($user->image != null) {
-//                $string = $user->image()->first()->src;
-//                $image_time_name = substr($string, strpos($string, 'profiles/') + 9); // 9
-//                // return $image_time_name;
-//                Storage::disk('s3')->delete('profiles' . '/' . $image_time_name);
-//                $user->image()->update([
-//                    // 'src' => Storage::disk('s3')->url($path)
-//                    'src' => $image_name
-//                ]);
-//            } else {
-//                $user->image()->create([
-//                    'src' => $image_name,
-//                    'type' => 'avatar',
-//                ]);
-//            }
+            //            if ($user->image != null) {
+            //                $string = $user->image()->first()->src;
+            //                $image_time_name = substr($string, strpos($string, 'profiles/') + 9); // 9
+            //                // return $image_time_name;
+            //                Storage::disk('s3')->delete('profiles' . '/' . $image_time_name);
+            //                $user->image()->update([
+            //                    // 'src' => Storage::disk('s3')->url($path)
+            //                    'src' => $image_name
+            //                ]);
+            //            } else {
+            //                $user->image()->create([
+            //                    'src' => $image_name,
+            //                    'type' => 'avatar',
+            //                ]);
+            //            }
         }
 
         $user->update($request->except(['image', 'password', 'locale']));
@@ -319,12 +325,9 @@ class PlayController extends Controller
         return view('error');
     }
 
-//    public function show()
-//    {
-//        return Storage::disk('s3')->response('images/' . $image->filename);
-//    }
-
-
-
+    //    public function show()
+    //    {
+    //        return Storage::disk('s3')->response('images/' . $image->filename);
+    //    }
 
 }
