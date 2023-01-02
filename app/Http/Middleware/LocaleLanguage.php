@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Language;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -22,23 +23,34 @@ class LocaleLanguage
 
         //If Request Doesn't have locale lang set => session to the value in database
 
+        $languages= Language::query()
+            ->select('iso')
+            ->where('active',true)
+            ->get();
 
+        view()->share(['languages'=>$languages]);
 
-        if (Auth::guard('author')->check() && !Session::has('locale')) {
-            // $locale = $request->user()->locale;
-            // $locale = Auth::guard('author')->user()->locale;
-            Session::put('locale','en');
+        if(session('locale')) {
+            app()->setLocale(session('locale'));
+        } else{
+            app()->setLocale('en');
         }
+
+//        if (Auth::guard('author')->check() && !Session::has('locale')) {
+//            // $locale = $request->user()->locale;
+//            // $locale = Auth::guard('author')->user()->locale;
+//            Session::put('locale','en');
+//        }
 
         //If Request has locale lang set => session to user preferred language
-        if ($request->has('locale')) {
-            $locale = $request->get('locale');
-            Session::put('locale',$locale);
-        }
+//        if ($request->has('locale')) {
+//            $locale = $request->get('locale');
+//            Session::put('locale',$locale);
+//        }
 
         //set language to the value in the session
-        $locale = Session::get('locale');
-        App::setLocale($locale);
+//        $locale = Session::get('locale');
+//        App::setLocale($locale);
         return $next($request);
 
     }

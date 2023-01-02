@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Author;
+use App\Models\Language;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
@@ -10,6 +11,19 @@ use Spatie\Permission\Models\Permission;
 
 class HomeController extends Controller
 {
+    public function change_locale($locale)
+    {
+        $language = Language::query()->where('iso',$locale)->first();
+        $before = app()->getLocale();
+        session()->put('locale',$locale);
+        $after = app()->getLocale();
+
+        return ' Before =>' . $before .  'After =>' .$after ;
+        // session()->put('rtl',$language['rtl']);
+        // session()->forget('trans');
+        // return redirect()->back();
+    }
+
     /**
      * Create a new controller instance.
      *

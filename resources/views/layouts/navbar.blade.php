@@ -23,6 +23,24 @@
             @endif
         @endif
 
+        <!-- Left navbar links -->
+        <ul class="navbar-nav" style="margin-left: 10px;">
+            {{-- <li class="nav-item">--}}
+            {{--  <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>--}}
+            {{-- </li>--}}
+            <li class="nav-item dropdown text-uppercase">
+                <button class="btn btn-primary btn-sm dropdown-toggle text-uppercase" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-globe"></i>  {{app()->getLocale()}}
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="min-width: 0px">
+                    @foreach($languages as $lang)
+                        @if(app()->getLocale() != $lang['iso']) <a class="dropdown-item"  href="{{route('change_locale',$lang['iso'])}}">{{$lang['iso']}}</a> @endif
+                    @endforeach
+                </div>
+            </li>
+
+        </ul>
+
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                 aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -106,25 +124,6 @@
                             <a class="nav-link" href="{{route('pay')}}">Payment</a>
                         </li>
                     @endif
-
-
-                        <!-- Left navbar links -->
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-                            </li>
-                            <li class="nav-item dropdown text-uppercase">
-                                <button class="btn btn-primary btn-sm dropdown-toggle text-uppercase" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-globe"></i>  {{app()->getLocale()}}
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="min-width: 0px">
-                                    @foreach($languages as $lang)
-                                        @if(app()->getLocale()!=$lang['iso']) <a class="dropdown-item"  href="{{route('$')}}">{{$lang['iso']}}</a> @endif
-                                    @endforeach
-                                </div>
-                            </li>
-
-                        </ul>
 
 
 

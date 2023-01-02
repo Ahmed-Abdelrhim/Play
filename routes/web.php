@@ -131,7 +131,8 @@ Route::group(['middleware' => 'auth:author'], function () {
 
 });
 Route::get('hash', function () {
-    return bcrypt('12345678');
+    // return bcrypt('12345678');
+    return app()->getLocale();
 });
 
 Route::get('sweet',[ImagesController::class,'sweet']);
@@ -149,6 +150,10 @@ Route::get('download',[SpatieController::class,'download']);
 Route::get('export',[FilesController::class,'export'])->name('export.excel');
 
 Route::get('sub',[FilesController::class,'subMonth'])->name('sub');
+
+
+// Language
+    Route::get('language/{locale}',[HomeController::class,'change_locale'])->name('change_locale');
 
 /*
  * ----------------------------------------------------------------------------------------------------
