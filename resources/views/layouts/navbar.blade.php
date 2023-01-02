@@ -108,6 +108,25 @@
                     @endif
 
 
+                        <!-- Left navbar links -->
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+                            </li>
+                            <li class="nav-item dropdown text-uppercase">
+                                <button class="btn btn-primary btn-sm dropdown-toggle text-uppercase" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-globe"></i>  {{app()->getLocale()}}
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="min-width: 0px">
+                                    @foreach($languages as $lang)
+                                        @if(app()->getLocale()!=$lang['iso']) <a class="dropdown-item"  href="{{route('$')}}">{{$lang['iso']}}</a> @endif
+                                    @endforeach
+                                </div>
+                            </li>
+
+                        </ul>
+
+
 
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
