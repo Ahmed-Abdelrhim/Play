@@ -70,7 +70,7 @@ Route::group(['middleware' => 'auth:author'], function () {
     ;
     Route::get('adding/blogPost', [PlayController::class, 'addBlogPost'])->name('create.blogPost');
     Route::get('update/post/{id}', [PlayController::class, 'updateBlogPostForm'])->name('update.post.form');
-    Route::post('update/post/{id}', [PlayController::class, 'storeBlogPost'])->name('update.post');
+    Route::post('update/post/{id}', [PlayController::class, 'updateBlogPost'])->name('update.post');
     Route::delete('delete/post/{id}', [PlayController::class, 'destroy'])->name('delete.post');
 
     Route::get('test', function () {

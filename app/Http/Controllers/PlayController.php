@@ -177,7 +177,7 @@ class PlayController extends Controller
         // return view('blogpost.update', compact('post'));
     }
 
-    public function storeBlogPost($id, Request $request): string|RedirectResponse
+    public function updateBlogPost($id, Request $request): string|RedirectResponse
     {
         $request->validate([
             'title' => 'required|string|min:4',
@@ -189,7 +189,7 @@ class PlayController extends Controller
         $blog_post->update([
             'title' => $request->input('title'),
             'content' => $request->input('content'),
-            'updated' => now(),
+            'updated_at' => now(),
         ]);
         return redirect()->back()->with(['success' => 'BlogPost Updated Successfully']);
     }

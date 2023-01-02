@@ -13,9 +13,14 @@ class BlogPostRepository
 
     public function show($id)
     {
-        return BlogPost::query()->with('comments')->where('id',$id)->firstOr(function(){
+        //        $post = BlogPost::query()->with('comments')->where('id',$id)->firstOr(function(){
+        //            return view('errors.404');
+        //        })->format();
+
+        $post = BlogPost::query()->where('id',$id)->FirstOr( function() {
             return view('errors.404');
-        })->format();
+        });
+        return view('blogpost.update',['post' => $post]);
     }
 
     public function update($id , $request)

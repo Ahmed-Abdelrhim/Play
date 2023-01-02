@@ -8,14 +8,7 @@
                     <div class="card-header">Update BlogPots</div>
                     <div class="card-body">
                         <form action="{{route('only.update',$post->id)}}" method="POST">
-                            {{-- Success Message --}}
-                            @if (Session::has('success'))
-                                <div class="row mr-2 ml-2">
-                                    <a  class="btn btn-lg btn-block btn-outline-success mb-2"
-                                            id="type-error">{{Session::get('success')}}
-                                    </a>
-                                </div>
-                            @endif
+
                             <!-- asd -->
 
                             @csrf
