@@ -5,7 +5,7 @@
         </a>
     @endcan
 
-    @can('edit post')
+    @can('delete post')
         <form method="POST" action="{{route('delete.post',$row->id)}}" class="d-inline" id="destroy-post">
             @csrf
             <input type="hidden" name="_method" value="delete">
