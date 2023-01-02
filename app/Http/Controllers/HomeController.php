@@ -6,6 +6,7 @@ use App\Models\Author;
 use App\Models\Language;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
@@ -13,12 +14,21 @@ class HomeController extends Controller
 {
     public function change_locale($locale)
     {
-        $language = Language::query()->where('iso',$locale)->first();
-        $before = app()->getLocale();
+        $language = Language::query()->where('iso', $locale)->first();
         session()->put('locale',$locale);
-        $after = app()->getLocale();
+        // app()->setLocale('locale');
+        // return session()->get('locale');
+        return redirect()->back();
 
-        return ' Before =>' . $before .  'After =>' .$after ;
+
+
+        //        // $before = app()->getLocale();
+        //        // session()->put('locale', $locale);
+        //        Session::put('locale', $locale);
+        //        return app()->setLocale('ar');
+        // $after = app()->getLocale();
+
+        // return ' Before =>' . $before .  'After =>' .$after ;
         // session()->put('rtl',$language['rtl']);
         // session()->forget('trans');
         // return redirect()->back();

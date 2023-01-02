@@ -132,6 +132,9 @@ Route::group(['middleware' => 'auth:author'], function () {
 });
 Route::get('hash', function () {
     // return bcrypt('12345678');
+//    session()->put('locale','ar');
+//    app()->setLocale('locale');
+    return session()->get('locale');
     return app()->getLocale();
 });
 
