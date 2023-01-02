@@ -134,7 +134,7 @@ Route::get('hash', function () {
     // return bcrypt('12345678');
 //    session()->put('locale','ar');
 //    app()->setLocale('locale');
-    return session()->get('locale');
+    return session()->get('ss');
     return app()->getLocale();
 });
 

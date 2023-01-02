@@ -34,10 +34,15 @@ class LocaleLanguage
         if (Session::has('locale')) {
             // app()->setLocale(session('locale'));
             $locale = Session::get('locale');
+            Session::put('ss','went for locale');
             App::setLocale($locale);
-        } else {
+        }
+
+        else {
             // app()->setLocale('en');
             App::setLocale('en');
+            Session::put('ss','went for English');
+
         }
 
 //        if (Auth::guard('author')->check() && !Session::has('locale')) {
@@ -53,8 +58,8 @@ class LocaleLanguage
 //        }
 
         //set language to the value in the session
-        $locale = Session::get('locale');
-        App::setLocale($locale);
+        // $locale = Session::get('locale');
+        // App::setLocale($locale);
         return $next($request);
 
     }
