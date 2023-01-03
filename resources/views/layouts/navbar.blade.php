@@ -139,12 +139,12 @@
                             {{__('msg.Products')}}
                         </a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="{{ route('profile') }}">
+                            <a class="dropdown-item" href="{{ route('product.index') }}">
                                 All Products
                             </a>
 
                             @can('create product')
-                                <a class="dropdown-item" href="{{ route('profile') }}">
+                                <a class="dropdown-item" href="{{ route('product.create') }}">
                                     Create Product
                                 </a>
                             @endcan

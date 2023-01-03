@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\BlogPost;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class AddTasks extends Component
 {

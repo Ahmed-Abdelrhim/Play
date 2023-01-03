@@ -157,31 +157,29 @@ Route::group(['middleware' => 'disable_back_btn'], function () {
     ####################################################################################################################
 
 
-    Route::group(['prefix' => 'product' , 'as' => 'product.'], function () {
+    Route::group(['prefix' => 'product', 'as' => 'product.'], function () {
 
-        Route::get('permissions',[SpatieController::class,'productPermissions']);
-
-
-
-        Route::get('All/Product',[ProductController::class,'index'])->name('index');
+        Route::get('permissions', [SpatieController::class, 'productPermissions']);
 
 
-        Route::get('create/product',[ProductController::class,'showCreateProductForm'])->name('create')
-        ->middleware('permission:create product');
-
-        Route::get('show/product',[ProductController::class,'show'])->name('show');
+        Route::get('All', [ProductController::class, 'index'])->name('index');
 
 
-        Route::post('create/product',[ProductController::class,'storeProduct'])->name('store')
+        Route::get('create', [ProductController::class, 'showCreateProductForm'])->name('create');
+//            ->middleware('permission:create product');
+
+        Route::post('store', [ProductController::class, 'storeProduct'])->name('store')
             ->middleware('permission:create product');
 
-        Route::get('edit/product',[ProductController::class,'showUpdateProductForm'])->name('edit')
+        Route::get('show', [ProductController::class, 'show'])->name('show');
+
+        Route::get('edit/product', [ProductController::class, 'showUpdateProductForm'])->name('edit')
             ->middleware('permission:update product');
 
-        Route::post('update/product',[ProductController::class,'updateProduct'])->name('update')
+        Route::post('update/product', [ProductController::class, 'updateProduct'])->name('update')
             ->middleware('permission:update product');
 
-        Route::post('delete/product',[ProductController::class,'deleteProduct'])->name('delete')
+        Route::post('delete/product', [ProductController::class, 'deleteProduct'])->name('delete')
             ->middleware('permission:delete product');
     });
 });
