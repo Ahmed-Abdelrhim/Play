@@ -21,7 +21,7 @@
                                 <li class="breadcrumb-item"><a href="{{route('home')}}">{{__('Home')}}</a></li>
                                 <li class="breadcrumb-item "><a href="{{route('product.index')}}">{{__('Products')}}</a>
                                 </li>
-                                <li class="breadcrumb-item active">{{__('Create doctor')}}</li>
+                                <li class="breadcrumb-item active">{{__('Create product')}}</li>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
