@@ -53,16 +53,37 @@
                 <div class="row">
                     @if(isset($products))
                         @foreach($products as $prod)
-                            <div class="card mt-3 ml-2" style="width: 18rem;">
-                                <img src="{{asset('storage/products/' . $prod->main_image . '/' . $prod->main_image)}}"
-                                     class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title">{{$prod->name_en}}</h5>
-                                    <p class="card-text">{{$prod->desc}}</p>
-                                    <div class="mx-auto">
-                                        <a href="{{route('product.show', [\Illuminate\Support\Str::random(15),$prod->id,\Illuminate\Support\Str::random(15)] )}}"
-                                           class="btn btn-primary">Show Product
-                                        </a>
+                        {{--                            <div class="card mt-3 ml-2" style="width: 18rem;">--}}
+                        {{--                                <img src="{{asset('storage/products/' . $prod->main_image . '/' . $prod->main_image)}}"--}}
+                        {{--                                     class="card-img-top" alt="...">--}}
+                        {{--                                <div class="card-body">--}}
+                        {{--                                    <h5 class="card-title">{{$prod->name_en}}</h5>--}}
+                        {{--                                    <p class="card-text">{{$prod->desc}}</p>--}}
+                        {{--                                    <div class="mx-auto">--}}
+                        {{--                                        <a href="{{route('product.show', [\Illuminate\Support\Str::random(15),$prod->id,\Illuminate\Support\Str::random(15)] )}}"--}}
+                        {{--                                           class="btn btn-primary">Show Product--}}
+                        {{--                                        </a>--}}
+                        {{--                                    </div>--}}
+                        {{--                                </div>--}}
+                        {{--                            </div>--}}
+
+
+
+                            <div class="product-card">
+                                <div class="badge">Hot</div>
+                                <div class="product-tumb">
+                                    <img src="{{asset('storage/products/'.$prod->main_image . '/' . $prod->main_image)}}" alt="">
+                                </div>
+                                <div class="product-details">
+                                    <span class="product-catagory">Clothes</span>
+                                    <h4><a href="">{{$prod->name}}</a></h4>
+                                    <p>{{$prod->desc}}</p>
+                                    <div class="product-bottom-details">
+                                        <div class="product-price"><small>{{$prod->$prod + $prod->discount}}</small>{{$prod->price}} EGP</div>
+                                        <div class="product-links">
+                                            <a href="#"><i class="fa fa-heart"></i></a>
+                                            <a href="#"><i class="fa fa-shopping-cart"></i></a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

@@ -45,14 +45,18 @@ class ProductCreate extends Component
         $this->validate();
         $image_name = Str::random(8) . time() . '.' . $this->main_image->guessExtension();
         $this->main_image->storeAs('products/' . $image_name, $image_name, 'public');
+        $discount = $this->discount;
+        if ($this->discount == '')
+            $discount = null;
         try {
+
             DB::beginTransaction();
             Product::query()->create([
                 'name_en' => $this->name_en,
                 'name_ar' => $this->name_ar,
                 'desc' => $this->desc,
                 'price' => $this->price,
-                'discount' => $this->discount,
+                'discount' => $discount,
                 'qty' => $this->qty,
                 'main_image' => $image_name,
             ]);

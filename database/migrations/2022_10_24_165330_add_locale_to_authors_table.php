@@ -14,7 +14,7 @@ class AddLocaleToAuthorsTable extends Migration
     public function up()
     {
         Schema::table('authors', function (Blueprint $table) {
-            $table->string('locale',3)->default('en');
+            $table->string('locale',3)->default('en')->nullable();
         });
     }
 

@@ -3,6 +3,7 @@
 <head>
     @include('layouts.head')
     @stack('styles')
+
 </head>
 <body>
 <div id="app">

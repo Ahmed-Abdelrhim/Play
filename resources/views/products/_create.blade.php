@@ -150,7 +150,7 @@
                        placeholder="{{__('Main Image')}}"
                        name="main_image"
                        id="main_image"
-                       @if(isset($doctor)) value="{{$doctor->email}}" @endif   wire:model="main_image">
+                       @if(isset($doctor)) value="{{$doctor->email}}" @endif  wire:model="main_image">
             </div>
             @error('main_image') <span class="error text-danger">{{ $message }}</span> @enderror
 
