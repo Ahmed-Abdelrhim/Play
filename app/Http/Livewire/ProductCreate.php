@@ -26,7 +26,7 @@ class ProductCreate extends Component
             'name_en'    => 'required|string|min:8',
             'name_ar'    => 'required|string|min:8',
             'price'      => 'required|numeric|between:10,100000',
-            'discount'   => 'required|numeric|between:10,1000',
+            'discount'   => 'nullable|numeric|between:5,1000',
             'qty'        => 'required|numeric|between:0,100000',
             'main_image' => 'required|mimes:jpg,jpeg,png,webp|max:1024',
         ];

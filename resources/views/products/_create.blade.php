@@ -52,7 +52,7 @@
                     <input type="number" class="form-control @error('price') is-invalid @enderror "
                            placeholder="{{__('Price')}}"
                            name="price"
-                           id="price" @if(isset($doctor)) value="{{$doctor->commission}}" @endif min="0" max="100"
+                           id="price" @if(isset($doctor)) value="{{$doctor->commission}}" @endif
                            wire:model="price">
                 </div>
                 @error('price') <span class="error text-danger">{{ $message }}</span> @enderror
@@ -75,7 +75,7 @@
                     <input type="number" class="form-control @error('discount') is-invalid @enderror "
                            placeholder="{{__('Discount')}}"
                            name="discount"
-                           id="discount" @if(isset($doctor)) value="{{$doctor->commission}}" @endif min="0" max="100"
+                           id="discount" @if(isset($doctor)) value="{{$doctor->commission}}" @endif
                            wire:model="discount">
                 </div>
                 @error('discount') <span class="error text-danger">{{ $message }}</span> @enderror
@@ -98,7 +98,7 @@
                     <input type="number" class="form-control @error('qty') is-invalid @enderror "
                            placeholder="{{__('Quantity')}}"
                            name="qty"
-                           id="qty" @if(isset($doctor)) value="{{$doctor->commission}}" @endif min="0" max="100"
+                           id="qty" @if(isset($doctor)) value="{{$doctor->commission}}" @endif
                            wire:model="qty">
                 </div>
                 @error('qty') <span class="error text-danger">{{ $message }}</span> @enderror
