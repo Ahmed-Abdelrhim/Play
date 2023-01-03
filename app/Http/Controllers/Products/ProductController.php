@@ -8,11 +8,40 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
+
 
 class ProductController extends Controller
 {
-    public function index()
+    public function index(): Factory|View|Application
     {
+        return view('products.index');
+    }
+
+    public function ajax()
+    {
+        $products = Product::query();
+        return DataTables::of($products)->addIndexColumn()
+            ->setRowClass(function ($row) {
+                return $row->id % 2 == 0 ? 'alert-primary' : 'alert-warning ' . $row->id;
+            })
+            ->setRowId(function ($row) {
+                return $row->id;
+            })
+            ->addColumn('action', function ($row) {
+                return view('products._action',['row' => $row]);
+            })
+            ->addColumn('name', function (Product $author) {
+                return $author->name_en;
+            })
+            ->addColumn('price',function(Product $post) {
+                return $post->price ;
+            })
+            ->editColumn('discount' , function(Product $post) {
+                return $post->price;
+            })
+            ->rawColumns(['action'])
+            ->make(true);
 
     }
 
@@ -44,7 +73,7 @@ class ProductController extends Controller
 
     }
 
-    public function deleteProduct()
+    public function deleteProduct($id)
     {
 
     }

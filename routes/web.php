@@ -164,15 +164,15 @@ Route::group(['middleware' => 'disable_back_btn'], function () {
 
         Route::get('All', [ProductController::class, 'index'])->name('index');
 
+        Route::get('products/all/datatables', [ProductController::class, 'ajax'])->name('dataTables');
 
         Route::get('create', [ProductController::class, 'showCreateProductForm'])->name('create');
-        //            ->middleware('permission:create product');
+        // ->middleware('permission:create product');
 
         Route::post('store', [ProductController::class, 'storeProduct'])->name('store')
             ->middleware('permission:create product');
 
         Route::get('{start?}/show/{id}/{end?}', [ProductController::class, 'show'])->name('show');
-
 
         Route::get('{start?}/buy/{id}/{end?}', [ProductController::class, 'buyProduct'])->name('buy');
 
@@ -182,7 +182,7 @@ Route::group(['middleware' => 'disable_back_btn'], function () {
         Route::post('update/product', [ProductController::class, 'updateProduct'])->name('update')
             ->middleware('permission:update product');
 
-        Route::post('delete/product', [ProductController::class, 'deleteProduct'])->name('delete')
+        Route::post('delete/product/{id}', [ProductController::class, 'deleteProduct'])->name('delete')
             ->middleware('permission:delete product');
     });
 });

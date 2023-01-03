@@ -7,8 +7,11 @@
 </head>
 <body>
 <div id="app">
+
     @include('layouts.navbar')
     @include('layouts.flash_messages')
+    <div class="scroller"></div>
+
     <main class="py-4">
         @yield('content')
     </main>
