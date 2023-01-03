@@ -9,13 +9,14 @@
                 <i class="fa fa-user"></i>
             </span>
                 </div>
-                <input type="text" class="form-control" placeholder="{{__('Product Name En')}}" name="name_en" id="name_en"
-                       @if(isset($doctor)) value="{{$doctor->name}}" @endif required wire:model="name_en">
+                <input type="text" class="form-control @error('name_en') is-invalid @enderror"
+                       placeholder="{{__('Product Name En')}}" name="name_en"
+                       id="name_en"
+                       @if(isset($doctor)) value="{{$doctor->name}}" @endif  wire:model="name_en">
             </div>
+            @error('name_en') <span class="error text-danger">{{ $message }}</span> @enderror
         </div>
     </div>
-    @error('name_en') <span class="error">{{ $message }}</span> @enderror
-
 
 
     <!-- Name Ar -->
@@ -27,12 +28,15 @@
                 <i class="fa fa-user"></i>
             </span>
                 </div>
-                <input type="text" class="form-control" placeholder="{{__('Product Name_En')}}" name="name_ar" id="name_ar"
-                       @if(isset($doctor)) value="{{$doctor->name}}" @endif required  wire:model="name_ar">
+                <input type="text" class="form-control @error('name_ar') is-invalid @enderror "
+                       placeholder="{{__('Product Name_En')}}"
+                       name="name_ar"
+                       id="name_ar"
+                       @if(isset($doctor)) value="{{$doctor->name}}" @endif   wire:model="name_ar">
             </div>
+            @error('name_ar') <span class="error text-danger">{{ $message }}</span> @enderror
         </div>
     </div>
-    @error('name_ar') <span class="error">{{ $message }}</span> @enderror
 
 
     <!-- Price -->
@@ -45,14 +49,17 @@
                     <i class="fas fa-percentage"></i>
                   </span>
                     </div>
-                    <input type="number" class="form-control" placeholder="{{__('Price')}}" name="price"
+                    <input type="number" class="form-control @error('price') is-invalid @enderror "
+                           placeholder="{{__('Price')}}"
+                           name="price"
                            id="price" @if(isset($doctor)) value="{{$doctor->commission}}" @endif min="0" max="100"
-                           required  wire:model="price">
+                           wire:model="price">
                 </div>
+                @error('price') <span class="error text-danger">{{ $message }}</span> @enderror
+
             </div>
         </div>
     </div>
-    @error('price') <span class="error">{{ $message }}</span> @enderror
 
 
     <!-- Discount -->
@@ -65,14 +72,17 @@
                     <i class="fas fa-percentage"></i>
                   </span>
                     </div>
-                    <input type="number" class="form-control" placeholder="{{__('Discount')}}" name="discount"
+                    <input type="number" class="form-control @error('discount') is-invalid @enderror "
+                           placeholder="{{__('Discount')}}"
+                           name="discount"
                            id="discount" @if(isset($doctor)) value="{{$doctor->commission}}" @endif min="0" max="100"
-                           required  wire:model="discount">
+                           wire:model="discount">
                 </div>
+                @error('discount') <span class="error text-danger">{{ $message }}</span> @enderror
+
             </div>
         </div>
     </div>
-    @error('discount') <span class="error">{{ $message }}</span> @enderror
 
 
     <!-- Qty -->
@@ -85,14 +95,17 @@
                     <i class="fas fa-percentage"></i>
                   </span>
                     </div>
-                    <input type="number" class="form-control" placeholder="{{__('Quantity')}}" name="qty"
+                    <input type="number" class="form-control @error('qty') is-invalid @enderror "
+                           placeholder="{{__('Quantity')}}"
+                           name="qty"
                            id="qty" @if(isset($doctor)) value="{{$doctor->commission}}" @endif min="0" max="100"
-                           required  wire:model="qty">
+                           wire:model="qty">
                 </div>
+                @error('qty') <span class="error text-danger">{{ $message }}</span> @enderror
+
             </div>
         </div>
     </div>
-    @error('qty') <span class="error">{{ $message }}</span> @enderror
 
 
     <!-- Main Image -->
@@ -104,12 +117,17 @@
                   <i class="fas fa-envelope"></i>
                 </span>
                 </div>
-                <input type="file" class="form-control" placeholder="{{__('Main Image')}}" name="main_image" id="main_image"
-                       @if(isset($doctor)) value="{{$doctor->email}}" @endif required  wire:model="main_image">
+                <input type="file" class="form-control @error('main_image') is-invalid @enderror"
+                       placeholder="{{__('Main Image')}}"
+                       name="main_image"
+                       id="main_image"
+                       @if(isset($doctor)) value="{{$doctor->email}}" @endif   wire:model="main_image">
+
             </div>
+            @error('main_image') <span class="error text-danger">{{ $message }}</span> @enderror
+
         </div>
     </div>
-    @error('main_image') <span class="error">{{ $message }}</span> @enderror
 
 
     {{--    <div class="col-lg-4">--}}

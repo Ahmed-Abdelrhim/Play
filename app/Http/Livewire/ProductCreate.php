@@ -2,6 +2,9 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Product;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -15,6 +18,7 @@ class ProductCreate extends Component
     public $discount;
     public $qty;
     public $main_image;
+    public $error_msg;
 
     protected function rules(): array
     {
@@ -36,6 +40,31 @@ class ProductCreate extends Component
     public function submit()
     {
         $this->validate();
-        dd($this->name_ar);
+        $image_name = Str::random(8) . time() .$this->main_image->guessExtension();
+        $this->main_image->storeAs('products/'.$image_name,$image_name , 'public');
+        try {
+            DB::beginTransaction();
+            Product::query()->create([
+                'name_en'    => $this->name_en,
+                'name_ar'    => $this->name_ar,
+                'price'      => $this->price,
+                'discount'   => $this->discount,
+                'qty'        => $this->qty,
+                'main_image' => '',
+            ]);
+            session()->flash('subscription', 'Product Added Successfully');
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            $this->addError('error', 'something went wrong');
+            $this->error_msg = 'Something Went Wrong Try Again Later~';
+        }
+        DB::commit();
+        $this->name_en = '';
+        $this->name_ar = '';
+        $this->price = '';
+        $this->discount = '';
+        $this->qty = '';
+        $this->main_image = '';
     }
 }
