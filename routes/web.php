@@ -164,7 +164,7 @@ Route::get('sub',[FilesController::class,'subMonth'])->name('sub');
 
 
 // Language
-    Route::get('language/{locale}',[FilesController::class,'change_locale'])->name('change_locale');
+    Route::get('language/{locale}',[HomeController::class,'change_locale'])->name('change_locale');
 
 /*
  * ----------------------------------------------------------------------------------------------------

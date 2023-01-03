@@ -102,28 +102,6 @@
                                 </div>
                             </div>
 
-
-                            <div class="row mb-3">
-                                <label for="lang"
-                                       class="col-md-4 col-form-label text-md-end">{{__('msg.language')}}</label>
-                                <div class="col-8">
-                                    <select id="lang" name="locale" class="custom-select" style="width: 73%">
-                                        @foreach(\App\Models\Author::LOCALES as $locale => $lang)
-                                            <option
-                                                value="{{$locale}}" {{ $user->locale != $locale ?: 'selected'}}>
-                                                {{$lang}}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                    @error('language')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-
                             <div class="row mb-3">
                                 <label for="password"
                                        class="col-md-4 col-form-label text-md-end">{{__('msg.Image')}}</label>
@@ -175,3 +153,25 @@
         </div>
     </div>
 @endsection
+
+
+
+{{--                            <div class="row mb-3">--}}
+{{--                                <label for="lang"--}}
+{{--                                       class="col-md-4 col-form-label text-md-end">{{__('msg.language')}}</label>--}}
+{{--                                <div class="col-8">--}}
+{{--                                    <select id="lang" name="locale" class="custom-select" style="width: 73%">--}}
+{{--                                        @foreach(\App\Models\Author::LOCALES as $locale => $lang)--}}
+{{--                                            <option--}}
+{{--                                                value="{{$locale}}" {{ $user->locale != $locale ?: 'selected'}}>--}}
+{{--                                                {{$lang}}--}}
+{{--                                            </option>--}}
+{{--                                        @endforeach--}}
+{{--                                    </select>--}}
+{{--                                    @error('language')--}}
+{{--                                    <span class="invalid-feedback" role="alert">--}}
+{{--                                        <strong>{{ $message }}</strong>--}}
+{{--                                    </span>--}}
+{{--                                    @enderror--}}
+{{--                                </div>--}}
+{{--                            </div>--}}

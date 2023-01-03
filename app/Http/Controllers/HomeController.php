@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Author;
 use App\Models\Language;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -12,38 +13,29 @@ use Spatie\Permission\Models\Permission;
 
 class HomeController extends Controller
 {
-    public function change_locale($locale)
-    {
-        $language = Language::query()->where('iso', $locale)->first();
-        session()->put('locale',$locale);
-        session()->put('locale2','NNN');
-        // app()->setLocale('locale');
-        // return session()->get('locale');
-        // return redirect()->back();
-
-
-
-        //        // $before = app()->getLocale();
-        //        // session()->put('locale', $locale);
-        //        Session::put('locale', $locale);
-        //        return app()->setLocale('ar');
-        // $after = app()->getLocale();
-
-        // return ' Before =>' . $before .  'After =>' .$after ;
-        // session()->put('rtl',$language['rtl']);
-        // session()->forget('trans');
-        // return redirect()->back();
-    }
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+
+    //    public function __construct()
+    //    {
+    //        $this->middleware('auth');
+    //    }
+
+    public function change_locale(string $locale): string|RedirectResponse
     {
-        $this->middleware('auth');
+        $language = Language::query()->where('iso', '=', $locale)->first();
+        if (!$language)
+            return 'Language Not Found';
+        session()->put('locale', $locale);
+        return redirect()->back();
+
     }
+
+
 
     /**
      * Show the application dashboard.

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Files;
 use App\Exports\UserExport;
 use App\Http\Controllers\Controller;
 use App\Models\Language;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
@@ -41,17 +42,6 @@ class FilesController extends Controller
         // return $updated_at - $created_at;
         // 32CBTLq8dSSJqM8
 
-
-    }
-
-    public function change_locale(string $locale)
-    {
-        $language = Language::query()->where('iso', '=', $locale)->first();
-        if (!$language)
-            return 'Language Not Found';
-        session()->put('locale', $locale);
-        // app()->setLocale('locale');
-        return redirect()->back();
 
     }
 
