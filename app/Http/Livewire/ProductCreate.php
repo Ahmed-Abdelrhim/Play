@@ -61,6 +61,7 @@ class ProductCreate extends Component
             $this->addError('error_msg', 'something went wrong');
             // $this->error_msg = 'Something Went Wrong Try Again Later~';
             $this->error_msg = $e;
+            dd($e);
         }
         DB::commit();
         session()->flash('success', 'Product Added Successfully');

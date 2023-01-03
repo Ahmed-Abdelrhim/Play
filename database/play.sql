@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 02, 2023 at 12:16 PM
+-- Generation Time: Jan 03, 2023 at 03:59 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -45,7 +45,7 @@ CREATE TABLE `authors` (
 --
 
 INSERT INTO `authors` (`id`, `name`, `email`, `password`, `avatar`, `phone`, `created_at`, `updated_at`, `is_authorized`, `locale`) VALUES
-(11, 'Ahmed Abdelrhim', 'abdelrhim.admin@gmail.com', '$2y$10$H5L/.IPVfT5WcFtIQNLslu7CZWuGG.ugPpfMKhSXtEqgluPhjnSQe', 'oReF1672566983.jpg', '01152067271', '2022-12-19 10:26:16', '2023-01-01 08:19:34', 0, 'en'),
+(11, 'Ahmed Abdelrhim', 'abdelrhim.admin@gmail.com', '$2y$10$H5L/.IPVfT5WcFtIQNLslu7CZWuGG.ugPpfMKhSXtEqgluPhjnSQe', 'oReF1672566983.jpg', '01152067271', '2022-12-19 10:26:16', '2023-01-02 12:47:17', 0, 'ar'),
 (12, 'Ismail Ashraf', 'ismail@gmail.com', '$2y$10$Xyb80oyuiddvvjTvm5jTfe6Hfk5QA2RGKbjpXEieAiK0sqs94D7J6', 'bgfU1671453343.jpg', '01116520328', '2022-12-19 10:26:16', '2022-12-19 10:35:43', 0, 'en'),
 (13, 'Ahmed Azzam', 'azzam@gmail.com', '$2y$10$RLjXaMU53/fdY9xTbg4L9OR.gLqaTTxZ2TGJGKBmjqHXr9FaKyWH6', 'xeKt1671453365.jpg', '01152067272', '2022-12-19 10:26:16', '2022-12-19 10:36:05', 0, 'en'),
 (14, 'Omar Sandoby', 'sandoby@gmail.com', '$2y$10$LbMaFL22XxylUy8yIiMMZunnyZRfiQbaCegFG99KBAJ9FfZf/l7EK', NULL, '01152067273', '2022-12-19 10:26:16', '2022-12-19 10:26:16', 0, 'en'),
@@ -165,7 +165,7 @@ INSERT INTO `blog_posts` (`id`, `author_id`, `title`, `content`, `created_at`, `
 (91, 15, 'Mr. Danny Barton', 'Nemo ipsam quia quis ipsa quae quos. Quae et sed impedit pariatur inventore quis. Dicta cumque exercitationem ducimus earum.', '2022-12-19 10:30:36', '2022-12-19 10:30:36', NULL),
 (92, 11, 'Baylee Lindgren', 'Aut quaerat libero voluptatum. Voluptatum amet et dolorem et dolorem fuga. Laboriosam eos minus amet nisi ipsum libero. Accusamus ut magni consequatur ut recusandae.', '2022-12-19 10:30:36', '2022-12-19 10:30:36', NULL),
 (93, 12, 'Mr. Theron Quigley VV', 'Qui perferendis velit est cum. Qui dolores maiores voluptas occaecati aut. Eum necessitatibus voluptas quos sunt. Aut dignissimos non et ipsum.', '2022-12-19 10:30:36', '2023-01-02 08:52:05', NULL),
-(94, 13, 'Ms. Rosalia Hilpert PhD', 'Dicta quidem dolor magni voluptas et atque vero. Porro enim maxime dolorem corrupti. Rerum asperiores laboriosam deserunt illum nulla magni omnis.', '2022-12-19 10:30:36', '2022-12-19 10:30:36', NULL),
+(94, 13, 'Ms. Rosalia Hilpert PhD', 'Dicta quidem dolor magni voluptas et atque vero. Porro enim maxime dolorem corrupti. Rerum asperiores laboriosam deserunt illum nulla magni omnis.', '2022-12-19 10:30:36', '2023-01-02 10:10:57', NULL),
 (95, 11, 'Johnathan Roob', 'Sint quas quam est ipsum voluptatem quis sunt. Sunt quaerat quisquam ipsum est. Ipsam est odit sit amet hic autem quam.', '2022-12-19 10:30:36', '2023-01-02 08:39:22', '2023-01-02 08:39:22'),
 (96, 11, 'Oda Harvey', 'Velit blanditiis error ab autem nemo omnis corrupti. Voluptatem voluptatem dicta et totam sequi qui repudiandae. Vel vero qui et animi nesciunt et accusamus.', '2022-12-19 10:30:36', '2023-01-02 08:39:19', '2023-01-02 08:39:19'),
 (97, 13, 'Lizzie Wilderman', 'Quia libero ullam sit. Corporis reiciendis mollitia assumenda repellendus ullam sit. Dolor nisi sint qui omnis.', '2022-12-19 10:30:36', '2023-01-02 08:39:13', '2023-01-02 08:39:13'),
@@ -380,6 +380,30 @@ CREATE TABLE `jobs` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `languages`
+--
+
+CREATE TABLE `languages` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `iso` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT 1,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `rtl` tinyint(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `languages`
+--
+
+INSERT INTO `languages` (`id`, `iso`, `active`, `created_at`, `updated_at`, `rtl`) VALUES
+(1, 'ar', 1, NULL, NULL, 1),
+(2, 'en', 1, NULL, NULL, 0),
+(3, 'ES', 1, NULL, NULL, 0);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `media`
 --
 
@@ -457,7 +481,10 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (18, '2022_11_01_183546_create_verification_codes_table', 1),
 (19, '2022_11_09_012754_add_columns_to_verification_codes', 1),
 (20, '2022_12_11_104819_create_permission_tables', 1),
-(21, '2022_12_14_115416_create_media_table', 1);
+(21, '2022_12_14_115416_create_media_table', 1),
+(22, '2023_01_02_141530_languages', 2),
+(23, '2023_01_02_141939_add_column_to_languages', 3),
+(26, '2023_01_03_111704_products', 4);
 
 -- --------------------------------------------------------
 
@@ -542,7 +569,10 @@ INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at
 (1, 'write post', 'author', '2022-12-14 06:55:54', '2022-12-14 06:55:54'),
 (2, 'edit post', 'author', '2022-12-14 06:55:54', '2022-12-14 06:55:54'),
 (3, 'publish post', 'author', '2022-12-14 06:55:54', '2022-12-14 06:55:54'),
-(4, 'delete post', 'author', '2023-01-02 09:13:07', '2023-01-02 09:13:07');
+(4, 'delete post', 'author', '2023-01-02 09:13:07', '2023-01-02 09:13:07'),
+(23, 'create product', 'author', '2023-01-03 09:54:03', '2023-01-03 09:54:03'),
+(24, 'update product', 'author', '2023-01-03 09:54:03', '2023-01-03 09:54:03'),
+(25, 'delete product', 'author', '2023-01-03 09:54:03', '2023-01-03 09:54:03');
 
 -- --------------------------------------------------------
 
@@ -561,6 +591,33 @@ CREATE TABLE `personal_access_tokens` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `products`
+--
+
+CREATE TABLE `products` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name_en` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name_ar` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `price` bigint(20) UNSIGNED NOT NULL,
+  `discount` double(8,2) DEFAULT NULL,
+  `desc` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `qty` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `main_image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`id`, `name_en`, `name_ar`, `price`, `discount`, `desc`, `qty`, `main_image`, `created_at`, `updated_at`) VALUES
+(1, 'T-Shirt Python', 'تيشيرت بايثون', 300, NULL, 'Nodejs is a JavaScript runtime built on Chrome V8 JavaScript engine. Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient. Node.js package ecosystem, npm, is the largest ecosystem of open source libraries in the world.', '30', '92sPMPjl1672757771.png', '2023-01-03 12:56:11', '2023-01-03 12:56:11'),
+(2, 'T-Shirt Node.Js', 'تيشيرت نود جي اس', 250, NULL, 'Nodejs is a JavaScript runtime built on Chrome V8 JavaScript engine. Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient. Node.js package ecosystem, npm, is the largest ecosystem of open source libraries in the world.', '30', 'gc6sDsZg1672757790.png', '2023-01-03 12:56:30', '2023-01-03 12:56:30');
 
 -- --------------------------------------------------------
 
@@ -602,13 +659,12 @@ CREATE TABLE `role_has_permissions` (
 --
 
 INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
-(1, 1),
 (1, 4),
-(2, 2),
 (2, 4),
-(3, 3),
 (3, 4),
-(4, 1);
+(23, 4),
+(24, 4),
+(25, 4);
 
 -- --------------------------------------------------------
 
@@ -772,6 +828,12 @@ ALTER TABLE `jobs`
   ADD KEY `jobs_queue_index` (`queue`);
 
 --
+-- Indexes for table `languages`
+--
+ALTER TABLE `languages`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `media`
 --
 ALTER TABLE `media`
@@ -824,6 +886,12 @@ ALTER TABLE `personal_access_tokens`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
   ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
+
+--
+-- Indexes for table `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `roles`
@@ -894,6 +962,12 @@ ALTER TABLE `jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `languages`
+--
+ALTER TABLE `languages`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `media`
 --
 ALTER TABLE `media`
@@ -903,7 +977,7 @@ ALTER TABLE `media`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `payment_platforms`
@@ -915,13 +989,19 @@ ALTER TABLE `payment_platforms`
 -- AUTO_INCREMENT for table `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `products`
+--
+ALTER TABLE `products`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `roles`

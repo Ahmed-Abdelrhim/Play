@@ -51,19 +51,23 @@
                 {{--                    </div>--}}
                 {{--                </div>--}}
                 <div class="row">
-                    @foreach($products as $prod)
-                        <div class="card mt-3" style="width: 18rem;">
-                            <img src="{{asset('storage/products/' . $prod->main_image . '/' . $prod->main_image)}}"
-                                 class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">{{$prod->name_en}}</h5>
-                                <p class="card-text">High quality product  , made of 100% cotton , for all programmers</p>
-                                <a href="{{route('product.show', [\Illuminate\Support\Str::random(15),$prod->id,\Illuminate\Support\Str::random(15)] )}}"
-                                   class="btn btn-primary">Show Product
-                                </a>
+                    @if(isset($products))
+                        @foreach($products as $prod)
+                            <div class="card mt-3 ml-2" style="width: 18rem;">
+                                <img src="{{asset('storage/products/' . $prod->main_image . '/' . $prod->main_image)}}"
+                                     class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{$prod->name_en}}</h5>
+                                    <p class="card-text">{{$prod->desc}}</p>
+                                    <div class="mx-auto">
+                                        <a href="{{route('product.show', [\Illuminate\Support\Str::random(15),$prod->id,\Illuminate\Support\Str::random(15)] )}}"
+                                           class="btn btn-primary">Show Product
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    @endforeach
+                        @endforeach
+                    @endif
                 </div>
             </div>
         </div>

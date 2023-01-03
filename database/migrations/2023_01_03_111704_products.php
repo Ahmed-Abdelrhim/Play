@@ -19,7 +19,7 @@ class Products extends Migration
             $table->string('name_ar');
             $table->unsignedBigInteger('price');
             $table->float('discount')->nullable();
-            $table->string('desc');
+            $table->text('desc');
             $table->string('qty');
             $table->string('main_image');
             $table->timestamps();
