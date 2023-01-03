@@ -6,7 +6,8 @@
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1">
-                <i class="fa fa-user"></i>
+{{--                <i class="fa fa-user"></i>--}}
+                <i class="fa-solid fa-signature"></i>
             </span>
                 </div>
                 <input type="text" class="form-control @error('name_en') is-invalid @enderror"
@@ -25,11 +26,12 @@
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1">
-                <i class="fa fa-user"></i>
+{{--                <i class="fa fa-user"></i>--}}
+                <i class="fa-solid fa-signature"></i>
             </span>
                 </div>
                 <input type="text" class="form-control @error('name_ar') is-invalid @enderror "
-                       placeholder="{{__('Product Name_En')}}"
+                       placeholder="{{__('Product Name Ar')}}"
                        name="name_ar"
                        id="name_ar"
                        @if(isset($doctor)) value="{{$doctor->name}}" @endif   wire:model="name_ar">
@@ -46,7 +48,8 @@
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1">
-                    <i class="fas fa-percentage"></i>
+{{--                    <i class="fas fa-percentage"></i>--}}
+                      <i class="fa-solid fa-money-bill"></i>
                   </span>
                     </div>
                     <input type="number" class="form-control @error('price') is-invalid @enderror "
@@ -92,7 +95,8 @@
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1">
-                    <i class="fas fa-percentage"></i>
+{{--                    <i class="fas fa-percentage"></i>--}}
+                      <i class="fa-solid fa-q"></i>
                   </span>
                     </div>
                     <input type="number" class="form-control @error('qty') is-invalid @enderror "
@@ -114,7 +118,8 @@
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">
-                  <i class="fas fa-envelope"></i>
+{{--                  <i class="fas fa-envelope"></i>--}}
+                    <i class="fa-solid fa-image"></i>
                 </span>
                 </div>
                 <input type="file" class="form-control @error('main_image') is-invalid @enderror"
