@@ -1,5 +1,6 @@
 <div class="container mt-10">
 
+
     <!-- BreadCrumb-->
     <div class="start_breadcrumb">
         <div class="col-6">
@@ -40,6 +41,7 @@
             <div class="card-body">
                 @csrf
                 @include('products._create')
+                @include('layouts.flash_messages')
             </div>
             <!-- /.card-body -->
             <div class="card-footer">

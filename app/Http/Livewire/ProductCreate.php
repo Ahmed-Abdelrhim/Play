@@ -28,7 +28,7 @@ class ProductCreate extends Component
             'price'      => 'required|numeric|between:10,100000',
             'discount'   => 'nullable|numeric|between:5,1000',
             'qty'        => 'required|numeric|between:0,100000',
-            'main_image' => 'required|mimes:jpg,jpeg,png,webp|max:1024',
+            'main_image' => 'required|mimes:jpg,jpeg,png,webp|max:6024',
         ];
     }
 
@@ -52,7 +52,7 @@ class ProductCreate extends Component
                 'qty'        => $this->qty,
                 'main_image' => '',
             ]);
-            session()->flash('subscription', 'Product Added Successfully');
+            session()->flash('success', 'Product Added Successfully');
 
         } catch (\Exception $e) {
             DB::rollBack();
@@ -60,11 +60,11 @@ class ProductCreate extends Component
             $this->error_msg = 'Something Went Wrong Try Again Later~';
         }
         DB::commit();
+        $this->main_image = '';
         $this->name_en = '';
         $this->name_ar = '';
         $this->price = '';
         $this->discount = '';
         $this->qty = '';
-        $this->main_image = '';
     }
 }
