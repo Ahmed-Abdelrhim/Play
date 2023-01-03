@@ -171,7 +171,10 @@ Route::group(['middleware' => 'disable_back_btn'], function () {
         Route::post('store', [ProductController::class, 'storeProduct'])->name('store')
             ->middleware('permission:create product');
 
-        Route::get('show', [ProductController::class, 'show'])->name('show');
+        Route::get('{start?}/show/{id}/{end?}', [ProductController::class, 'show'])->name('show');
+
+
+        Route::get('{start?}/buy/{id}/{end?}', [ProductController::class, 'buyProduct'])->name('buy');
 
         Route::get('edit/product', [ProductController::class, 'showUpdateProductForm'])->name('edit')
             ->middleware('permission:update product');

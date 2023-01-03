@@ -112,6 +112,30 @@
     </div>
 
 
+    <!-- Desc  -->
+    <div class="col-lg-4">
+        <div class="form-group">
+            <div class="form-group">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">
+{{--                    <i class="fas fa-percentage"></i>--}}
+                      <i class="fa-solid fa-q"></i>
+                  </span>
+                    </div>
+                    <input type="text" class="form-control @error('desc') is-invalid @enderror "
+                           placeholder="{{__('Desc')}}"
+                           name="desc"
+                           id="desc" @if(isset($doctor)) value="{{$doctor->commission}}" @endif
+                           wire:model="desc">
+                </div>
+                @error('desc') <span class="error text-danger">{{ $message }}</span> @enderror
+
+            </div>
+        </div>
+    </div>
+
+
     <!-- Main Image -->
     <div class="col-lg-4">
         <div class="form-group">
@@ -127,7 +151,6 @@
                        name="main_image"
                        id="main_image"
                        @if(isset($doctor)) value="{{$doctor->email}}" @endif   wire:model="main_image">
-
             </div>
             @error('main_image') <span class="error text-danger">{{ $message }}</span> @enderror
 

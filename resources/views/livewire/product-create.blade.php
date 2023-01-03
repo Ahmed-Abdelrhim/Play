@@ -31,13 +31,21 @@
         </div>
     </div>
 
+    @if ($error_msg)
+        <script>
+            swal({
+                text: " {{$error_msg}}",
+                icon: "error",
+            })
+        </script>
+    @endif
 
     <!-- Product Form -->
     <div class="card card-primary">
         <div class="card-header">
             <h3 class="card-title">{{__('Create Product')}}</h3>
         </div>
-        <form wire:submit.prevent="submit">
+        <form wire:submit.prevent="submit" enctype="multipart/form-data">
             <!-- /.card-header -->
             <div class="card-body">
                 @csrf

@@ -15,15 +15,15 @@
                         @endif
 
 
-                            {{-- Success Message --}}
-                            @if (Session::has('error'))
-                                <script>
-                                    swal({
-                                        text: " {!! Session::get('error') !!}",
-                                        icon: "error",
-                                    })
-                                </script>
-                            @endif
+                        {{-- Success Message --}}
+                        @if (Session::has('error'))
+                            <script>
+                                swal({
+                                    text: " {!! Session::get('error') !!}",
+                                    icon: "error",
+                                })
+                            </script>
+                        @endif
 
                         @guest('author')
                             <div>Not Authenticated In Author Guard</div>
@@ -40,24 +40,30 @@
                     </div>
                 </div>
                 {{-- My Card--}}
-{{--                <div class="card mt-3">--}}
-{{--                    <div class="card-body">--}}
-{{--                        <h5 class="card-title">{{__('msg.welcome', ['name' => Auth::guard('author')->user()->name]) }}</h5>--}}
-{{--                        <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>--}}
-{{--                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of--}}
-{{--                            the card's content.</p>--}}
-{{--                        <a href="#" class="card-link">Card link</a>--}}
-{{--                        <a href="#" class="card-link">Another link</a>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-
-                <div class="card mt-3" style="width: 18rem;">
-                    <img src="..." class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
+                {{--                <div class="card mt-3">--}}
+                {{--                    <div class="card-body">--}}
+                {{--                        <h5 class="card-title">{{__('msg.welcome', ['name' => Auth::guard('author')->user()->name]) }}</h5>--}}
+                {{--                        <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>--}}
+                {{--                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of--}}
+                {{--                            the card's content.</p>--}}
+                {{--                        <a href="#" class="card-link">Card link</a>--}}
+                {{--                        <a href="#" class="card-link">Another link</a>--}}
+                {{--                    </div>--}}
+                {{--                </div>--}}
+                <div class="row">
+                    @foreach($products as $prod)
+                        <div class="card mt-3" style="width: 18rem;">
+                            <img src="{{asset('storage/products/' . $prod->main_image . '/' . $prod->main_image)}}"
+                                 class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">{{$prod->name_en}}</h5>
+                                <p class="card-text">High quality product  , made of 100% cotton , for all programmers</p>
+                                <a href="{{route('product.show', [\Illuminate\Support\Str::random(15),$prod->id,\Illuminate\Support\Str::random(15)] )}}"
+                                   class="btn btn-primary">Show Product
+                                </a>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </div>
