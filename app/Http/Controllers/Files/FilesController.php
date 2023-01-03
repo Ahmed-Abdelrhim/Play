@@ -59,5 +59,16 @@ class FilesController extends Controller
         $img = Image::make('/storage/app/public/profiles/'.auth()->guard('author')->user()->avatar);
         //        $img->resize(320,400);
         //        return $img->response('jpg');
+
+    }
+
+    public function methodName()
+    {
+        //  TODO: let's play here for a while
+        // You Nay Like It .
+        // Time With Seconds .
+        // Time With Seconds .
+        // To Be Paid At The End Of The Week .
+        //
     }
 }

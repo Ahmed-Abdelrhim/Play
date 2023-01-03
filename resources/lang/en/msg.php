@@ -9,4 +9,18 @@ return [
     'Update' => 'Update',
     'Phone' => 'Phone',
     'Update Profile' => 'Update Profile',
+    'Payment' => 'Payment',
+    'datatables' => 'DataTables',
+    'Upload' => 'Upload',
+    'livewire' => 'LiveWire',
+    'Add' => 'Add',
+    'Check mail' => 'Check Mail',
+    'Mail' => 'Mail',
+    'BlogPost' => 'BlogPost',
+    'Register' => 'Register',
+    'login'=> 'login',
+    'Dashboard'=> 'Dashboard',
+    'Products'=> 'Products',
+    ''=> '',
+
 ];

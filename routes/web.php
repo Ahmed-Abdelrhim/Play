@@ -15,6 +15,7 @@ use App\Http\Controllers\ProblemsController;
 use App\Http\Controllers\Files\ImagesController;
 use App\Http\Controllers\SpatieController;
 use App\Http\Controllers\Files\FilesController;
+use App\Http\Controllers\Products\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -148,29 +149,72 @@ Route::group(['middleware' => 'disable_back_btn'], function () {
     Route::get('sub', [FilesController::class, 'subMonth'])->name('sub');
 
 
-// Language
+    // Language
     Route::get('language/{locale}', [HomeController::class, 'change_locale'])->name('change_locale');
     Route::get('image', [FilesController::class, 'PlayWithImages']);
+    Route::get('give/any/name', [FilesController::class, 'methodName'])->name('give.any.name');
 
-    /*
-     * ----------------------------------------------------------------------------------------------------
-     * -                         -                                    -                                   -
-     * -                         -                                    -                                   -
-     * -                         -                                    -                                   -
-     * -                         -                                    -                                   -
-     * -                         -                                    -                                   -
-     * -                         -                                    -                                   -
-     * -                         -                                    -                                   -
-     * -                         -                                    -                                   -
-     * ----------------------------------------------------------------------------------------------------
-     * -                         -                                    -                                   -
-     * -                         -                                    -                                   -
-     * -                         -                                    -                                   -
-     * -                         -                                    -                                   -
-     * -                         -                                    -                                   -
-     * -                         -                                    -                                   -
-     * -                         -                                    -                                   -
-     * -                         -                                    -                                   -                                    -                                   -
-     * ----------------------------------------------------------------------------------------------------
-     */
+    ####################################################################################################################
+
+
+    Route::group(['prefix' => 'product' , 'as' => 'product.'], function () {
+
+        Route::get('permissions',[SpatieController::class,'productPermissions']);
+
+
+
+        Route::get('All/Product',[ProductController::class,'index'])->name('index');
+
+
+        Route::get('create/product',[ProductController::class,'showCreateProductForm'])->name('create')
+        ->middleware('permission:create product');
+
+        Route::get('show/product',[ProductController::class,'show'])->name('show');
+
+
+        Route::post('create/product',[ProductController::class,'storeProduct'])->name('store')
+            ->middleware('permission:create product');
+
+        Route::get('edit/product',[ProductController::class,'showUpdateProductForm'])->name('edit')
+            ->middleware('permission:update product');
+
+        Route::post('update/product',[ProductController::class,'updateProduct'])->name('update')
+            ->middleware('permission:update product');
+
+        Route::post('delete/product',[ProductController::class,'deleteProduct'])->name('delete')
+            ->middleware('permission:delete product');
+    });
 });
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+ * ----------------------------------------------------------------------------------------------------
+ * -                         -                                    -                                   -
+ * -                         -                                    -                                   -
+ * -                         -                                    -                                   -
+ * -                         -                                    -                                   -
+ * -                         -                                    -                                   -
+ * -                         -                                    -                                   -
+ * -                         -                                    -                                   -
+ * -                         -                                    -                                   -
+ * ----------------------------------------------------------------------------------------------------
+ * -                         -                                    -                                   -
+ * -                         -                                    -                                   -
+ * -                         -                                    -                                   -
+ * -                         -                                    -                                   -
+ * -                         -                                    -                                   -
+ * -                         -                                    -                                   -
+ * -                         -                                    -                                   -
+ * -                         -                                    -                                   -                                    -                                   -
+ * ----------------------------------------------------------------------------------------------------
+ */

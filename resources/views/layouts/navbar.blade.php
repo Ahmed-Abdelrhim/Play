@@ -29,13 +29,14 @@
             {{--  <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>--}}
             {{-- </li>--}}
             <li class="nav-item dropdown text-uppercase">
-                <button class="btn btn-primary btn-sm dropdown-toggle text-uppercase" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-globe"></i>  {{app()->getLocale()}}
+                <button class="btn btn-primary btn-sm dropdown-toggle text-uppercase" type="button"
+                        id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-globe"></i> {{app()->getLocale()}}
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="min-width: 0px">
                     @foreach($languages as $lang)
                         @if(app()->getLocale() !== $lang->iso)
-                            <a class="dropdown-item"  href="{{route('change_locale', $lang['iso'] )}}">
+                            <a class="dropdown-item" href="{{route('change_locale', $lang->iso )}}">
                                 {{$lang->iso}}
                             </a>
                         @endif
@@ -63,32 +64,32 @@
                 @guest('author')
                     @if (Route::has('login'))
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('login') }}</a>
+                            <a class="nav-link" href="{{ route('login') }}">{{ __('msg.login') }}</a>
                         </li>
                     @endif
 
                     @if (Route::has('register'))
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            <a class="nav-link" href="{{ route('register') }}">{{ __('msg.Register') }}</a>
                         </li>
                     @endif
                 @else
 
                     @if(Route::current()->getName() != 'blog_posts' )
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('blog_posts')}}">BlogPost</a>
+                            <a class="nav-link" href="{{route('blog_posts')}}">{{__('msg.BlogPost')}}</a>
                         </li>
                     @endif
 
                     @if(Route::current()->getName() != 'sending-email')
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('sending-email')}}">Mail</a>
+                            <a class="nav-link" href="{{route('sending-email')}}">{{__('msg.Mail')}}</a>
                         </li>
                     @endif
 
                     @if(Route::current()->getName() != 'check.verification.code')
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('check.verification.code')}}">Check mail</a>
+                            <a class="nav-link" href="{{route('check.verification.code')}}">{{__('msg.Check mail')}}</a>
                         </li>
                     @endif
 
@@ -96,26 +97,26 @@
 
                     @if(Route::current()->getName() != 'add.blog_post' )
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('add.blog_post')}}">Add</a>
+                            <a class="nav-link" href="{{route('add.blog_post')}}"> {{__('msg.Add')}} </a>
                         </li>
                     @endif
 
                     @if(Route::current()->getName() != 'livewire' )
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('livewire')}}">livewire</a>
+                            <a class="nav-link" href="{{route('livewire')}}">{{__('msg.livewire')}}</a>
                         </li>
                     @endif
 
                     @if(Route::current()->getName() != 'upload.form' )
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('upload.form')}}">Upload</a>
+                            <a class="nav-link" href="{{route('upload.form')}}">{{__('msg.Upload')}}</a>
                         </li>
                     @endif
 
                     {{--                            @can('edit post')--}}
                     @if(Route::current()->getName() != 'dataTables' )
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('dataTables')}}">dataTables</a>
+                            <a class="nav-link" href="{{route('dataTables')}}">{{__('msg.datatables')}}</a>
                         </li>
                     @endif
                     {{--                            @endcan--}}
@@ -125,12 +126,34 @@
 
                     @if(Route::current()->getName() != 'pay' )
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('pay')}}">Payment</a>
+                            <a class="nav-link" href="{{route('pay')}}">{{__('msg.Payment')}}</a>
                         </li>
                     @endif
 
 
+                    {{--  Product --}}
 
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                           aria-expanded="false">
+                            {{__('msg.Products')}}
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="{{ route('profile') }}">
+                                All Products
+                            </a>
+
+                            @can('create product')
+                                <a class="dropdown-item" href="{{ route('profile') }}">
+                                    Create Product
+                                </a>
+                            @endcan
+
+                        </div>
+                    </li>
+
+
+                    {{--  User Info --}}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
                            aria-expanded="false">
@@ -152,6 +175,7 @@
 
                         </div>
                     </li>
+
                 @endguest
             </ul>
         </div>
