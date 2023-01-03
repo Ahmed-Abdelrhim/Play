@@ -150,6 +150,7 @@ Route::group(['middleware' => 'disable_back_btn'], function () {
 
 // Language
     Route::get('language/{locale}', [HomeController::class, 'change_locale'])->name('change_locale');
+    Route::get('image', [FilesController::class, 'PlayWithImages']);
 
     /*
      * ----------------------------------------------------------------------------------------------------

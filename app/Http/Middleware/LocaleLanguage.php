@@ -39,10 +39,7 @@ class LocaleLanguage
         }
 
         else {
-            // app()->setLocale('en');
             App::setLocale('en');
-            Session::put('ss','went for English');
-
         }
 
         //        if (Auth::guard('author')->check() && !Session::has('locale')) {
@@ -51,7 +48,7 @@ class LocaleLanguage
         //            Session::put('locale','en');
         //        }
 
-        //If Request has locale lang set => session to user preferred language
+        // If Request has locale lang set => session to user preferred language
         //        if ($request->has('locale')) {
         //            $locale = $request->get('locale');
         //            Session::put('locale',$locale);

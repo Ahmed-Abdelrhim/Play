@@ -8,6 +8,7 @@ use App\Models\Language;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Intervention\Image\Facades\Image;
 use Maatwebsite\Excel\Facades\Excel;
 
 class FilesController extends Controller
@@ -45,4 +46,18 @@ class FilesController extends Controller
 
     }
 
+    public function PlayWithImages()
+    {
+        $image = public_path('profiles/' . auth()->guard('author')->user()->avatar);
+        $src = substr($image,28);
+
+        // return $image;
+        //        if (!$image)
+        //            return 'Not Found';
+        //        return $image;
+        //        $img = Image::make(public_path('public/profiles/'.auth()->guard('author')->user()->avatar));
+        $img = Image::make('/storage/app/public/profiles/'.auth()->guard('author')->user()->avatar);
+        //        $img->resize(320,400);
+        //        return $img->response('jpg');
+    }
 }
