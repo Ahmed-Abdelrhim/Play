@@ -145,7 +145,6 @@ Route::group(['middleware' => 'disable_back_btn'], function () {
 
             Route::get('create', [ProductController::class, 'showCreateProductForm'])
                 ->middleware('permission:create product')->name('create');
-
             // permission:write post create product
 
             Route::post('store', [ProductController::class, 'storeProduct'])->name('store')

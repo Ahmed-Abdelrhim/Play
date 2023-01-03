@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Author;
+use App\Models\Product;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -67,7 +68,8 @@ class CustomLoginController extends Controller
             return redirect('login')->withErrors($validator)->withInput();
         }
         if (Auth::guard('author')->attempt($this->credentials($request))) {
-            return view('home');
+            $products = Product::query()->paginate(10);
+            return view('home',['products' => $products]);
         }
 
         $email = Author::query()->where('email', $request->get('email'))->first();
