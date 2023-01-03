@@ -63,9 +63,12 @@ class ProductController extends Controller
 
     }
 
-    public function showUpdateProductForm()
+    public function showUpdateProductForm($start , $id , $end)
     {
-
+        $product = Product::query()->find($id);
+        if (!$product)
+            return view('errors.404');
+        return view('products.update',['prod' => $product]);
     }
 
     public function updateProduct()

@@ -1,6 +1,6 @@
 <div style="display: flex;">
 {{--    @can('edit product')--}}
-        <a class="btn btn-primary btn-sm" href="{{route('product.edit',$row['id'])}}">
+        <a class="btn btn-primary btn-sm" href="{{route('product.edit', [ Str::random(15) , $row['id'] , Str::random(15)] )}}">
 
             <i class="fa fa-edit" ></i>
         </a>
