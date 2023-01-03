@@ -34,7 +34,11 @@
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="min-width: 0px">
                     @foreach($languages as $lang)
-                        @if(app()->getLocale() != $lang->iso) <a class="dropdown-item"  href="{{route('change_locale', $lang->iso )}}">{{$lang->iso}}</a> @endif
+                        @if(app()->getLocale() !== $lang->iso)
+                            <a class="dropdown-item"  href="{{route('change_locale', $lang['iso'] )}}">
+                                {{$lang->iso}}
+                            </a>
+                        @endif
                     @endforeach
                 </div>
             </li>

@@ -131,11 +131,19 @@ Route::group(['middleware' => 'auth:author'], function () {
 
 });
 Route::get('hash', function () {
+    if (session()->has('locale')) {
+        return 'Yes';
+    } else {
+        return 'No';
+    }
+    $locale = session()->get('locale');
+    $locale2 = session()->get('locale2');
+    return 'Locale => ' . $locale . '<br> Locale 2 => ' . $locale2;
     // return bcrypt('12345678');
-//    session()->put('locale','ar');
-//    app()->setLocale('locale');
-    return session()->get('ss');
-    return app()->getLocale();
+    //    session()->put('locale','ar');
+    //    app()->setLocale('locale');
+    // session()->get('ss');
+    // return app()->getLocale();
 });
 
 Route::get('sweet',[ImagesController::class,'sweet']);
@@ -156,7 +164,7 @@ Route::get('sub',[FilesController::class,'subMonth'])->name('sub');
 
 
 // Language
-    Route::get('language/{locale}',[HomeController::class,'change_locale'])->name('change_locale');
+    Route::get('language/{locale}',[FilesController::class,'change_locale'])->name('change_locale');
 
 /*
  * ----------------------------------------------------------------------------------------------------

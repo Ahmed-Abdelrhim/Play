@@ -20,9 +20,9 @@ class LocaleLanguage
      */
     public function handle(Request $request, Closure $next)
     {
-        //We have two solutions => first the user didn't set locale yet . second => the user already set locale to his preferred language
+        // We have two solutions => first the user didn't set locale yet . second => the user already set locale to his preferred language
 
-        //If Request Doesn't have locale lang set => session to the value in database
+        // If Request Doesn't have locale lang set => session to the value in database 10:30 AM
 
         $languages = Language::query()
             ->select('iso')
@@ -45,19 +45,19 @@ class LocaleLanguage
 
         }
 
-//        if (Auth::guard('author')->check() && !Session::has('locale')) {
-//            // $locale = $request->user()->locale;
-//            // $locale = Auth::guard('author')->user()->locale;
-//            Session::put('locale','en');
-//        }
+        //        if (Auth::guard('author')->check() && !Session::has('locale')) {
+        //            // $locale = $request->user()->locale;
+        //            // $locale = Auth::guard('author')->user()->locale;
+        //            Session::put('locale','en');
+        //        }
 
         //If Request has locale lang set => session to user preferred language
-//        if ($request->has('locale')) {
-//            $locale = $request->get('locale');
-//            Session::put('locale',$locale);
-//        }
+        //        if ($request->has('locale')) {
+        //            $locale = $request->get('locale');
+        //            Session::put('locale',$locale);
+        //        }
 
-        //set language to the value in the session
+        // set language to the value in the session
         // $locale = Session::get('locale');
         // App::setLocale($locale);
         return $next($request);

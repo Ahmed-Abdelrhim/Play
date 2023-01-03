@@ -16,9 +16,10 @@ class HomeController extends Controller
     {
         $language = Language::query()->where('iso', $locale)->first();
         session()->put('locale',$locale);
+        session()->put('locale2','NNN');
         // app()->setLocale('locale');
         // return session()->get('locale');
-        return redirect()->back();
+        // return redirect()->back();
 
 
 
