@@ -130,7 +130,10 @@ Route::group(['middleware' => 'disable_back_btn'], function () {
 
     });
     Route::get('hash', function () {
-        return bcrypt('12345678');
+        $user = auth()->guard('author')->user();
+        return $user->hasPermissionTo('delete product');
+
+        // return bcrypt('12345678');
     });
 
     Route::get('sweet', [ImagesController::class, 'sweet']);
