@@ -73,7 +73,8 @@ Route::group(['middleware' => 'disable_back_btn'], function () {
 
 
         Route::get('add/blogPost', [PlayController::class, 'showBlogPostForm'])->name('add.blog_post')
-            ->middleware('permission:write post');
+            ->middleware('permission:create product');
+        // permission:write post
         Route::get('adding/blogPost', [PlayController::class, 'addBlogPost'])->name('create.blogPost');
         Route::get('update/post/{id}', [PlayController::class, 'updateBlogPostForm'])->name('update.post.form');
         Route::post('update/post/{id}', [PlayController::class, 'updateBlogPost'])->name('update.post');
@@ -131,6 +132,39 @@ Route::group(['middleware' => 'disable_back_btn'], function () {
 
         Route::post('upload-multiple', [ImagesController::class, 'uploadMultipleImages'])->name('multiple.images');
 
+
+
+        Route::group(['prefix' => 'product', 'as' => 'product.'], function () {
+
+            Route::get('permissions', [SpatieController::class, 'productPermissions']);
+
+
+            Route::get('All', [ProductController::class, 'index'])->name('index');
+
+            Route::get('products/all/datatables', [ProductController::class, 'ajax'])->name('dataTables');
+
+            Route::get('create', [ProductController::class, 'showCreateProductForm'])
+                ->middleware('permission:create product')->name('create');
+
+            // permission:write post create product
+
+            Route::post('store', [ProductController::class, 'storeProduct'])->name('store')
+                ->middleware('permission:create product');
+
+            Route::get('{start?}/show/{id}/{end?}', [ProductController::class, 'show'])->name('show');
+
+            Route::get('{start?}/buy/{id}/{end?}', [ProductController::class, 'buyProduct'])->name('buy');
+
+            Route::get('edit/product/{start?}/{id}/{end}', [ProductController::class, 'showUpdateProductForm'])->name('edit')
+                ->middleware('permission:update product');
+
+            Route::post('update/product', [ProductController::class, 'updateProduct'])->name('update')
+                ->middleware('permission:update product');
+
+            Route::post('delete/product/{id}', [ProductController::class, 'deleteProduct'])->name('delete')
+                ->middleware('permission:delete product');
+        });
+
     });
     Route::get('hash', function () {
         $user = auth()->guard('author')->user();
@@ -163,36 +197,7 @@ Route::group(['middleware' => 'disable_back_btn'], function () {
     ####################################################################################################################
 
 
-    Route::group(['prefix' => 'product', 'as' => 'product.'], function () {
 
-        Route::get('permissions', [SpatieController::class, 'productPermissions']);
-
-
-        Route::get('All', [ProductController::class, 'index'])->name('index');
-
-        Route::get('products/all/datatables', [ProductController::class, 'ajax'])->name('dataTables');
-
-        Route::get('create', [ProductController::class, 'showCreateProductForm'])->middleware('permission:create product')
-            ->name('create');
-
-        // permission:write post create product
-
-        Route::post('store', [ProductController::class, 'storeProduct'])->name('store')
-            ->middleware('permission:create product');
-
-        Route::get('{start?}/show/{id}/{end?}', [ProductController::class, 'show'])->name('show');
-
-        Route::get('{start?}/buy/{id}/{end?}', [ProductController::class, 'buyProduct'])->name('buy');
-
-        Route::get('edit/product/{start?}/{id}/{end}', [ProductController::class, 'showUpdateProductForm'])->name('edit')
-            ->middleware('permission:update product');
-
-        Route::post('update/product', [ProductController::class, 'updateProduct'])->name('update')
-            ->middleware('permission:update product');
-
-        Route::post('delete/product/{id}', [ProductController::class, 'deleteProduct'])->name('delete')
-            ->middleware('permission:delete product');
-    });
 });
 
 
