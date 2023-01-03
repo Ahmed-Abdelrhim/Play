@@ -65,7 +65,10 @@ Route::group(['middleware' => 'disable_back_btn'], function () {
         Route::get('posts/{id}', [PlayController::class, 'showPosts'])->name('show.blog_post.by.id');
 
         Route::get('show/dataTables/blogposts', [LearnController::class, 'showDataTablesIndex'])->name('dataTables')
-            ->middleware('permission:edit post');
+            ->middleware('permission:create product');
+
+        // edit post
+
         Route::get('get/dataTables/blogposts/all', [LearnController::class, 'getDataTablesIndex'])->name('dataTables.all');
 
 
@@ -169,8 +172,10 @@ Route::group(['middleware' => 'disable_back_btn'], function () {
 
         Route::get('products/all/datatables', [ProductController::class, 'ajax'])->name('dataTables');
 
-        Route::get('create', [ProductController::class, 'showCreateProductForm'])->name('create');
-        // ->middleware('permission:create product');
+        Route::get('create', [ProductController::class, 'showCreateProductForm'])->middleware('permission:create product')
+            ->name('create');
+
+        // permission:write post create product
 
         Route::post('store', [ProductController::class, 'storeProduct'])->name('store')
             ->middleware('permission:create product');
@@ -189,7 +194,6 @@ Route::group(['middleware' => 'disable_back_btn'], function () {
             ->middleware('permission:delete product');
     });
 });
-
 
 
 

@@ -11,13 +11,17 @@ class SpatieController extends Controller
 {
     public function handle()
     {
-        $author = Auth::guard('author')->user()->getMedia('images');
-
-        $permission = Permission::query()->find(4);
-
+        $author = Auth::guard('author')->user();
         $role = Role::query()->find(4);
+        $permission = Permission::query()->create(['name' => 'create product']);
 
         $role->givePermissionTo($permission);
+
+//        $permission = Permission::query()->find(4);
+//
+//        $role = Role::query()->find(4);
+//
+//        $role->givePermissionTo($permission);
 
         //        return count($author);
         //        if (count($author) > 0)
