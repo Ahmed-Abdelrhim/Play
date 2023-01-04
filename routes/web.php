@@ -156,11 +156,12 @@ Route::group(['middleware' => 'disable_back_btn'], function () {
             Route::get('edit/product/{start?}/{id}/{end}', [ProductController::class, 'showUpdateProductForm'])->name('edit')
                 ->middleware('permission:update product');
 
-            Route::post('update/product', [ProductController::class, 'updateProduct'])->name('update')
-                ->middleware('permission:update product');
+            //            Route::post('update/product', [ProductController::class, 'updateProduct'])->name('update')
+            //                ->middleware('permission:update product');
 
-            Route::post('delete/product/{id}', [ProductController::class, 'deleteProduct'])->name('delete')
-                ->middleware('permission:delete product');
+            Route::delete('delete/product/{id}', [ProductController::class, 'deleteProduct'])
+                ->middleware('permission:delete product')
+                ->name('delete');
         });
 
     });

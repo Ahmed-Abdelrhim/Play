@@ -7,6 +7,7 @@ use App\Models\Product;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Yajra\DataTables\Facades\DataTables;
 
 
@@ -72,14 +73,21 @@ class ProductController extends Controller
         return view('products.update',['product' => $product]);
     }
 
-    public function updateProduct()
+    //    public function updateProduct()
+    //    {
+    //
+    //    }
+
+    public function deleteProduct($id): View|Factory|RedirectResponse|Application
     {
-
-    }
-
-    public function deleteProduct($id)
-    {
-
+        if (!is_numeric($id))
+            return view('errors.404');
+        $product = Product::query()->find($id);
+        if (!$product)
+            return view('errors.404');
+        $product->delete();
+        session()->flash('success' , 'Successfully Deleted Product');
+        return redirect()->back();
     }
 
     public function buyProduct($start,$id,$end): Factory|View|Application

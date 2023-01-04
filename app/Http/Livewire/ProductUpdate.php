@@ -3,6 +3,9 @@
 namespace App\Http\Livewire;
 
 use App\Models\Product;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Livewire\Component;
@@ -45,7 +48,7 @@ class ProductUpdate extends Component
     }
 
 
-    public function render()
+    public function render(): Factory|View|Application
     {
         return view('livewire.product-update');
     }
@@ -82,13 +85,13 @@ class ProductUpdate extends Component
         }
         DB::commit();
         session()->flash('success', 'Product Updated Successfully');
-        $this->main_image = '';
-        $this->name_en = '';
-        $this->name_ar = '';
-        $this->desc = '';
-        $this->price = '';
-        $this->discount = '';
-        $this->qty = '';
+        //        $this->main_image = '';
+        //        $this->name_en = '';
+        //        $this->name_ar = '';
+        //        $this->desc = '';
+        //        $this->price = '';
+        //        $this->discount = '';
+        //        $this->qty = '';
     }
 
 }

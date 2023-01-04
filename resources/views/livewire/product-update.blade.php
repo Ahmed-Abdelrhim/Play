@@ -43,7 +43,7 @@
     <!-- Product Form -->
     <div class="card card-primary">
         <div class="card-header">
-            <h3 class="card-title">{{__('Create Product')}}</h3>
+            <h3 class="card-title">{{__('Update Product')}}</h3>
         </div>
         <form wire:submit.prevent="submit" enctype="multipart/form-data">
             <!-- /.card-header -->

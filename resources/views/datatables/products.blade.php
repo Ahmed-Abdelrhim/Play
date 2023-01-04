@@ -56,11 +56,11 @@
             );
         });
         $(document).on('click', '.swal-button--confirm', function (e) {
-
+            $('#destroy-product').submit();
         });
 
-        // $(document).on('click', '.edit-product', function (e) {
-        //     alert('edit pressed');
+        // $(document).on('click', '.destroy-product', function (e) {
+        //
         // });
 
     });

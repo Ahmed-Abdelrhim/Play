@@ -7,7 +7,7 @@
     @endif
 
     @if(auth()->guard('author')->user()->hasPermissionTo('delete product'))
-        <form method="POST" action="{{route('product.delete',$row->id)}}" class="d-inline" id="destroy-post"
+        <form method="POST" action="{{route('product.delete', $row['id'] )}}" class="d-inline" id="destroy-product"
               style="margin-left: 5px;">
             @csrf
             <input type="hidden" name="_method" value="delete">

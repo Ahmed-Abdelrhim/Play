@@ -2,10 +2,10 @@
 @section('content')
     <div class="scroller"></div>
     <div class="container">
-        <div class="col-sm-4">
-            <button class="btn btn-primary">pdf</button>
-            <br>
-        </div>
+{{--        <div class="col-sm-4">--}}
+{{--            <button class="btn btn-primary">pdf</button>--}}
+{{--            <br>--}}
+{{--        </div>--}}
         <table class="table table-dark" id="datatable-example">
             <thead>
             <tr>
