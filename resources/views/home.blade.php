@@ -76,10 +76,15 @@
                                 </div>
                                 <div class="product-details">
                                     <span class="product-catagory">Clothes</span>
-                                    <h4><a href="">{{$prod->name}}</a></h4>
+                                    <h4><a href="{{route('product.buy',[Str::random(15),$prod->id,Str::random(15)])}}">{{$prod->name_en}}</a></h4>
                                     <p>{{$prod->desc}}</p>
                                     <div class="product-bottom-details">
-                                        <div class="product-price"><small>{{$prod->price + $prod->discount}}</small>{{$prod->price}} EGP</div>
+                                        <div class="product-price">
+                                            <small>
+                                                @if(($prod->price + $prod->discount)  != $prod->price) {{$prod->price + $prod->discount}} @endif
+                                            </small>
+                                            {{$prod->price}} EGP
+                                        </div>
 
                                         <div class="product-links">
                                             <a class="btn btn-primary" href="{{route('product.show',[Str::random(15) , $prod->id , Str::random(15)])}}">Buy</a>
@@ -96,4 +101,7 @@
         </div>
     </div>
 @endsection
-{{--  H("TRIPLE H DOT COM HEY HEY ZIZO EL-MISTRO ")--}}
+
+@section('footer')
+    @include('layouts.footer')
+@endsection
