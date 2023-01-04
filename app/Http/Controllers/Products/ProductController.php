@@ -7,7 +7,6 @@ use App\Models\Product;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
 
@@ -31,14 +30,14 @@ class ProductController extends Controller
             ->addColumn('action', function ($row) {
                 return view('products._action',['row' => $row]);
             })
-            ->addColumn('name', function (Product $author) {
-                return $author->name_en;
+            ->addColumn('name', function (Product $product) {
+                return $product->name_en;
             })
-            ->addColumn('price',function(Product $post) {
-                return $post->price ;
+            ->addColumn('price',function(Product $product) {
+                return $product->price ;
             })
-            ->editColumn('discount' , function(Product $post) {
-                return $post->price;
+            ->editColumn('discount' , function(Product $product) {
+                return $product->price;
             })
             ->rawColumns(['action'])
             ->make(true);

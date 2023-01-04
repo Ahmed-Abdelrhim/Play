@@ -32,6 +32,18 @@ class ProductUpdate extends Component
         ];
     }
 
+    public function mount()
+    {
+        $this->name_ar = $this->product->name_ar;
+        $this->name_en = $this->product->name_en;
+
+        $this->price = $this->product->price;
+        $this->discount = $this->product->discount;
+
+        $this->qty = $this->product->qty;
+        $this->desc = $this->product->desc;
+    }
+
 
     public function render()
     {

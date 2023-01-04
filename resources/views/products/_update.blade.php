@@ -124,10 +124,8 @@
                   </span>
                     </div>
                     <input type="text" class="form-control @error('desc') is-invalid @enderror "
-                           placeholder="{{__('Desc')}}"
                            name="desc"
-                           id="desc" @if(isset($product)) value="{{$product->desc}}" @endif
-                           wire:model="desc">
+                           id="desc" wire:model="desc">
                 </div>
                 @error('desc') <span class="error text-danger">{{ $message }}</span> @enderror
 
