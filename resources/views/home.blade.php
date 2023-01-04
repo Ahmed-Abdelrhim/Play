@@ -79,7 +79,7 @@
                                     <h4><a href="">{{$prod->name}}</a></h4>
                                     <p>{{$prod->desc}}</p>
                                     <div class="product-bottom-details">
-                                        <div class="product-price"><small>{{$prod->$prod + $prod->discount}}</small>{{$prod->price}} EGP</div>
+                                        <div class="product-price"><small>{{$prod->price + $prod->discount}}</small>{{$prod->price}} EGP</div>
 
                                         <div class="product-links">
                                             <a class="btn btn-primary" href="{{route('product.show',[Str::random(15) , $prod->id , Str::random(15)])}}">Buy</a>
