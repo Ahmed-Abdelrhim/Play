@@ -1,8 +1,8 @@
 <div style="display: flex;">
     @if(auth()->guard('author')->user()->hasPermissionTo('update product'))
         <a class="btn btn-primary btn-sm"
-           href="{{route('product.edit', [ Str::random(15) , $row['id'] , Str::random(15)] )}}">
-            <i class="fa fa-edit"></i>
+           href="{{route('product.edit', [ Str::random(15) , $row['id'] , Str::random(15)] )}}" >
+            <i class="fa fa-edit edit-product"></i>
         </a>
     @endif
 

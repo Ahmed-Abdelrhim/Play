@@ -12,16 +12,14 @@ class SpatieController extends Controller
     public function handle()
     {
         $author = Auth::guard('author')->user();
-        $role = Role::query()->find(4);
-        $permission = Permission::query()->create(['name' => 'create product']);
+         // $role = Role::query()->find(4);
+//        $permission = Permission::query()->create(['name' => 'create product']);
+//        $permission = Permission::query()->create(['name' => 'update product']);
+//        $permission = Permission::query()->create(['name' => 'delete product']);
 
-        $role->givePermissionTo($permission);
+        // $role->givePermissionTo($permission);
 
-//        $permission = Permission::query()->find(4);
-//
-//        $role = Role::query()->find(4);
-//
-//        $role->givePermissionTo($permission);
+
 
         //        return count($author);
         //        if (count($author) > 0)
@@ -29,6 +27,7 @@ class SpatieController extends Controller
         //        return 'No';
         // return $avatars = $author->getMedia();
         // return view('spatie.index',['avatars' => $avatars]);
+        return 'No Specified Action Till Now';
     }
 
     public function download()

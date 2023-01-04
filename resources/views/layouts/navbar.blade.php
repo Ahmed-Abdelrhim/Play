@@ -132,7 +132,6 @@
 
 
                     {{--  Product --}}
-
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
                            aria-expanded="false">
@@ -143,11 +142,11 @@
                                 All Products
                             </a>
 
-                            @can('create product')
+                            @if(auth()->guard('author')->user()->hasPermissionTo('create product'))
                                 <a class="dropdown-item" href="{{ route('product.create') }}">
                                     Create Product
                                 </a>
-                            @endcan
+                            @endif
 
                         </div>
                     </li>

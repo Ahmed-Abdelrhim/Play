@@ -56,8 +56,12 @@
             );
         });
         $(document).on('click', '.swal-button--confirm', function (e) {
-            $('#destroy-post').submit();
+
         });
+
+        // $(document).on('click', '.edit-product', function (e) {
+        //     alert('edit pressed');
+        // });
 
     });
 </script>
