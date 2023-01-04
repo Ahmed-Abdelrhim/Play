@@ -304,6 +304,4 @@
         font-size: 14px;
         color: #878787;
     }
-
-
 </style>
