@@ -11,7 +11,7 @@
     @include('layouts.navbar')
     @include('layouts.flash_messages')
     <div class="scroller"></div>
-
+    @include('layouts.sidebar')
     <main class="py-4">
         @yield('content')
     </main>
@@ -19,7 +19,7 @@
 
 @include('layouts.scripts')
 
-@yield('footer')
+@include('layouts.footer')
 </body>
 </html>
 

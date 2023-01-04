@@ -16,9 +16,7 @@
         </table>
     </div>
 @endsection
-@section('footer')
-    @include('layouts.footer')
-@endsection
+
 @push('scripts')
     @include('datatables.products')
 @endpush

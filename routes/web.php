@@ -232,3 +232,6 @@ Route::group(['middleware' => 'disable_back_btn'], function () {
  */
 
 
+Route::get('sidebar',function () {
+    return view('layouts.sidebar');
+});
