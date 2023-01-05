@@ -22,8 +22,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('pay/goo',[PaymentController::class,'pay']);
-Route::post('success/callback',[PaymentController::class,'successCallback']);
-Route::post('error/callback',[PaymentController::class,'errorCallback']);
+Route::get('success/callback',[PaymentController::class,'successCallback']);
+Route::get('error/callback',[PaymentController::class,'errorCallback']);
 
 ################################ Auth  ################################
 Route::get('register',[BlogPostController::class,'register']);

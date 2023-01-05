@@ -50,6 +50,8 @@ class FatoorahService
         //        return $response;
     }
 
+    // dd('what is she doing right now ? ');
+
     //    private function saveTransactionPayment($patient_id, $invoice_id)
     //    {
     //
