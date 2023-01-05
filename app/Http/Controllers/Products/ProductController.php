@@ -55,6 +55,7 @@ class ProductController extends Controller
 
     public function showCreateProductForm(): Factory|View|Application
     {
+        // return 'sadasda';
         return view('products.create');
     }
 

@@ -133,7 +133,7 @@ Route::group(['middleware' => 'disable_back_btn'], function () {
         Route::post('upload-multiple', [ImagesController::class, 'uploadMultipleImages'])->name('multiple.images');
 
 
-
+        ######################################################################################
         Route::group(['prefix' => 'product', 'as' => 'product.'], function () {
 
             Route::get('permissions', [SpatieController::class, 'productPermissions']);
