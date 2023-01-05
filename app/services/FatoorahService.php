@@ -14,8 +14,7 @@ class FatoorahService
     public function __construct(Client $client_request)
     {
         $this->client_request = $client_request;
-        // $this->base_url = env('fattorah_base_url');
-        $this->base_url = 'https://apitest.myfatoorah.com/'; //  https://apitest.myfatoorah.com/
+        $this->base_url = 'https://apitest.myfatoorah.com/'; //  env('fattorah_base_url')
         $this->headers = [
             'Content-Type' => 'application/json',
             'authorization' => 'Bearer'.

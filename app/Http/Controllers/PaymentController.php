@@ -29,32 +29,42 @@ class PaymentController extends Controller
         // $author = Auth::guard('author')->user()->name;
         // return 'dddd';
         $data = [
-//            'CustomerName'       => 'Ahmed Abdelrhim',
-//            'NotificationOption' => 'Lnk', // 'SMS' , 'EML' , or 'ALL'
-//            'InvoiceValue'       => 500,
-//            "MobileCountryCode" => "965",
-//            "CustomerMobile" => "12345678",
-//            'CustomerEmail'      => 'aabdelrhim974@gmail.com',
-//            'CallBackUrl'        => 'https://google.com',
-//            'ErrorUrl'           => 'https://youtube.com', //or 'https://example.com/error.php'
-//            'Language'           => 'ar', //or 'en'
-//            'DisplayCurrencyIso' => 'EGP',
-
-
-            "CustomerName" => "Ahmed",
-            "NotificationOption" => "Lnk",
+            'CustomerName'       => 'Ahmed Abdelrhim',
+            'NotificationOption' => 'Lnk', // 'SMS' , 'EML' , or 'ALL'
+            'InvoiceValue'       => 500,
             "MobileCountryCode" => "20",
             "CustomerMobile" => "01152067271",
-            "CustomerEmail" => "aabdelrhim974@gmail.com",
-            "InvoiceValue" => 100,
-            "DisplayCurrencyIso" => "EGP",
-            "CallBackUrl" => 'https://google.com',
-            "ErrorUrl" => 'https://youtube.com',
-            "Language" => "en",
+            'CustomerEmail'      => 'aabdelrhim974@gmail.com',
+            'CallBackUrl'        => 'http://127.0.0.1:1020/api/success/callback', // http://127.0.0.1:1020/api/pay/goo
+            'ErrorUrl'           => 'http://127.0.0.1:1020/api/error/callback', // or  https://google.com https://youtube.com
+            'Language'           => 'ar', //or 'en'
+            'DisplayCurrencyIso' => 'EGP',
+
+
+//            "CustomerName" => "Ahmed",
+//            "NotificationOption" => "Lnk",
+//            "MobileCountryCode" => "20",
+//            "CustomerMobile" => "01152067271",
+//            "CustomerEmail" => "aabdelrhim974@gmail.com",
+//            "InvoiceValue" => 100,
+//            "DisplayCurrencyIso" => "EGP",
+//            "CallBackUrl" => 'https://google.com',
+//            "ErrorUrl" => 'https://youtube.com',
+//            "Language" => "en",
 
         ];
         return $this->gateway->sendPayment($data);
     }
+    public function successCallback(Request $request)
+    {
+        dd($request);
+    }
+
+    public function errorCallback(Request $request)
+    {
+        dd($request);
+    }
+
 }
 
 //Fill optional data
