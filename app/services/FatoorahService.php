@@ -25,17 +25,17 @@ class FatoorahService
     public function buildRequest($uri, $method, $body = [])
     {
         $request = new Request($method, $this->base_url . $uri, $this->headers);
-//        if (!$body)
-//            return false;
+        if (!$body)
+            return false;
 
         $response = $this->client_request->send($request, [
             'json' => $body,
         ]);
 
-//        if ($response->getStatusCode() != 200)
-//        {
-//            return false;
-//        }
+        if ($response->getStatusCode() != 200)
+        {
+            return false;
+        }
 
         $response = json_decode($response->getBody(), true);
         return $response;
@@ -43,26 +43,23 @@ class FatoorahService
 
     public function sendPayment($data)
     {
-//        $requestData = $this->parsePaymentData();
-
         return $response = $this->buildRequest('v2/SendPayment', 'POST', $data);
-//        if($response)
-//            $this->saveTransactionPayment($patient_id,$response['Data']['InvoiceId']);
-//        return $response;
-
-
+        //        $requestData = $this->parsePaymentData();
+        //        if($response)
+        //            $this->saveTransactionPayment($patient_id,$response['Data']['InvoiceId']);
+        //        return $response;
     }
 
-    private function saveTransactionPayment($patient_id, $invoice_id)
-    {
+    //    private function saveTransactionPayment($patient_id, $invoice_id)
+    //    {
+    //
+    //    }
 
-    }
 
-
-    private function parsePaymentData($patient_id, $value, $planCurrency)
-    {
-        return [
-
-        ];
-    }
+    //    private function parsePaymentData($patient_id, $value, $planCurrency)
+    //    {
+    //        return [
+    //
+    //        ];
+    //    }
 }
