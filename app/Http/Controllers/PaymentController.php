@@ -41,15 +41,15 @@ class PaymentController extends Controller
 //            'DisplayCurrencyIso' => 'EGP',
 
 
-            "CustomerName" => "Ali",
+            "CustomerName" => "Ahmed",
             "NotificationOption" => "Lnk",
-            "MobileCountryCode" => "965",
-            "CustomerMobile" => "12345678",
-            "CustomerEmail" => "mail@company.com",
+            "MobileCountryCode" => "20",
+            "CustomerMobile" => "01152067271",
+            "CustomerEmail" => "aabdelrhim974@gmail.com",
             "InvoiceValue" => 100,
-            "DisplayCurrencyIso" => "kwd",
-            "CallBackUrl" => env('success_url'),
-            "ErrorUrl" => env('error_url'),
+            "DisplayCurrencyIso" => "EGP",
+            "CallBackUrl" => 'https://google.com',
+            "ErrorUrl" => 'https://youtube.com',
             "Language" => "en",
 
         ];
