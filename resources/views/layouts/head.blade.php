@@ -1,6 +1,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-{{--<title>@yield('title')</title>--}}
+<title>@yield('title')</title>
 {{--    <link rel="apple-touch-icon" href="{{asset('assets/admin/images/ico/apple-icon-120.png')}}">--}}
 <link rel="apple-touch-icon" href="{{asset('storage/thumbnails/play-1.png')}}">
 <link rel="shortcut icon" type="image/x-icon" href="{{asset('storage/thumbnails/play-1.png')}}">
@@ -40,27 +40,11 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
-{{--<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"--}}
-{{--        integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="--}}
-{{--        crossorigin="anonymous" referrerpolicy="no-referrer"></script>--}}
-
-
-{{--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"--}}
-{{--      integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="--}}
-{{--      crossorigin="anonymous" referrerpolicy="no-referrer"/>--}}
 
 <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css"/>
 
-{{--@include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])--}}
-
-{{--<link rel="stylesheet" href="{{assert('css/menu/mmenu/mmenu-custom.min.css')}}"/>--}}
-{{--<link rel="stylesheet" href="{{assert('css/menu/mmenu/mmenu-custom.css')}}"/>--}}
-{{--<link rel="stylesheet" href="{{assert('css/menu/mmenu/jquery.min.css')}}"/>--}}
-{{--<link rel="stylesheet" href="{{assert('css/menu/mmenu/jquery.css')}}"/>--}}
-{{--<link rel="stylesheet" href="{{assert('css/vertical-menu.css')}}"/>--}}
 
 
 
 @include('layouts.style')
 
-{{--    <link rel="stylesheet" href="{{asset('css/style.css')}}">--}}

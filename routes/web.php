@@ -59,7 +59,9 @@ Route::group(['middleware' => 'disable_back_btn'], function () {
         Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 
-        Route::get('payment', [PaymentController::class, 'showPaymentForm'])->name('pay');
+         Route::get('payment', [PaymentController::class, 'pay'])->name('pay');
+        // Route::post('pay/goo',[PaymentController::class,'pay']);
+
         Route::get('restore/post/{id}', [PlayController::class, 'restoreBlogPosts']);
         Route::get('all/posts', [PlayController::class, 'showAllPosts'])->name('blog_posts');
         Route::get('posts/{id}', [PlayController::class, 'showPosts'])->name('show.blog_post.by.id');
@@ -151,7 +153,9 @@ Route::group(['middleware' => 'disable_back_btn'], function () {
 
             Route::get('{start?}/show/{id}/{end?}', [ProductController::class, 'show'])->name('show');
 
-            Route::get('{start?}/buy/{id}/{end?}', [ProductController::class, 'buyProduct'])->name('buy');
+            // Route::get('{start?}/buy/{id}/{end?}', [ProductController::class, 'buyProduct'])->name('buy');
+            Route::get('buy/{id}', [PaymentController::class, 'pay'])->name('buy');
+            // Route::post('pay/goo',[PaymentController::class,'pay']);
 
             Route::get('edit/product/{start?}/{id}/{end}', [ProductController::class, 'showUpdateProductForm'])->name('edit')
                 ->middleware('permission:update product');
@@ -235,3 +239,7 @@ Route::group(['middleware' => 'disable_back_btn'], function () {
 Route::get('sidebar',function () {
     return view('layouts.sidebar');
 });
+
+
+Route::get('success/transaction',[ProductController::class,'success']);
+Route::get('error/transaction',[ProductController::class,'error']);

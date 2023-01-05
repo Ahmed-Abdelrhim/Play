@@ -17,13 +17,14 @@ use Spatie\Permission\Traits\HasRoles;
 
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Laravel\Cashier\Billable;
 
 
 //use Laravel\Sanctum\HasApiTokens;
 
 class Author extends Authenticatable implements HasMedia
 {
-    use HasFactory, HasApiTokens, Notifiable, HasRoles , InteractsWithMedia ;
+    use HasFactory, HasApiTokens, Notifiable, HasRoles , InteractsWithMedia , Billable ;
 
     protected $table = 'authors';
     protected $fillable = ['name', 'email', 'password', 'phone', 'avatar', 'locale','created_at', 'updated_at'];

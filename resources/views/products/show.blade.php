@@ -13,7 +13,7 @@
                 <div class="product-price"><small>{{$prod->$prod + $prod->discount}}</small>{{$prod->price}} EGP</div>
 
                 <div class="product-links">
-                    <a class="btn btn-primary" href="{{route('product.buy',[Str::random(15) , $prod->id , Str::random(15)])}}">
+                    <a class="btn btn-primary" href="{{route('product.buy', $prod->id )}}">
                         Confirm
                     </a>
                     <a href="#"><i class="fa fa-heart"></i></a>
@@ -23,7 +23,7 @@
         </div>
     </div>
 
-
+@endsection
 
 
 

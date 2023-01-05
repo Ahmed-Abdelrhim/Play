@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\Author;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Http\Resources\Json\ResourceCollection;
+use Laravel\Cashier\Cashier;
 class AppServiceProvider extends ServiceProvider
 {
     /**

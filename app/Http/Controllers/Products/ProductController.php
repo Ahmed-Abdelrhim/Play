@@ -98,7 +98,14 @@ class ProductController extends Controller
         $product = Product::query()->find($id);
         if (!$product)
             return view('errors.404');
-        return view('products.buy');
+        return view('products.buy' ,['intent' => auth()->guard('author')->user()->createSetupIntent()]);
+    }
+
+    public function success() {
+        return 'success';
+    }
+    public function error() {
+        return 'error';
     }
 
 

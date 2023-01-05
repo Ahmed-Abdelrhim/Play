@@ -28,7 +28,7 @@
                         <i class="far fa-envelope-open"></i>
                         <div class="cta-text">
                             <h4>Mail us</h4>
-                            <span>aabdelrhim974@gmail.com</span>
+                            <span><a href="mailto:aabdelrhim974@gmail.com" target="_blank">aabdelrhim974@gmail.com</a></span>
                         </div>
                     </div>
                 </div>
@@ -47,9 +47,9 @@
                         </div>
                         <div class="footer-social-icon">
                             <span>Follow us</span>
-                            <a href="https://www.facebook.com/ahmed.abdalraheem.739"><i class="fab fa-facebook-f facebook-bg"></i></a>
-                            <a href="https://www.facebook.com/ahmed.abdalraheem.739"><i class="fab fa-twitter twitter-bg"></i></a>
-                            <a href="https://www.facebook.com/ahmed.abdalraheem.739"><i class="fab fa-google-plus-g google-bg"></i></a>
+                            <a href="https://www.facebook.com/ahmed.abdalraheem.739" target="_blank"><i class="fab fa-facebook-f facebook-bg"></i></a>
+                            <a href="https://www.facebook.com/ahmed.abdalraheem.739" target="_blank"><i class="fab fa-twitter twitter-bg"></i></a>
+                            <a href="https://www.facebook.com/ahmed.abdalraheem.739" target="_blank"><i class="fab fa-google-plus-g google-bg"></i></a>
                         </div>
                     </div>
                 </div>

@@ -1,6 +1,4 @@
 <div class="container mt-10">
-
-
     <!-- BreadCrumb-->
     <div class="start_breadcrumb">
         <div class="col-6">
@@ -10,7 +8,7 @@
                         <div class="col-sm-6">
                             <h1 class="m-0 text-dark">
                                 <h1 class="m-0 text-dark">
-                                    {{--                                    <i class="nav-icon fa fa-user-md"></i>--}}
+                                    {{-- <i class="nav-icon fa fa-user-md"></i>--}}
                                     <i class="fa-brands fa-product-hunt"></i>
                                     {{__('Products')}}
                                 </h1>
@@ -60,6 +58,4 @@
             </div>
         </form>
     </div>
-
-
 </div>

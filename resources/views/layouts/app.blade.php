@@ -3,7 +3,7 @@
 <head>
     @include('layouts.head')
     @stack('styles')
-
+    @yield('custom-style')
 </head>
 <body>
 <div id="app">

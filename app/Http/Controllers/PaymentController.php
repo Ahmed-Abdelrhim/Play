@@ -6,6 +6,7 @@ use App\Models\Currency;
 use App\Models\PaymentPlatform;
 use App\services\FatoorahService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PaymentController extends Controller
 {
@@ -25,17 +26,34 @@ class PaymentController extends Controller
 
     public function pay()
     {
+        // $author = Auth::guard('author')->user()->name;
+        // return 'dddd';
         $data = [
-            'NotificationOption' => 'Lnk', //'SMS', 'EML', or 'ALL'
-            'InvoiceValue'       => '500',
-            'CustomerName'       => 'Ahmed Abdelrhim',
-            //'CustomerEmail'      => 'email@example.com',
-            'CallBackUrl'        => env('success_url'),
-            'ErrorUrl'           => env('error_url'), //or 'https://example.com/error.php'
-            'DisplayCurrencyIso' => 'EGP',
-            'Language'           => 'ar', //or 'en'
+//            'CustomerName'       => 'Ahmed Abdelrhim',
+//            'NotificationOption' => 'Lnk', // 'SMS' , 'EML' , or 'ALL'
+//            'InvoiceValue'       => 500,
+//            "MobileCountryCode" => "965",
+//            "CustomerMobile" => "12345678",
+//            'CustomerEmail'      => 'aabdelrhim974@gmail.com',
+//            'CallBackUrl'        => 'https://google.com',
+//            'ErrorUrl'           => 'https://youtube.com', //or 'https://example.com/error.php'
+//            'Language'           => 'ar', //or 'en'
+//            'DisplayCurrencyIso' => 'EGP',
+
+
+            "CustomerName" => "Ali",
+            "NotificationOption" => "Lnk",
+            "MobileCountryCode" => "965",
+            "CustomerMobile" => "12345678",
+            "CustomerEmail" => "mail@company.com",
+            "InvoiceValue" => 100,
+            "DisplayCurrencyIso" => "kwd",
+            "CallBackUrl" => env('success_url'),
+            "ErrorUrl" => env('error_url'),
+            "Language" => "en",
+
         ];
-        $this->gateway->sendPayment($data);
+        return $this->gateway->sendPayment($data);
     }
 }
 
