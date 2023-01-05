@@ -27,7 +27,7 @@ class PaymentController extends Controller
     public function pay()
     {
         // $author = Auth::guard('author')->user()->name;
-        // return 'dddd';
+        // return 'done';
         $data = [
             'CustomerName'       => 'Ahmed Abdelrhim',
             'NotificationOption' => 'Lnk', // 'SMS' , 'EML' , or 'ALL'
