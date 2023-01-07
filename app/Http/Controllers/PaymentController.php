@@ -78,6 +78,7 @@ class PaymentController extends Controller
         $data['key'] = $request->get('paymentId');
         $data['keyType'] = 'PaymentId';
         $invoiceData = $this->gateway->getPaymentStatus($data);
+
         return $invoiceData;
     }
 
