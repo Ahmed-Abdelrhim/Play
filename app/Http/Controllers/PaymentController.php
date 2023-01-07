@@ -45,8 +45,10 @@ class PaymentController extends Controller
             'DisplayCurrencyIso' => 'EGP',
         ];
         $data =  $this->gateway->sendPayment($data);
-
-        return redirect($data['Data']['InvoiceURL']);
+        $invoiceId =  $data['Data']['InvoiceId'];
+        $invoiceURL =  $data['Data']['InvoiceURL'];
+        // InvoiceId customer_id product_id
+        return redirect($invoiceURL);
     }
 
     public function successCallback(Request $request)
