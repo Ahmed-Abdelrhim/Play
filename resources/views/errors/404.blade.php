@@ -211,7 +211,11 @@
     <span class="door right"></span>
 </nav>
 <h1>Error 404</h1>
-<p>The page you're looking for can't be found</p>
+@if(isset($msg))
+    <p>{{$msg}}</p>
+@else
+    <p>The page you're looking for can't be found</p>
+@endif
 
 </body>
 </html>
