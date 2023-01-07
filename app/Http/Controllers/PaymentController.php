@@ -6,8 +6,15 @@ use App\Models\Currency;
 use App\Models\PaymentPlatform;
 use App\Models\Product;
 use App\services\FatoorahService;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Transaction;
+use Illuminate\Support\Facades\DB;
 
 class PaymentController extends Controller
 {
@@ -19,10 +26,10 @@ class PaymentController extends Controller
     }
 
 
-    public function showPaymentForm()
+    public function showPaymentForm(): Factory|View|Application
     {
-        $currencies = Currency::get();
-        $paymentPlatforms = PaymentPlatform::get();
+        $currencies = Currency::query()->get();
+        $paymentPlatforms = PaymentPlatform::query()->get();
         return view('payment.pay')->with(['currencies' => $currencies, 'plats' => $paymentPlatforms]);
     }
 
@@ -47,7 +54,21 @@ class PaymentController extends Controller
         $data =  $this->gateway->sendPayment($data);
         $invoiceId =  $data['Data']['InvoiceId'];
         $invoiceURL =  $data['Data']['InvoiceURL'];
-        // InvoiceId customer_id product_id
+        try {
+            DB::beginTransaction();
+            Transaction::query()->create([
+                'invoiceId' => $invoiceId,
+                'customer_id' => $author->id,
+                'product_id' => $product->id,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            session()->flash('error','Something Went Wrong');
+            return redirect()->back();
+        }
+        DB::commit();
         return redirect($invoiceURL);
     }
 

@@ -10,7 +10,7 @@ class Transaction extends Model
     use HasFactory;
     public $table = 'transactions';
 
-    protected $fillable = ['invoice_id','customer_id','product_id'];
+    protected $fillable = ['invoiceId','customer_id','product_id'];
     protected $hidden = [];
 
     protected $casts = [];
