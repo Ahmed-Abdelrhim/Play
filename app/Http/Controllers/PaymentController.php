@@ -33,7 +33,7 @@ class PaymentController extends Controller
         return view('payment.pay')->with(['currencies' => $currencies, 'plats' => $paymentPlatforms]);
     }
 
-    public function pay($id)
+    public function pay($id): View|Factory|Redirector|RedirectResponse|Application
     {
         $author = Auth::guard('author')->user();
         $product = Product::query()->find($id);
