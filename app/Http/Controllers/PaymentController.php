@@ -117,6 +117,14 @@ class PaymentController extends Controller
         return redirect()->route('product.show',[Str::random(15),$transaction->product_id,Str::random(15)]);
     }
 
+    public function play()
+    {
+        session()->flash('success', 'Success Transaction , Your Order Was Bought Successfully');
+        $msg = 'Success Transaction , Your Order Was Bought Successfully';
+        return redirect()->route('product.show',[Str::random(15),4,Str::random(15)])->with(['success' => $msg]);
+
+    }
+
 }
 // T-Shirt Python     تيشيرت بايثون  Solid colors: 100% Cotton; Heather Grey: 90% Cotton, 10% Polyester; All Other Heathers: 50% Cotton, 50% Polyester        SuaIz2fH1672766239.png
 // Developers T-Shirt تيشيرت للمبرمجين               8    JsR1zuD1672766440.jpg
