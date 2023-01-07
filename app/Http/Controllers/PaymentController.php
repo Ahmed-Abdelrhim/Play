@@ -108,7 +108,6 @@ class PaymentController extends Controller
             ]);
         } catch (\Exception $e) {
             DB::rollBack();
-            // return $e;
             session()->flash('error', 'Something Went Wrong');
             return redirect()->back();
         }
@@ -117,7 +116,7 @@ class PaymentController extends Controller
         return redirect()->route('product.show',[Str::random(15),$transaction->product_id,Str::random(15)]);
     }
 
-    public function play()
+    public function play(): RedirectResponse
     {
         session()->flash('success', 'Success Transaction , Your Order Was Bought Successfully');
         $msg = 'Success Transaction , Your Order Was Bought Successfully';
