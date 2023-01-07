@@ -1,5 +1,7 @@
 @extends('layouts.app')
+
 @section('content')
+    @include('layouts.flash_messages')
     <div class="product-card">
         <div class="badge">Hot</div>
         <div class="product-tumb">

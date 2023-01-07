@@ -15,7 +15,8 @@ use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Transaction;
 use Illuminate\Support\Facades\DB;
-
+use App\Models\Payment;
+use Illuminate\Support\Str;
 class PaymentController extends Controller
 {
     protected $gateway;
@@ -46,14 +47,14 @@ class PaymentController extends Controller
             "MobileCountryCode" => "+20",
             "CustomerMobile" => $author->phone,
             'CustomerEmail' => $author->email,
-            'CallBackUrl' => 'http://127.0.0.1:1010/api/success/callback' , // 'http://127.0.0.1:1010/api/success/callback'  env('SUCCESS_URL')
-            'ErrorUrl' =>  'http://127.0.0.1:1010/api/error/callback', //'http://127.0.0.1:1010/api/error/callback'   env('ERROR_URL')
+            'CallBackUrl' => 'http://127.0.0.1:1010/api/success/callback', // 'http://127.0.0.1:1010/api/success/callback'  env('SUCCESS_URL')
+            'ErrorUrl' => 'http://127.0.0.1:1010/api/error/callback', //'http://127.0.0.1:1010/api/error/callback'   env('ERROR_URL')
             'Language' => app()->getLocale(), //or 'en'
             'DisplayCurrencyIso' => 'EGP',
         ];
-        $data =  $this->gateway->sendPayment($data);
-        $invoiceId =  $data['Data']['InvoiceId'];
-        $invoiceURL =  $data['Data']['InvoiceURL'];
+        $data = $this->gateway->sendPayment($data);
+        $invoiceId = $data['Data']['InvoiceId'];
+        $invoiceURL = $data['Data']['InvoiceURL'];
         try {
             DB::beginTransaction();
             Transaction::query()->create([
@@ -65,26 +66,55 @@ class PaymentController extends Controller
             ]);
         } catch (\Exception $e) {
             DB::rollBack();
-            session()->flash('error','Something Went Wrong');
+            session()->flash('error', 'Something Went Wrong');
             return redirect()->back();
         }
         DB::commit();
         return redirect($invoiceURL);
     }
 
-    public function successCallback(Request $request)
+    public function successCallback(Request $request): RedirectResponse
     {
         $data = [];
         $data['key'] = $request->get('paymentId');
         $data['keyType'] = 'PaymentId';
         $invoiceData = $this->gateway->getPaymentStatus($data);
-
-        return $invoiceData;
+        return $this->successAction($invoiceData);
     }
 
-    public function errorCallback(Request $request)
+    public function errorCallback(Request $request): Request
     {
-        dd($request);
+        return $request;
+        // dd($request);
+    }
+
+    public function successAction($invoiceData): RedirectResponse
+    {
+        try {
+            $invoice_id = $invoiceData['Data']['InvoiceId'];
+            $transaction = Transaction::query()->where('invoiceId', $invoice_id)->get()->last();
+            DB::beginTransaction();
+            Payment::query()->create([
+                'invoiceId' => $invoiceData['Data']['InvoiceId'],
+                'customer_id' => $transaction->customer_id,
+                'product_id' => $transaction->product_id,
+                'created_date' => $invoiceData['Data']['CreatedDate'],
+                'invoice_value' => $invoiceData['Data']['InvoiceValue'],
+                'currency' => $invoiceData['Data']['InvoiceTransactions'][0]['Currency'],
+                'card_number' => $invoiceData['Data']['InvoiceTransactions'][0]['CardNumber'],
+                'country' => $invoiceData['Data']['InvoiceTransactions'][0]['Country'],
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            // return $e;
+            session()->flash('error', 'Something Went Wrong');
+            return redirect()->back();
+        }
+        DB::commit();
+        session()->flash('success', 'Success Transaction , Your Order Was Bought Successfully');
+        return redirect()->route('product.show',[Str::random(15),$transaction->product_id,Str::random(15)]);
     }
 
 }
