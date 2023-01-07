@@ -50,6 +50,11 @@ class FatoorahService
         //        return $response;
     }
 
+    public function getPaymentStatus($data)
+    {
+        return $this->buildRequest('v2/getPaymentStatus','POST',$data);
+    }
+
     // dd('what is she doing right now ? ');
 
     //    private function saveTransactionPayment($patient_id, $invoice_id)

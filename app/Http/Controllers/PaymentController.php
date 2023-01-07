@@ -39,17 +39,23 @@ class PaymentController extends Controller
             "MobileCountryCode" => "+20",
             "CustomerMobile" => $author->phone,
             'CustomerEmail' => $author->email,
-            'CallBackUrl' => 'http://127.0.0.1:1010/api/success/callback', // 'http://127.0.0.1:1010/api/success/callback'   env('SUCCESS_URL')
-            'ErrorUrl' => 'http://127.0.0.1:1010/api/error/callback' , // 'http://127.0.0.1:1010/api/error/callback'   env('ERROR_URL')
+            'CallBackUrl' => 'http://127.0.0.1:1010/api/success/callback' , // 'http://127.0.0.1:1010/api/success/callback'  env('SUCCESS_URL')
+            'ErrorUrl' =>  'http://127.0.0.1:1010/api/error/callback', //'http://127.0.0.1:1010/api/error/callback'   env('ERROR_URL')
             'Language' => app()->getLocale(), //or 'en'
             'DisplayCurrencyIso' => 'EGP',
         ];
-        return $this->gateway->sendPayment($data);
+        $data =  $this->gateway->sendPayment($data);
+
+        return redirect($data['Data']['InvoiceURL']);
     }
 
     public function successCallback(Request $request)
     {
-        dd($request);
+        $data = [];
+        $data['key'] = $request->get('paymentId');
+        $data['keyType'] = 'PaymentId';
+        $invoiceData = $this->gateway->getPaymentStatus($data);
+        return $invoiceData;
     }
 
     public function errorCallback(Request $request)
