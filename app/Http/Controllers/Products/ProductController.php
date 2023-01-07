@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Products;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -55,13 +56,7 @@ class ProductController extends Controller
 
     public function showCreateProductForm(): Factory|View|Application
     {
-        // return 'sadasda';
         return view('products.create');
-    }
-
-    public function storeProduct()
-    {
-
     }
 
     public function showUpdateProductForm($start , $id , $end)
@@ -73,11 +68,6 @@ class ProductController extends Controller
             return view('errors.404');
         return view('products.update',['product' => $product]);
     }
-
-    //    public function updateProduct()
-    //    {
-    //
-    //    }
 
     public function deleteProduct($id): View|Factory|RedirectResponse|Application
     {
@@ -104,9 +94,9 @@ class ProductController extends Controller
     public function success() {
         return 'success';
     }
+
     public function error() {
         return 'error';
     }
-
 
 }
