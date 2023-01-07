@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 04, 2023 at 12:01 AM
+-- Generation Time: Jan 07, 2023 at 07:53 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 7.4.30
 
@@ -37,19 +37,23 @@ CREATE TABLE `authors` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `is_authorized` tinyint(1) NOT NULL DEFAULT 0,
-  `locale` varchar(3) COLLATE utf8mb4_unicode_ci DEFAULT 'en'
+  `locale` varchar(3) COLLATE utf8mb4_unicode_ci DEFAULT 'en',
+  `stripe_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `card_brand` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `card_last_four` varchar(4) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `trial_ends_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `authors`
 --
 
-INSERT INTO `authors` (`id`, `name`, `email`, `password`, `avatar`, `phone`, `created_at`, `updated_at`, `is_authorized`, `locale`) VALUES
-(11, 'Ahmed Abdelrhim', 'abdelrhim.admin@gmail.com', '$2y$10$H5L/.IPVfT5WcFtIQNLslu7CZWuGG.ugPpfMKhSXtEqgluPhjnSQe', '7sTF1672766085.jpg', '01152067271', '2022-12-19 10:26:16', '2023-01-03 15:14:45', 0, NULL),
-(12, 'Ismail Ashraf', 'ismail@gmail.com', '$2y$10$Xyb80oyuiddvvjTvm5jTfe6Hfk5QA2RGKbjpXEieAiK0sqs94D7J6', 'bgfU1671453343.jpg', '01116520328', '2022-12-19 10:26:16', '2022-12-19 10:35:43', 0, 'en'),
-(13, 'Ahmed Azzam', 'azzam@gmail.com', '$2y$10$RLjXaMU53/fdY9xTbg4L9OR.gLqaTTxZ2TGJGKBmjqHXr9FaKyWH6', 'xeKt1671453365.jpg', '01152067272', '2022-12-19 10:26:16', '2022-12-19 10:36:05', 0, 'en'),
-(14, 'Omar Sandoby', 'sandoby@gmail.com', '$2y$10$LbMaFL22XxylUy8yIiMMZunnyZRfiQbaCegFG99KBAJ9FfZf/l7EK', NULL, '01152067273', '2022-12-19 10:26:16', '2022-12-19 10:26:16', 0, 'en'),
-(15, 'Anas Rabea', 'anas@gmail.com', '$2y$10$KKh7FCb.XZyU8LmC3EiA4OJzfAot/4NiYwJTBFes2MnPtqe9p6gU2', 'yneT1671453383.jpg', '01014012312', '2022-12-19 10:26:16', '2022-12-19 10:36:23', 0, 'en');
+INSERT INTO `authors` (`id`, `name`, `email`, `password`, `avatar`, `phone`, `created_at`, `updated_at`, `is_authorized`, `locale`, `stripe_id`, `card_brand`, `card_last_four`, `trial_ends_at`) VALUES
+(11, 'Ahmed Abdelrhim', 'abdelrhim.admin@gmail.com', '$2y$10$H5L/.IPVfT5WcFtIQNLslu7CZWuGG.ugPpfMKhSXtEqgluPhjnSQe', '7sTF1672766085.jpg', '01152067271', '2022-12-19 10:26:16', '2023-01-03 15:14:45', 0, NULL, NULL, NULL, NULL, NULL),
+(12, 'Ismail Ashraf', 'ismail@gmail.com', '$2y$10$Xyb80oyuiddvvjTvm5jTfe6Hfk5QA2RGKbjpXEieAiK0sqs94D7J6', 'bgfU1671453343.jpg', '01116520328', '2022-12-19 10:26:16', '2022-12-19 10:35:43', 0, 'en', NULL, NULL, NULL, NULL),
+(13, 'Ahmed Azzam', 'azzam@gmail.com', '$2y$10$RLjXaMU53/fdY9xTbg4L9OR.gLqaTTxZ2TGJGKBmjqHXr9FaKyWH6', 'xeKt1671453365.jpg', '01152067272', '2022-12-19 10:26:16', '2022-12-19 10:36:05', 0, 'en', NULL, NULL, NULL, NULL),
+(14, 'Omar Sandoby', 'sandoby@gmail.com', '$2y$10$LbMaFL22XxylUy8yIiMMZunnyZRfiQbaCegFG99KBAJ9FfZf/l7EK', NULL, '01152067273', '2022-12-19 10:26:16', '2022-12-19 10:26:16', 0, 'en', NULL, NULL, NULL, NULL),
+(15, 'Anas Rabea', 'anas@gmail.com', '$2y$10$KKh7FCb.XZyU8LmC3EiA4OJzfAot/4NiYwJTBFes2MnPtqe9p6gU2', 'yneT1671453383.jpg', '01014012312', '2022-12-19 10:26:16', '2022-12-19 10:36:23', 0, 'en', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -173,6 +177,29 @@ INSERT INTO `blog_posts` (`id`, `author_id`, `title`, `content`, `created_at`, `
 (99, 13, 'Elmer Wolf Jr.', 'Et veniam voluptas nostrum aut. Eum corrupti illo harum similique nostrum atque non. Harum in tempora velit.', '2022-12-19 10:30:36', '2023-01-02 08:35:12', '2023-01-02 08:35:12'),
 (100, 11, 'Mrs. Glenda Mante PhD', 'Laboriosam suscipit ipsum ut rerum. Ut et distinctio velit voluptatum quia esse perferendis. Recusandae recusandae odit rem eos aut. Modi et et aut consequatur.', '2022-12-19 10:30:36', '2023-01-02 08:06:50', '2023-01-02 08:06:50'),
 (101, 11, 'dddddddddddddddd', 'ddddddddddddddddddddd', '2022-12-20 12:28:04', '2023-01-02 08:03:31', '2023-01-02 08:03:31');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `categories`
+--
+
+CREATE TABLE `categories` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name_en` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name_ar` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `categories`
+--
+
+INSERT INTO `categories` (`id`, `name_en`, `name_ar`, `image`, `created_at`, `updated_at`) VALUES
+(1, 'Clothes', 'ملابس', NULL, '2023-01-07 15:57:08', '2023-01-07 15:57:08'),
+(2, 'Mobile Phones', 'موبايلات', NULL, '2023-01-07 15:57:08', '2023-01-07 15:57:08');
 
 -- --------------------------------------------------------
 
@@ -486,7 +513,15 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (21, '2022_12_14_115416_create_media_table', 1),
 (22, '2023_01_02_141530_languages', 2),
 (23, '2023_01_02_141939_add_column_to_languages', 3),
-(26, '2023_01_03_111704_products', 4);
+(26, '2023_01_03_111704_products', 4),
+(27, '2019_05_03_000001_create_customer_columns', 5),
+(28, '2019_05_03_000002_create_subscriptions_table', 5),
+(29, '2019_05_03_000003_create_subscription_items_table', 5),
+(30, '2023_01_05_081623_add_columns_to_authors', 5),
+(31, '2023_01_07_154213_add_column_to_products', 5),
+(32, '2023_01_07_154344_categories', 6),
+(33, '2023_01_07_161247_create_table_transactions', 7),
+(34, '2023_01_07_172259_create_payments_table', 8);
 
 -- --------------------------------------------------------
 
@@ -538,6 +573,36 @@ CREATE TABLE `password_resets` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `payments`
+--
+
+CREATE TABLE `payments` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `invoiceId` bigint(20) NOT NULL,
+  `customer_id` bigint(20) NOT NULL,
+  `product_id` bigint(20) NOT NULL,
+  `created_date` date NOT NULL,
+  `invoice_value` double(8,2) NOT NULL,
+  `card_number` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `currency` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `country` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `payments`
+--
+
+INSERT INTO `payments` (`id`, `invoiceId`, `customer_id`, `product_id`, `created_date`, `invoice_value`, `card_number`, `currency`, `country`, `created_at`, `updated_at`) VALUES
+(5, 1974177, 11, 4, '2023-01-07', 2.93, '512345xxxxxx0008', 'KD', 'Egypt', '2023-01-07 16:13:25', '2023-01-07 16:13:25'),
+(6, 1974177, 11, 4, '2023-01-07', 2.93, '512345xxxxxx0008', 'KD', 'Egypt', '2023-01-07 16:14:00', '2023-01-07 16:14:00'),
+(7, 1974178, 11, 4, '2023-01-07', 2.93, '512345xxxxxx0008', 'KD', 'Egypt', '2023-01-07 16:14:26', '2023-01-07 16:14:26'),
+(8, 1974190, 11, 3, '2023-01-07', 2.93, '512345xxxxxx0008', 'KD', 'Egypt', '2023-01-07 16:16:22', '2023-01-07 16:16:22');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `payment_platforms`
 --
 
@@ -572,7 +637,9 @@ INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at
 (2, 'edit post', 'author', '2022-12-14 06:55:54', '2022-12-14 06:55:54'),
 (3, 'publish post', 'author', '2022-12-14 06:55:54', '2022-12-14 06:55:54'),
 (4, 'delete post', 'author', '2023-01-02 09:13:07', '2023-01-02 09:13:07'),
-(26, 'create product', 'author', '2023-01-03 20:35:18', '2023-01-03 20:35:18');
+(26, 'create product', 'author', '2023-01-03 20:35:18', '2023-01-03 20:35:18'),
+(27, 'update product', 'author', '2023-01-07 18:47:26', '2023-01-07 18:47:26'),
+(28, 'delete product', 'author', '2023-01-07 18:47:02', '2023-01-07 18:47:02');
 
 -- --------------------------------------------------------
 
@@ -608,18 +675,20 @@ CREATE TABLE `products` (
   `qty` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `main_image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `category_id` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `name_en`, `name_ar`, `price`, `discount`, `desc`, `qty`, `main_image`, `created_at`, `updated_at`) VALUES
-(3, 'T-Shirt Python', 'تيشيرت بايثون', 25, NULL, 'Solid colors: 100% Cotton; Heather Grey: 90% Cotton, 10% Polyester; All Other Heathers: 50% Cotton, 50% Polyester', '35', 'SuaIz2fH1672766239.png', '2023-01-03 15:17:19', '2023-01-03 15:17:19'),
-(4, 'Developers T-Shirt', 'تيشيرت للمبرمجين', 250, 10.00, 'Solid colors: 100% Cotton; Heather Grey: 90% Cotton, 10% Polyester; All Other Heathers: 50% Cotton, 50% Polyester', '20', '8JsR1zuD1672766440.jpg', '2023-01-03 15:20:40', '2023-01-03 15:20:40'),
-(5, 'Node.js T-Shirt', 'تيشيرت نود جي اس', 250, NULL, 'Solid colors: 100% Cotton; Heather Grey: 90% Cotton, 10% Polyester; All Other Heathers: 50% Cotton, 50% Polyester', '30', 'BADhUinz1672766526.jpg', '2023-01-03 15:22:06', '2023-01-03 15:22:06'),
-(6, 'Web Development T-Shirt ', 'تيشيرت برمجة الويب', 250, NULL, 'Solid colors: 100% Cotton; Heather Grey: 90% Cotton, 10% Polyester; All Other Heathers: 50% Cotton, 50% Polyester', '30', 'Aba4c4qK1672766709.jpg', '2023-01-03 15:25:09', '2023-01-03 15:25:09');
+INSERT INTO `products` (`id`, `name_en`, `name_ar`, `price`, `discount`, `desc`, `qty`, `main_image`, `created_at`, `updated_at`, `category_id`) VALUES
+(3, 'T-Shirt Python', 'تيشيرت بايثون', 250, NULL, 'Solid colors: 100% Cotton; Heather Grey: 90% Cotton, 10% Polyester; All Other Heathers: 50% Cotton, 50% Polyester', '35', 'SuaIz2fH1672766239.png', '2023-01-03 15:17:19', '2023-01-03 15:17:19', 1),
+(4, 'Developers T-Shirt', 'تيشيرت للمبرمجين', 250, 10.00, 'Solid colors: 100% Cotton; Heather Grey: 90% Cotton, 10% Polyester; All Other Heathers: 50% Cotton, 50% Polyester', '20', '8JsR1zuD1672766440.jpg', '2023-01-03 15:20:40', '2023-01-03 15:20:40', 1),
+(5, 'Node.js T-Shirt', 'تيشيرت نود جي اس', 250, NULL, 'Solid colors: 100% Cotton; Heather Grey: 90% Cotton, 10% Polyester; All Other Heathers: 50% Cotton, 50% Polyester', '30', 'BADhUinz1672766526.jpg', '2023-01-03 15:22:06', '2023-01-03 15:22:06', 1),
+(6, 'Web Development T-Shirt ', 'تيشيرت برمجة الويب', 250, NULL, 'Solid colors: 100% Cotton; Heather Grey: 90% Cotton, 10% Polyester; All Other Heathers: 50% Cotton, 50% Polyester', '30', 'Aba4c4qK1672766709.jpg', '2023-01-03 15:25:09', '2023-01-03 15:25:09', 1),
+(7, 'Swaetetr', 'سويتر جينس', 260, 10.00, 'Solid colors: 100% Cotton; Heather Grey: 90% Cotton, 10% Polyester; All Other Heathers: 50% Cotton, 50% Polyester', '10', 'NJRCZIqY1673115595.jpg', '2023-01-07 16:19:55', '2023-01-07 16:19:55', NULL);
 
 -- --------------------------------------------------------
 
@@ -692,6 +761,42 @@ INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, 
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `subscriptions`
+--
+
+CREATE TABLE `subscriptions` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `stripe_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `stripe_status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `stripe_plan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `quantity` int(11) DEFAULT NULL,
+  `trial_ends_at` timestamp NULL DEFAULT NULL,
+  `ends_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `subscription_items`
+--
+
+CREATE TABLE `subscription_items` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `subscription_id` bigint(20) UNSIGNED NOT NULL,
+  `stripe_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `stripe_plan` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `quantity` int(11) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `teams`
 --
 
@@ -745,6 +850,30 @@ CREATE TABLE `team_user` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `transactions`
+--
+
+CREATE TABLE `transactions` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `invoiceId` bigint(20) NOT NULL,
+  `customer_id` bigint(20) NOT NULL,
+  `product_id` bigint(20) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `transactions`
+--
+
+INSERT INTO `transactions` (`id`, `invoiceId`, `customer_id`, `product_id`, `created_at`, `updated_at`) VALUES
+(12, 1974177, 11, 4, '2023-01-07 16:13:07', '2023-01-07 16:13:07'),
+(13, 1974178, 11, 4, '2023-01-07 16:14:05', '2023-01-07 16:14:05'),
+(14, 1974190, 11, 3, '2023-01-07 16:16:04', '2023-01-07 16:16:04');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -756,7 +885,11 @@ CREATE TABLE `users` (
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `stripe_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `card_brand` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `card_last_four` varchar(4) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `trial_ends_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -784,7 +917,8 @@ ALTER TABLE `authors`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `authors_name_unique` (`name`),
   ADD UNIQUE KEY `authors_email_unique` (`email`),
-  ADD UNIQUE KEY `authors_phone_unique` (`phone`);
+  ADD UNIQUE KEY `authors_phone_unique` (`phone`),
+  ADD KEY `authors_stripe_id_index` (`stripe_id`);
 
 --
 -- Indexes for table `blog_posts`
@@ -792,6 +926,12 @@ ALTER TABLE `authors`
 ALTER TABLE `blog_posts`
   ADD PRIMARY KEY (`id`),
   ADD KEY `blog_posts_author_id_foreign` (`author_id`);
+
+--
+-- Indexes for table `categories`
+--
+ALTER TABLE `categories`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `comments`
@@ -867,6 +1007,12 @@ ALTER TABLE `password_resets`
   ADD KEY `password_resets_email_index` (`email`);
 
 --
+-- Indexes for table `payments`
+--
+ALTER TABLE `payments`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `payment_platforms`
 --
 ALTER TABLE `payment_platforms`
@@ -908,11 +1054,33 @@ ALTER TABLE `role_has_permissions`
   ADD KEY `role_has_permissions_role_id_foreign` (`role_id`);
 
 --
+-- Indexes for table `subscriptions`
+--
+ALTER TABLE `subscriptions`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `subscriptions_user_id_stripe_status_index` (`user_id`,`stripe_status`);
+
+--
+-- Indexes for table `subscription_items`
+--
+ALTER TABLE `subscription_items`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `subscription_items_subscription_id_stripe_plan_unique` (`subscription_id`,`stripe_plan`),
+  ADD KEY `subscription_items_stripe_id_index` (`stripe_id`);
+
+--
+-- Indexes for table `transactions`
+--
+ALTER TABLE `transactions`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `users_email_unique` (`email`);
+  ADD UNIQUE KEY `users_email_unique` (`email`),
+  ADD KEY `users_stripe_id_index` (`stripe_id`);
 
 --
 -- Indexes for table `verification_codes`
@@ -936,6 +1104,12 @@ ALTER TABLE `authors`
 --
 ALTER TABLE `blog_posts`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
+
+--
+-- AUTO_INCREMENT for table `categories`
+--
+ALTER TABLE `categories`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `comments`
@@ -977,7 +1151,13 @@ ALTER TABLE `media`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+
+--
+-- AUTO_INCREMENT for table `payments`
+--
+ALTER TABLE `payments`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `payment_platforms`
@@ -989,7 +1169,7 @@ ALTER TABLE `payment_platforms`
 -- AUTO_INCREMENT for table `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -1001,13 +1181,31 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `subscriptions`
+--
+ALTER TABLE `subscriptions`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `subscription_items`
+--
+ALTER TABLE `subscription_items`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `transactions`
+--
+ALTER TABLE `transactions`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `users`

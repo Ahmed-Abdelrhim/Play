@@ -124,11 +124,11 @@
                     {{-- Route::current()->getName()   show/dataTables/blogposts    --}}
                     {{-- Request::route()->getPrefix() --}}
 
-                    @if(Route::current()->getName() != 'pay' )
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{route('pay')}}">{{__('msg.Payment')}}</a>
-                        </li>
-                    @endif
+{{--                    @if(Route::current()->getName() != 'pay' )--}}
+{{--                        <li class="nav-item">--}}
+{{--                            <a class="nav-link" href="{{route('pay')}}">{{__('msg.Payment')}}</a>--}}
+{{--                        </li>--}}
+{{--                    @endif--}}
 
 
                     {{--  Product --}}
