@@ -53,18 +53,11 @@ class CustomLoginController extends Controller
 
     public function login(Request $request)
     {
-        //        $this->credentials($request);
-        //                if ($request->has('phone'))
-        //                    return $request;
-        //                if ($request->has('name'))
-        //                    return $request;
-        //                return $request;
         $validator = Validator::make($request->all(), [
             'email' => 'required',
             'password' => 'required',
         ]);
         if ($validator->fails()) {
-            // return $validator->errors();
             return redirect('login')->withErrors($validator)->withInput();
         }
         if (Auth::guard('author')->attempt($this->credentials($request))) {
@@ -73,8 +66,9 @@ class CustomLoginController extends Controller
         }
 
         $email = Author::query()->where('email', $request->get('email'))->first();
-        $name = Author::query()->where('name', $request->get('email'))->first();
-        if ($email || $name)
+        $name = Author::query()->where('name', $request->get('name'))->first();
+        $phone = Author::query()->where('phone', $request->get('phone'))->first();
+        if ($email || $name || $phone)
             return redirect()->back()->withErrors([
                 'errors' => 'Password Is Incorrect!',
             ]);
