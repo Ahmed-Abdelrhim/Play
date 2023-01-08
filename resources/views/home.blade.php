@@ -58,7 +58,7 @@
                                         <div class="product-links">
                                             <a class="btn btn-primary" href="{{route('product.show',[Str::random(15) , $prod->id , Str::random(15)])}}">Buy</a>
                                             <a href="#"><i class="fa fa-heart"></i></a>
-                                            <a href="#"><i class="fa fa-shopping-cart"></i></a>
+                                            <a href="{{route('product.to.cart',$prod->id)}}"><i class="fa fa-shopping-cart"></i></a>
                                         </div>
                                     </div>
                                 </div>

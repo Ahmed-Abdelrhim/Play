@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BlogPostController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\Comments\CommentsController;
 use App\Http\Controllers\LearnController;
 use App\Http\Controllers\MailController;
@@ -152,6 +153,8 @@ Route::group(['middleware' => 'disable_back_btn'], function () {
                 ->middleware('permission:create product');
 
             Route::get('{start?}/show/{id}/{end?}', [ProductController::class, 'show'])->name('show');
+
+            Route::get('cart/{id}',[CartController::class,'addToCart'])->name('to.cart');
 
             // Route::get('{start?}/buy/{id}/{end?}', [ProductController::class, 'buyProduct'])->name('buy');
             Route::get('buy/{id}', [PaymentController::class, 'pay'])->name('buy');
