@@ -1,10 +1,11 @@
 {{-- Success Message --}}
 @if (Session::has('success'))
     <script>
-        swal({
-            text: " {!! Session::get('success') !!}",
-            icon: "success",
-        })
+        {{--swal({--}}
+        {{--    text: " {!! Session::get('success') !!}",--}}
+        {{--    icon: "success",--}}
+        {{--})--}}
+        toastr.success('{{Session::get('success')}} ');
     </script>
 @endif
 
