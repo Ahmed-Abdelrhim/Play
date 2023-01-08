@@ -137,10 +137,10 @@
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1">
-                    <i class="fas fa-percentage"></i>
+                      <i class="fa-solid fa-cart-shopping"></i>
                   </span>
                     </div>
-                    <select wire:model="cat">
+                    <select wire:model="cat" class="custom-select">
                         <option selected>Choose Category</option>
                         @foreach($cats as $cat)
                             <option value="{{$cat->id}}">
