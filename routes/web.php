@@ -246,3 +246,5 @@ Route::get('sidebar',function () {
 
 Route::get('success/transaction',[ProductController::class,'success']);
 Route::get('error/transaction',[ProductController::class,'error']);
+
+Route::get('session',[ProductController::class,'sessionMethod']);

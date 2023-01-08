@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@include('layouts.flash_messages')
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
@@ -8,23 +8,6 @@
                     <div class="card-header">{{ __('msg.Dashboard') }}</div>
 
                     <div class="card-body">
-                        @if (session('status'))
-                            <div class="alert alert-success" role="alert">
-                                {{ session('status') }}
-                            </div>
-                        @endif
-
-
-                        {{-- Success Message --}}
-                        @if (Session::has('error'))
-                            <script>
-                                swal({
-                                    text: " {!! Session::get('error') !!}",
-                                    icon: "error",
-                                })
-                            </script>
-                        @endif
-
                         @guest('author')
                             <div>Not Authenticated In Author Guard</div>
                         @else

@@ -41,7 +41,7 @@
                         Confirm
                     </a>
                     <a href="#"><i class="fa fa-heart"></i></a>
-                    <a href="#"><i class="fa fa-shopping-cart"></i></a>
+                    <a href="{{route('product.to.cart',$prod->id)}}"><i class="fa fa-shopping-cart"></i></a>
                 </div>
             </div>
         </div>

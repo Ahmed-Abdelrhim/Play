@@ -100,4 +100,11 @@ class ProductController extends Controller
         return 'error';
     }
 
+    public function sessionMethod()
+    {
+        if (session()->has('success'))
+            return 'True';
+        return 'False';
+    }
+
 }

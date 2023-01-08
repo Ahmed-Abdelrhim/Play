@@ -34,16 +34,12 @@ class CustomLoginController extends Controller
         ]);
         if ($validator->fails())
             return redirect('register/now')->withErrors($validator)->withInput();
-        $user = Author::create($request->except(['image']));
+        $user = Author::query()->create($request->except(['image']));
         $user->password = bcrypt($user->password);
         $user->save();
         if ($request->has('image')) {
             $image_name = time() . '.' . $request->file('image')->guessExtension();
             $name = $request->file('image')->storeAs('profiles', $image_name, 'public');
-            //            $user->image()->create([
-            //                'src' => $name,
-            //                'type' => 'avatar',
-            //            ]);
             $user->avatar = $image_name;
             $user->save();
             return redirect()->route('login');
@@ -85,16 +81,6 @@ class CustomLoginController extends Controller
 
     public function username($request): string
     {
-//        $value = $request->get('email');
-//        $field = 'name';
-//        if (is_numeric($value)) {
-//            $field = 'phone';
-//        } elseif (filter_var($value, FILTER_VALIDATE_EMAIL)) {
-//            $field = 'email';
-//        }
-//        request()->merge([$field => $value]);
-//        return $field;
-
         $value = $request->get('email');
         $login = 'name';
         if (is_numeric($value))
@@ -108,36 +94,6 @@ class CustomLoginController extends Controller
     public function logout(): \Illuminate\Http\RedirectResponse
     {
         Auth::guard('author')->logout();
-        //        $user->logout();
-        //        $author->logout();
         return redirect()->route('login');
     }
-
-    // he is coming right now because his phone is ringing
-    // I can hear his voice coming
-
-    //        public function username($request): string
-    //    {
-    //        $value = $request->get('email');
-    //        $field = 'name';
-    //        if (is_numeric($value)) {
-    //            $field = 'phone';
-    //            // request()->merge([$field => $value]);
-    //            // return ['phone' => $request->get('email'), 'password' => $request->get('password')];
-    //        } elseif (filter_var($value, FILTER_VALIDATE_EMAIL)) {
-    //            $field = 'email';
-    //            // request()->merge([$field => $value]);
-    //            // return ['email' => $request->get('email'), 'password'=>$request->get('password')];
-    //        }
-    //        //        else {
-    //        //            $field = 'name';
-    //        //            request()->merge([$field => $value]);
-    //        //        }
-    //        request()->merge([$field => $value]);
-    //        return $field;
-    //
-    //        //        return ['username' => $request->get('email'), 'password'=>$request->get('password')];
-    //        //        return 'email';
-    //    }
-
 }

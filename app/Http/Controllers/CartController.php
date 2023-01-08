@@ -38,13 +38,12 @@ class CartController extends Controller
             ]);
         } catch (\Exception $e) {
             DB::rollBack();
-            return $e;
             session()->flash('error' , 'Something Went Wrong');
             return redirect()->back();
         }
         DB::commit();
         session()->flash('success' , 'Product Added To Cart');
-        return redirect()->back();
+        return redirect()->route('home')->with('success' ,'Product Added To Cart');
     }
 
 }
