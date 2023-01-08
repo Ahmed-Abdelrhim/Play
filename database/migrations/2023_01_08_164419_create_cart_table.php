@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTableCart extends Migration
+class CreateCartTable extends Migration
 {
     /**
      * Run the migrations.
@@ -20,7 +20,7 @@ class CreateTableCart extends Migration
             $table->foreign('customer_id')->references('id')->on('authors')->onDelete('cascade');
 
 
-            $table->unsignedInteger('product_id')->unique();
+            $table->unsignedInteger('product_id');
             // $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
 
             $table->unsignedInteger('qty')->default(1);
