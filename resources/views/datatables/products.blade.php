@@ -53,11 +53,18 @@
                     closeOnConfirm: false,
                     buttons: true,
                 }
-            );
+            ).then(function (isConfirm){
+                if(isConfirm) {
+                    $('#destroy-product').submit();
+                }
+            });
         });
-        $(document).on('click', '.swal-button--confirm', function (e) {
-            $('#destroy-product').submit();
-        });
+        // $(document).on('click', '.swal-button--confirm', function (e) {
+        //     // e.preventDefault();
+        //     // $(e).parent().submit();
+        //     $('#destroy-product').submit();
+        //
+        // });
 
         // $(document).on('click', '.destroy-product', function (e) {
         //
