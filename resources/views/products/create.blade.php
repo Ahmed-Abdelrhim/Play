@@ -1,4 +1,4 @@
 @extends('layouts.app')
 @section('content')
-    <livewire:product-create />
+    <livewire:product-create :cats="$cats"/>
 @endsection

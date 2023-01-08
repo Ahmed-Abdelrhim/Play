@@ -56,7 +56,8 @@ class ProductController extends Controller
 
     public function showCreateProductForm(): Factory|View|Application
     {
-        return view('products.create');
+        $cats = Category::query()->get();
+        return view('products.create',['cats' => $cats]);
     }
 
     public function showUpdateProductForm($start , $id , $end)

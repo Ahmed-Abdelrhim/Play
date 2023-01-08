@@ -6,7 +6,6 @@
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1">
-{{--                <i class="fa fa-user"></i>--}}
                 <i class="fa-solid fa-signature"></i>
             </span>
                 </div>
@@ -26,7 +25,6 @@
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1">
-{{--                <i class="fa fa-user"></i>--}}
                 <i class="fa-solid fa-signature"></i>
             </span>
                 </div>
@@ -48,7 +46,6 @@
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1">
-{{--                    <i class="fas fa-percentage"></i>--}}
                       <i class="fa-solid fa-money-bill"></i>
                   </span>
                     </div>
@@ -95,7 +92,6 @@
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1">
-{{--                    <i class="fas fa-percentage"></i>--}}
                       <i class="fa-solid fa-q"></i>
                   </span>
                     </div>
@@ -119,7 +115,6 @@
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1">
-{{--                    <i class="fas fa-percentage"></i>--}}
                       <i class="fa-solid fa-q"></i>
                   </span>
                     </div>
@@ -135,6 +130,30 @@
         </div>
     </div>
 
+    <!-- Categories  -->
+    <div class="col-lg-4">
+        <div class="form-group">
+            <div class="form-group">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">
+                    <i class="fas fa-percentage"></i>
+                  </span>
+                    </div>
+                    <select wire:model="cat">
+                        <option selected>Choose Category</option>
+                        @foreach($cats as $cat)
+                            <option value="{{$cat->id}}">
+                                {{$cat->name_en}}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+                @error('cat') <span class="error text-danger">{{ $message }}</span> @enderror
+
+            </div>
+        </div>
+    </div>
 
     <!-- Main Image -->
     <div class="col-lg-4">
@@ -149,7 +168,7 @@
                        placeholder="{{__('Main Image')}}"
                        name="main_image"
                        id="main_image"
-                       @if(isset($doctor)) value="{{$doctor->email}}" @endif  wire:model="main_image">
+                       wire:model="main_image">
             </div>
             @error('main_image') <span class="error text-danger">{{ $message }}</span> @enderror
 

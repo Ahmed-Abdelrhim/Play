@@ -19,7 +19,10 @@ class ProductCreate extends Component
     public $qty;
     public $main_image;
     public $desc;
+    public $cats;
+    public $cat;
     public string $error_msg;
+
 
 
     protected function rules(): array
@@ -32,6 +35,7 @@ class ProductCreate extends Component
             'discount' => 'nullable|numeric|between:5,1000',
             'qty' => 'required|numeric|between:0,100000',
             'main_image' => 'required|image',
+            'cat' => 'required|numeric|exists:categories,id'
         ];
     }
 
@@ -58,6 +62,7 @@ class ProductCreate extends Component
                 'price' => $this->price,
                 'discount' => $discount,
                 'qty' => $this->qty,
+                'category_id' => $this->cat,
                 'main_image' => $image_name,
             ]);
         } catch (\Exception $e) {
@@ -69,7 +74,7 @@ class ProductCreate extends Component
         }
         DB::commit();
         session()->flash('success', 'Product Added Successfully');
-        $this->main_image = '';
+        $this->main_image = null;
         $this->name_en = '';
         $this->name_ar = '';
         $this->desc = '';
