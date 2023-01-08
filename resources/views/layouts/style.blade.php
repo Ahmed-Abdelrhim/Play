@@ -142,6 +142,10 @@
         color: #fbb72c;
     }
 
+    .previous  {
+        margin-left: 10px;
+    }
+
 
     /*  Footer  */
     ul {

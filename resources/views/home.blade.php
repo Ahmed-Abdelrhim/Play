@@ -30,44 +30,13 @@
                         @else
                             <div>{{Auth::guard('author')->user()->name}}</div>
                         @endguest
-                        {{--                            <div>Checking Here {{Auth::guard('author')->check()}}</div>--}}
                         {{ __('You are logged in!') }}
-                        {{-- <div>--}}
-                        {{-- <video src="{{asset('storage/third/1665768905.mp4')}}" type="mp4" controlsList="nodownload" controls >--}}
-                        {{-- </video>--}}
-                        {{-- </div>--}}
 
                     </div>
                 </div>
-                {{-- My Card--}}
-                {{--                <div class="card mt-3">--}}
-                {{--                    <div class="card-body">--}}
-                {{--                        <h5 class="card-title">{{__('msg.welcome', ['name' => Auth::guard('author')->user()->name]) }}</h5>--}}
-                {{--                        <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>--}}
-                {{--                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of--}}
-                {{--                            the card's content.</p>--}}
-                {{--                        <a href="#" class="card-link">Card link</a>--}}
-                {{--                        <a href="#" class="card-link">Another link</a>--}}
-                {{--                    </div>--}}
-                {{--                </div>--}}
                 <div class="row">
                     @if(isset($products))
                         @foreach($products as $prod)
-                        {{--                            <div class="card mt-3 ml-2" style="width: 18rem;">--}}
-                        {{--                                <img src="{{asset('storage/products/' . $prod->main_image . '/' . $prod->main_image)}}"--}}
-                        {{--                                     class="card-img-top" alt="...">--}}
-                        {{--                                <div class="card-body">--}}
-                        {{--                                    <h5 class="card-title">{{$prod->name_en}}</h5>--}}
-                        {{--                                    <p class="card-text">{{$prod->desc}}</p>--}}
-                        {{--                                    <div class="mx-auto">--}}
-                        {{--                                        <a href="{{route('product.show', [\Illuminate\Support\Str::random(15),$prod->id,\Illuminate\Support\Str::random(15)] )}}"--}}
-                        {{--                                           class="btn btn-primary">Show Product--}}
-                        {{--                                        </a>--}}
-                        {{--                                    </div>--}}
-                        {{--                                </div>--}}
-                        {{--                            </div>--}}
-
-
 
                             <div class="product-card">
                                 <div class="badge">Hot</div>
@@ -96,6 +65,7 @@
                             </div>
                         @endforeach
                     @endif
+                    {{!!$products->links()}}
                 </div>
             </div>
         </div>
