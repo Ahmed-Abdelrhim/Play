@@ -92,3 +92,9 @@
 <!---->
 <!-- STRIPE_KET=pk_test_51MMoiaJP8QJL60xoTaUHafqEm2kaUYjcb8ZccvruLn5pLCq5vsna4lp3pGNcg2sP2SxvWRstooDMpfslIEE8MFr8001a3fbvVn-->
 <!-- STRIPE_SECERT=sk_test_51MMoiaJP8QJL60xolyb2B1wFpqUeaAK79TsyAC6Y1fZGhCAWg1Hzv8bKT4pxRTPgRd6XBR5bMJBkVdAduJ9WXAXg00kqOmlFQd-->
+
+
+
+############################## Nexmo Credentials ##############################
+// NEXMO_KEY=26df5740
+// NEXMO_SECRET=9C2AE7FXrQTfpvK8

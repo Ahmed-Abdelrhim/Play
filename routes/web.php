@@ -240,6 +240,4 @@ Route::get('error/transaction', [ProductController::class, 'error']);
 Route::get('session', [ProductController::class, 'sessionMethod']);
 
 
-############################## Nexmo Credentials ##############################
-// NEXMO_KEY=26df5740
-// NEXMO_SECRET=9C2AE7FXrQTfpvK8
+
