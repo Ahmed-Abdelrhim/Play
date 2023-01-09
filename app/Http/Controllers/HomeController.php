@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Author;
+use App\Models\Cart;
 use App\Models\Language;
 use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
@@ -45,8 +46,12 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $author = auth()->guard('author')->user();
+        $products = Product::query()->with('cart')->paginate(10);
+        // return $products;
+        // $carts = Cart::query()->where('customer_id', $author->id)->pluck('id');
+        // $products = [$only_products,$carts];
 
-        $products = Product::query()->paginate(10);
         return view('home',['products' => $products]);
     }
 }

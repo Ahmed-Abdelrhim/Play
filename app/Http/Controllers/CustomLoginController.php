@@ -3,9 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Author;
+use App\Models\Cart;
 use App\Models\Product;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
@@ -13,12 +19,12 @@ use Illuminate\Support\Facades\Validator;
 class CustomLoginController extends Controller
 {
 
-    public function showRegisterForm()
+    public function showRegisterForm(): Factory|View|Application
     {
         return view('register');
     }
 
-    public function showLoginForm()
+    public function showLoginForm(): Factory|View|Application
     {
         return view('auth.login');
     }
@@ -57,13 +63,21 @@ class CustomLoginController extends Controller
             return redirect('login')->withErrors($validator)->withInput();
         }
         if (Auth::guard('author')->attempt($this->credentials($request))) {
-            $products = Product::query()->paginate(10);
-            return view('home',['products' => $products]);
+            $author = auth()->guard('author')->user();
+            $only_products = Product::query()->paginate(10);
+            $carts = Cart::query()->where('customer_id', $author->id)->pluck('id');
+
+            // $products = [$only_products, $carts];
+            $products = ['products' => $only_products, 'cart' =>$carts];
+            // return $products;
+
+            return view('home', ['products' => $products, 'carts' => $carts]);
         }
 
         $email = Author::query()->where('email', $request->get('email'))->first();
         $name = Author::query()->where('name', $request->get('name'))->first();
         $phone = Author::query()->where('phone', $request->get('phone'))->first();
+
         if ($email || $name || $phone)
             return redirect()->back()->withErrors([
                 'errors' => 'Password Is Incorrect!',
@@ -85,13 +99,13 @@ class CustomLoginController extends Controller
         $login = 'name';
         if (is_numeric($value))
             $login = 'phone';
-        if (filter_var($value,FILTER_VALIDATE_EMAIL))
+        if (filter_var($value, FILTER_VALIDATE_EMAIL))
             $login = 'email';
         request()->merge([$login => $value]);
         return $login;
     }
 
-    public function logout(): \Illuminate\Http\RedirectResponse
+    public function logout(): RedirectResponse
     {
         Auth::guard('author')->logout();
         return redirect()->route('login');

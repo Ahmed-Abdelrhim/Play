@@ -70,7 +70,7 @@ Route::group(['middleware' => 'disable_back_btn'], function () {
         Route::get('show/dataTables/blogposts', [LearnController::class, 'showDataTablesIndex'])->name('dataTables')
             ->middleware('permission:create product');
 
-        // edit post
+        // Edit Post
 
         Route::get('get/dataTables/blogposts/all', [LearnController::class, 'getDataTablesIndex'])->name('dataTables.all');
 

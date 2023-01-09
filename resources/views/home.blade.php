@@ -7,6 +7,9 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">{{ __('msg.Dashboard') }}</div>
+                    @foreach($products as $key => $prod)
+{{--                        {{$prod->cart}}--}}
+                    @endforeach
 
                     <div class="card-body">
 
@@ -28,15 +31,18 @@
                         {{--toastr.success('{{Session::get('success')}} ');--}}
                     </script>
                 @endif
+
                 <div class="row">
                     @if(isset($products))
-                        @foreach($products as $prod)
+                        @foreach($products as $key => $prod)
 
                             <div class="product-card">
                                 <div class="badge">Hot</div>
                                 <div class="product-tumb">
                                     <img
-                                        src="{{asset('storage/products/'.$prod->main_image . '/' . $prod->main_image)}}"
+                                        src="{{asset('storage/products/'.
+                                                        $prod['main_image'] . '/' .
+                                                        $prod['main_image'])}}"
                                         alt="">
                                 </div>
                                 <div class="product-details">
@@ -58,20 +64,29 @@
                                         <div class="product-links">
                                             <a class="btn btn-primary"
                                                href="{{route('product.show',[Str::random(15) , $prod->id , Str::random(15)])}}">Buy</a>
-                                            <a href="#"><i class="fa fa-heart"></i></a>
-                                            <a href="{{route('product.to.cart',$prod->id)}}"><i
-                                                    class="fa fa-shopping-cart"></i></a>
+                                            <a href="#">
+                                                <i class="fa fa-heart"></i>
+                                            </a>
+                                            <a href="{{route('product.to.cart',$prod->id)}}">
+                                                @if(isset($prod->cart[0]))
+                                                    <i class="fa fa-shopping-cart" style="color: #007bff"></i>
+                                                @else
+                                                    <i class="fa fa-shopping-cart"></i>
+                                                @endif
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         @endforeach
                     @endif
-                    {{--{{!!$products->links()}}--}}
+                    {{!!$products->links()}}
                 </div>
+
             </div>
         </div>
     </div>
+
 @endsection
 
 @section('footer')

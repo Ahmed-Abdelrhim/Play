@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Products;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cart;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Contracts\Foundation\Application;
@@ -102,9 +103,22 @@ class ProductController extends Controller
 
     public function sessionMethod()
     {
-        if (session()->forget('success'))
-            return 'True';
-        return 'False';
+        $author = auth()->guard('author')->user();
+        $carts = Cart::query()->where('customer_id', $author->id)->pluck('id');
+
+        // $carts = Cart::query()->where('customer_id', $author->id)->get();
+
+        // $products = [$only_products,$carts];
+        $products = Product::query()->with('cart')->paginate(10);
+//         return var_dump($products[0]['cart']);
+//        return $products[1]['cart'][0];
+        if ( isset($products[0]['cart'][0]))
+            return 'Has Data';
+        return 'No Data';
+
+        //        if (session()->forget('success'))
+        //            return 'True';
+        //        return 'False';
     }
 
 }
