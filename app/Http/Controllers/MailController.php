@@ -163,12 +163,6 @@ class MailController extends Controller
 
     public function sendSms()
     {
-//        Nexmo::message()->send([
-//            'to'   => '2001152067271',
-//            'from' => '+2001152067271',
-//            'text' => 'Laravel SMS , Ahmed Abdelrhim .'
-//        ]);
-
         try {
             $nexmo = app('Nexmo\Client');
 
