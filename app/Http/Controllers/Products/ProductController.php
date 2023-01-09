@@ -108,11 +108,10 @@ class ProductController extends Controller
         if (session()->has('success'))
             return 'Yes';
         return 'No';
-        $products = Product::query()->with('cart')->paginate(10);
-        if ( isset($products[0]['cart'][0]))
-            return 'Has Data';
-        return 'No Data';
-
+        //        $products = Product::query()->with('cart')->paginate(10);
+        //        if ( isset($products[0]['cart'][0]))
+        //            return 'Has Data';
+        //        return 'No Data';
     }
 
 }

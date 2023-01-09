@@ -59,7 +59,7 @@
                                             {{$prod->price}} EGP
                                         </div>
 
-                                        <div class="product-links d-flex">
+                                        <div class="product-links ">
                                             <a class="btn btn-primary"
                                                href="{{route('product.show',[Str::random(15) , $prod->id , Str::random(15)])}}">Buy</a>
                                             <a href="#">
@@ -70,7 +70,10 @@
                                                     <i class="fa fa-shopping-cart" style="color: #007bff"></i>
                                                 </a>
                                             @else
-                                                <livewire:cart.add-to-cart :product_id="$prod->id"/>
+                                                {{-- <livewire:cart.add-to-cart :product_id="$prod->id"/>--}}
+                                                <a href="{{route('product.to.cart',[Str::random(15),$prod->id,Str::random(15)])}}">
+                                                    <i class="fa fa-shopping-cart"></i>
+                                                </a>
                                             @endif
                                         </div>
                                     </div>
