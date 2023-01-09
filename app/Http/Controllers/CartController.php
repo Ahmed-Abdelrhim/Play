@@ -26,7 +26,7 @@ class CartController extends Controller
     }
 
 
-    public function storeToCart($product_id)
+    public function storeToCart($product_id): RedirectResponse
     {
         $author = auth()->guard('author')->user();
         try {
@@ -39,7 +39,7 @@ class CartController extends Controller
             ]);
         } catch (\Exception $e) {
             DB::rollBack();
-            return $e;
+            // return $e;
             Session::put('error','Something Went Wrong');
             // session()->flash('error' , 'Something Went Wrong');
             return redirect()->back();
@@ -47,7 +47,7 @@ class CartController extends Controller
         DB::commit();
         // session()->flash('success' , 'Product Added To Cart');
         Session::put('success','Product Added To Cart');
-        return redirect()->route('home');
+        return redirect()->back();
     }
 
 }
