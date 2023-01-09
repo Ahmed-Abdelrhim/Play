@@ -44,14 +44,9 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(): \Illuminate\Contracts\Support\Renderable
     {
-        $author = auth()->guard('author')->user();
         $products = Product::query()->with('cart')->paginate(10);
-        // return $products;
-        // $carts = Cart::query()->where('customer_id', $author->id)->pluck('id');
-        // $products = [$only_products,$carts];
-
         return view('home',['products' => $products]);
     }
 }

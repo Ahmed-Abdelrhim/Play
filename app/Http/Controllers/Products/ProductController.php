@@ -61,7 +61,7 @@ class ProductController extends Controller
         return view('products.create',['cats' => $cats]);
     }
 
-    public function showUpdateProductForm($start , $id , $end)
+    public function showUpdateProductForm($start , $id , $end): Factory|View|Application
     {
         if (!is_numeric($id))
             return view('errors.404');
@@ -93,32 +93,23 @@ class ProductController extends Controller
         return view('products.buy' ,['intent' => auth()->guard('author')->user()->createSetupIntent()]);
     }
 
-    public function success() {
+    public function success(): string
+    {
         return 'success';
     }
 
-    public function error() {
+    public function error(): string
+    {
         return 'error';
     }
 
-    public function sessionMethod()
+    public function sessionMethod(): string
     {
-        $author = auth()->guard('author')->user();
-        $carts = Cart::query()->where('customer_id', $author->id)->pluck('id');
-
-        // $carts = Cart::query()->where('customer_id', $author->id)->get();
-
-        // $products = [$only_products,$carts];
         $products = Product::query()->with('cart')->paginate(10);
-//         return var_dump($products[0]['cart']);
-//        return $products[1]['cart'][0];
         if ( isset($products[0]['cart'][0]))
             return 'Has Data';
         return 'No Data';
 
-        //        if (session()->forget('success'))
-        //            return 'True';
-        //        return 'False';
     }
 
 }
