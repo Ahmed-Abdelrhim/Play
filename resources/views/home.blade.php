@@ -8,7 +8,7 @@
                 <div class="card">
                     <div class="card-header">{{ __('msg.Dashboard') }}</div>
                     @foreach($products as $key => $prod)
-{{--                        {{$prod->cart}}--}}
+                        {{--                        {{$prod->cart}}--}}
                     @endforeach
 
                     <div class="card-body">
@@ -67,13 +67,18 @@
                                             <a href="#">
                                                 <i class="fa fa-heart"></i>
                                             </a>
-                                            <a href="{{route('product.to.cart',$prod->id)}}">
-                                                @if(isset($prod->cart[0]))
+                                            {{-- <a href="{{route('product.to.cart',$prod->id)}}">  --}}
+                                            {{-- </a>  --}}
+
+                                            @if(isset($prod->cart[0]))
+                                                <a href="{{route('product.destroy.cart',$prod->id)}}">
                                                     <i class="fa fa-shopping-cart" style="color: #007bff"></i>
-                                                @else
+                                                </a>
+                                            @else
+                                                <a href="{{route('product.to.cart',[Str::random(15),$prod->id,Str::random(15)])}}">
                                                     <i class="fa fa-shopping-cart"></i>
-                                                @endif
-                                            </a>
+                                                </a>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>

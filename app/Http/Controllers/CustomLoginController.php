@@ -63,11 +63,8 @@ class CustomLoginController extends Controller
             return redirect('login')->withErrors($validator)->withInput();
         }
         if (Auth::guard('author')->attempt($this->credentials($request))) {
-            $author = auth()->guard('author')->user();
-            $only_products = Product::query()->paginate(10);
-            $carts = Cart::query()->where('customer_id', $author->id)->pluck('id');
-            $products = ['products' => $only_products, 'cart' =>$carts];
-            return view('home', ['products' => $products, 'carts' => $carts]);
+            $products = Product::query()->with('cart')->paginate(10);
+            return view('home', ['products' => $products]);
         }
 
         $email = Author::query()->where('email', $request->get('email'))->first();

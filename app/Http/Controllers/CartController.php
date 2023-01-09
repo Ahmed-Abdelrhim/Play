@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
-    public function addToCart($product_id)
+    public function addToCart($product_id): View|Factory|Application|RedirectResponse
     {
         if (!is_numeric($product_id))
             return view('errors.404', ['msg' => 'Product Not Found']);
@@ -24,7 +24,6 @@ class CartController extends Controller
             return view('errors.404', ['msg' => 'Product Not Found']);
         return $this->storeToCart($product_id);
     }
-
 
     public function storeToCart($product_id): RedirectResponse
     {
@@ -47,6 +46,21 @@ class CartController extends Controller
         DB::commit();
         session()->flash('success', 'Product Added To Cart');
         // Session::put('success', 'Product Added To Cart');
+        return redirect()->back();
+    }
+
+    public function deleteFromCart($cart_id): View|Factory|RedirectResponse|Application
+    {
+        if (!is_numeric($cart_id))
+            return view('errors.404',['msg' => 'product does not exists']);
+
+        $cart = Cart::query()->where('product_id',$cart_id)->get();
+        if (!$cart)
+            return view('errors.404',['msg' => 'product does not exists']);
+            foreach ($cart as $car) {
+                $car->delete();
+            }
+        session()->flash('success' , 'Product removed From Cart');
         return redirect()->back();
     }
 

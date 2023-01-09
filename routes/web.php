@@ -154,17 +154,14 @@ Route::group(['middleware' => 'disable_back_btn'], function () {
 
             Route::get('{start?}/show/{id}/{end?}', [ProductController::class, 'show'])->name('show');
 
-            Route::get('cart/{id}', [CartController::class, 'addToCart'])->name('to.cart');
+            Route::get('{start?}/cart/{id}/{end?}', [CartController::class, 'addToCart'])->name('to.cart');
+            Route::get('destroy/{id}', [CartController::class, 'deleteFromCart'])->name('destroy.cart');
 
-            // Route::get('{start?}/buy/{id}/{end?}', [ProductController::class, 'buyProduct'])->name('buy');
             Route::get('buy/{id}', [PaymentController::class, 'pay'])->name('buy');
-            // Route::post('pay/goo',[PaymentController::class,'pay']);
 
             Route::get('edit/product/{start?}/{id}/{end}', [ProductController::class, 'showUpdateProductForm'])->name('edit')
                 ->middleware('permission:update product');
 
-            //            Route::post('update/product', [ProductController::class, 'updateProduct'])->name('update')
-            //                ->middleware('permission:update product');
 
             Route::delete('delete/product/{id}', [ProductController::class, 'deleteProduct'])
                 ->middleware('permission:delete product')
