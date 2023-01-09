@@ -10,6 +10,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 
 class CartController extends Controller
@@ -38,12 +39,15 @@ class CartController extends Controller
             ]);
         } catch (\Exception $e) {
             DB::rollBack();
-            session()->flash('error' , 'Something Went Wrong');
+            return $e;
+            Session::put('error','Something Went Wrong');
+            // session()->flash('error' , 'Something Went Wrong');
             return redirect()->back();
         }
         DB::commit();
-        session()->flash('success' , 'Product Added To Cart');
-        return redirect()->route('home')->with('success' ,'Product Added To Cart');
+        // session()->flash('success' , 'Product Added To Cart');
+        Session::put('success','Product Added To Cart');
+        return redirect()->route('home');
     }
 
 }

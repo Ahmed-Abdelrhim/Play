@@ -1,5 +1,6 @@
 @extends('layouts.app')
-@include('layouts.flash_messages')
+{{--@include('layouts.flash_messages')--}}
+
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
@@ -8,6 +9,7 @@
                     <div class="card-header">{{ __('msg.Dashboard') }}</div>
 
                     <div class="card-body">
+
                         @guest('author')
                             <div>Not Authenticated In Author Guard</div>
                         @else
@@ -17,6 +19,11 @@
 
                     </div>
                 </div>
+                @if (Session::has('success'))
+                    <script>
+                        toastr.success('{{Session::get('success')}} ');
+                    </script>
+                @endif
                 <div class="row">
                     @if(isset($products))
                         @foreach($products as $prod)
@@ -24,31 +31,39 @@
                             <div class="product-card">
                                 <div class="badge">Hot</div>
                                 <div class="product-tumb">
-                                    <img src="{{asset('storage/products/'.$prod->main_image . '/' . $prod->main_image)}}" alt="">
+                                    <img
+                                        src="{{asset('storage/products/'.$prod->main_image . '/' . $prod->main_image)}}"
+                                        alt="">
                                 </div>
                                 <div class="product-details">
                                     <span class="product-catagory">Clothes</span>
-                                    <h4><a href="{{route('product.buy',[Str::random(15),$prod->id,Str::random(15)])}}">{{$prod->name_en}}</a></h4>
+                                    <h4>
+                                        <a href="{{route('product.buy',[Str::random(15),$prod->id,Str::random(15)])}}">{{$prod->name_en}}</a>
+                                    </h4>
                                     <p>{{$prod->desc}}</p>
                                     <div class="product-bottom-details">
                                         <div class="product-price">
                                             <small>
-                                                @if(($prod->price + $prod->discount)  != $prod->price) {{$prod->price + $prod->discount}} @endif
+                                                @if(($prod->price + $prod->discount)  != $prod->price)
+                                                    {{$prod->price + $prod->discount}}
+                                                @endif
                                             </small>
                                             {{$prod->price}} EGP
                                         </div>
 
                                         <div class="product-links">
-                                            <a class="btn btn-primary" href="{{route('product.show',[Str::random(15) , $prod->id , Str::random(15)])}}">Buy</a>
+                                            <a class="btn btn-primary"
+                                               href="{{route('product.show',[Str::random(15) , $prod->id , Str::random(15)])}}">Buy</a>
                                             <a href="#"><i class="fa fa-heart"></i></a>
-                                            <a href="{{route('product.to.cart',$prod->id)}}"><i class="fa fa-shopping-cart"></i></a>
+                                            <a href="{{route('product.to.cart',$prod->id)}}"><i
+                                                    class="fa fa-shopping-cart"></i></a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         @endforeach
                     @endif
-{{--                    {{!!$products->links()}}--}}
+                    {{--{{!!$products->links()}}--}}
                 </div>
             </div>
         </div>
