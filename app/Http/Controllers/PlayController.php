@@ -261,14 +261,6 @@ class PlayController extends Controller
 
     public function storeUserProfileData(Request $request): View|Factory|Redirector|RedirectResponse|Application
     {
-        //        $user = Auth::guard('author')->user();
-        //        $user->addMediaFromRequest('image')->toMediaCollection('images');
-        //        return back();
-        //        dd($request->image);
-        //        $user = auth()->guard('author')->user();
-        //        return $request->image;
-        ////        $user->addMedia($request->get('image'))->toMediaCollection();
-        ////        return redirect()->back();
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|min:4',
             'email' => 'required|email|unique:authors,email,' . Auth::guard('author')->user()->id,
@@ -286,22 +278,6 @@ class PlayController extends Controller
             $user->addMediaFromRequest('image')->toMediaCollection('images');
             $user->avatar = $image_name;
             $user->save();
-            // if (count($user->image) > 0) {
-            //            if ($user->image != null) {
-            //                $string = $user->image()->first()->src;
-            //                $image_time_name = substr($string, strpos($string, 'profiles/') + 9); // 9
-            //                // return $image_time_name;
-            //                Storage::disk('s3')->delete('profiles' . '/' . $image_time_name);
-            //                $user->image()->update([
-            //                    // 'src' => Storage::disk('s3')->url($path)
-            //                    'src' => $image_name
-            //                ]);
-            //            } else {
-            //                $user->image()->create([
-            //                    'src' => $image_name,
-            //                    'type' => 'avatar',
-            //                ]);
-            //            }
         }
 
         $user->update($request->except(['image', 'password', 'locale']));
