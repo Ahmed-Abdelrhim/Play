@@ -6,6 +6,7 @@ use App\Models\Author;
 use App\Models\Cart;
 use App\Models\Language;
 use App\Models\Product;
+use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -42,9 +43,9 @@ class HomeController extends Controller
     /**
      * Show the application dashboard.
      *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @return Renderable
      */
-    public function index(): \Illuminate\Contracts\Support\Renderable
+    public function index(): Renderable
     {
         $products = Product::query()->with('cart')->paginate(10);
         return view('home',['products' => $products]);

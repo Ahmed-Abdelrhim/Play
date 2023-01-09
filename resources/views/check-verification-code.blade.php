@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('title')
+    {{ __('send-otp') }}
+@endsection
 @section('content')
     <div class="container">
         <div class="row col-3 mx-auto">

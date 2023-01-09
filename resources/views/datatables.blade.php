@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('title')
+    {{ __('Datatables') }}
+@endsection
 @section('content')
     <div class="scroller"></div>
     <div class="container">

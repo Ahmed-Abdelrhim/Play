@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
-    public function addToCart($product_id): View|Factory|Application|RedirectResponse
+    public function addToCart($start,$product_id,$end): View|Factory|Application|RedirectResponse
     {
         if (!is_numeric($product_id))
             return view('errors.404', ['msg' => 'Product Not Found']);

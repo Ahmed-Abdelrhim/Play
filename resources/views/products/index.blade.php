@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('title')
+    {{ __('Home') }}
+@endsection
 @section('content')
     <div class="container">
         <table class="table table-dark" id="datatable-example">
