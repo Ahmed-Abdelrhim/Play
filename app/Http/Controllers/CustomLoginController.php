@@ -53,7 +53,7 @@ class CustomLoginController extends Controller
 
     }
 
-    public function login(Request $request)
+    public function login(Request $request): View|Factory|Redirector|RedirectResponse|Application
     {
         $validator = Validator::make($request->all(), [
             'email' => 'required',
@@ -66,11 +66,7 @@ class CustomLoginController extends Controller
             $author = auth()->guard('author')->user();
             $only_products = Product::query()->paginate(10);
             $carts = Cart::query()->where('customer_id', $author->id)->pluck('id');
-
-            // $products = [$only_products, $carts];
             $products = ['products' => $only_products, 'cart' =>$carts];
-            // return $products;
-
             return view('home', ['products' => $products, 'carts' => $carts]);
         }
 
