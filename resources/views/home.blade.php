@@ -7,19 +7,13 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">{{ __('msg.Dashboard') }}</div>
-                    @foreach($products as $key => $prod)
-                        {{--                        {{$prod->cart}}--}}
-                    @endforeach
-
                     <div class="card-body">
-
                         @guest('author')
                             <div>Not Authenticated In Author Guard</div>
                         @else
                             <div>{{Auth::guard('author')->user()->name}}</div>
                         @endguest
                         {{ __('You are logged in!') }}
-
                     </div>
                 </div>
                 @if (Session::has('success'))
@@ -67,9 +61,6 @@
                                             <a href="#">
                                                 <i class="fa fa-heart"></i>
                                             </a>
-                                            {{-- <a href="{{route('product.to.cart',$prod->id)}}">  --}}
-                                            {{-- </a>  --}}
-
                                             @if(isset($prod->cart[0]))
                                                 <a href="{{route('product.destroy.cart',$prod->id)}}">
                                                     <i class="fa fa-shopping-cart" style="color: #007bff"></i>
@@ -87,13 +78,10 @@
                     @endif
                     {{!!$products->links()}}
                 </div>
-
             </div>
         </div>
     </div>
-
 @endsection
-
 @section('footer')
     @include('layouts.footer')
 @endsection
