@@ -1,5 +1,5 @@
 @extends('layouts.app')
-{{--@include('layouts.flash_messages')--}}
+@include('layouts.flash_messages')
 
 @section('content')
     <div class="container">
@@ -21,7 +21,11 @@
                 </div>
                 @if (Session::has('success'))
                     <script>
-                        toastr.success('{{Session::get('success')}} ');
+                        swal({
+                            text: " {!! Session::get('success') !!}",
+                            icon: "success",
+                        })
+                        {{--toastr.success('{{Session::get('success')}} ');--}}
                     </script>
                 @endif
                 <div class="row">

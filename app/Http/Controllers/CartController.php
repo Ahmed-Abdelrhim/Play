@@ -18,10 +18,10 @@ class CartController extends Controller
     public function addToCart($product_id)
     {
         if (!is_numeric($product_id))
-            return view('errors.404',['msg' => 'Product Not Found']);
+            return view('errors.404', ['msg' => 'Product Not Found']);
         $product = Product::query()->find($product_id);
         if (!$product_id)
-            return view('errors.404',['msg' => 'Product Not Found']);
+            return view('errors.404', ['msg' => 'Product Not Found']);
         return $this->storeToCart($product_id);
     }
 
@@ -40,13 +40,13 @@ class CartController extends Controller
         } catch (\Exception $e) {
             DB::rollBack();
             // return $e;
-            Session::put('error','Something Went Wrong');
-            // session()->flash('error' , 'Something Went Wrong');
+            // Session::put('error','Something Went Wrong');
+            session()->flash('error', 'Something Went Wrong');
             return redirect()->back();
         }
         DB::commit();
-        // session()->flash('success' , 'Product Added To Cart');
-        Session::put('success','Product Added To Cart');
+        session()->flash('success', 'Product Added To Cart');
+        // Session::put('success', 'Product Added To Cart');
         return redirect()->back();
     }
 

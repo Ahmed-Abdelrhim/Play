@@ -102,7 +102,7 @@ class ProductController extends Controller
 
     public function sessionMethod()
     {
-        if (session()->has('success'))
+        if (session()->forget('success'))
             return 'True';
         return 'False';
     }
