@@ -58,7 +58,7 @@ class FilesController extends Controller
         //        $img = Image::make(public_path('public/profiles/'.auth()->guard('author')->user()->avatar));
         $img = Image::make('/storage/app/public/profiles/'.auth()->guard('author')->user()->avatar);
         //        $img->resize(320,400);
-        //        return $img->response('jpg');
+        //        return $img->response('jpg'); .
 
     }
 
@@ -69,6 +69,6 @@ class FilesController extends Controller
         // Time With Seconds .
         // Time With Seconds .
         // To Be Paid At The End Of The Week .
-        //
+        // three cases to
     }
 }
