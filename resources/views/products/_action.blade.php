@@ -6,7 +6,8 @@
         </a>
     @endif
 
-    @if(auth()->guard('author')->user()->hasPermissionTo('delete product'))
+{{--    @if(auth()->guard('author')->user()->hasPermissionTo('delete product'))--}}
+    @if(auth()->guard('author')->user()->can('delete product'))
         <form method="POST" action="{{route('product.delete', $row['id'] )}}" class="d-inline" id="destroy-product"
               style="margin-left: 5px;">
             @csrf
