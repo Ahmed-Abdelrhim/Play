@@ -1,6 +1,4 @@
 @extends('layouts.app')
-{{--@include('layouts.flash_messages')--}}
-
 @section('title')
     {{ __('Home') }}
 @endsection
