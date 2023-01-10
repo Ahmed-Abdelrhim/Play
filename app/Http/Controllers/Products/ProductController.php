@@ -47,7 +47,7 @@ class ProductController extends Controller
 
     }
 
-    public function show($start,$id,$end): Factory|View|Application
+    public function show($id, $start = null,$end = null): Factory|View|Application
     {
         $product = Product::query()->find($id);
         if (!$product)

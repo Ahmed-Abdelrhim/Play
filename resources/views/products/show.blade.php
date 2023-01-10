@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@section('title')
+    {{__('Product Details')}}
+@endsection
 @section('content')
     @include('layouts.flash_messages')
 
@@ -37,29 +39,14 @@
                 <div class="product-price"><small>{{$prod->$prod + $prod->discount}}</small>{{$prod->price}} EGP</div>
 
                 <div class="product-links">
-                    <a class="btn btn-primary" href="{{route('product.buy', $prod->id )}}">
+                    <a class="btn btn-primary" href="{{route('product.buy', [Str::random(15) , $prod->id , Str::random(15) ] )}}">
                         Confirm
                     </a>
                     <a href="#"><i class="fa fa-heart"></i></a>
-                    <a href="{{route('product.to.cart',$prod->id)}}"><i class="fa fa-shopping-cart"></i></a>
+                    <a href="{{route('product.to.cart',[ $prod->id ,Str::random(15) , Str::random(15) ])}}"><i class="fa fa-shopping-cart"></i></a>
                 </div>
             </div>
         </div>
     </div>
 
 @endsection
-
-
-
-
-    {{--    <div class="container">--}}
-    {{--        <div class="card mt-3" style="width: 18rem;">--}}
-    {{--            <img src="{{asset('storage/products/' . $prod->main_image . '/' . $prod->main_image)}}"--}}
-    {{--                 class="card-img-top" alt="...">--}}
-    {{--            <div class="card-body">--}}
-    {{--                <h5 class="card-title">{{$prod->name_en}}</h5>--}}
-    {{--                <p class="card-text">High quality product  , made of 100% cotton , for all programmers</p>--}}
-    {{--                <a href="{{route('product.buy',[Str::random(15),$prod->id,Str::random(15)])}}" class="btn btn-primary">Buy Product</a>--}}
-    {{--            </div>--}}
-    {{--        </div>--}}
-    {{--    </div>--}}

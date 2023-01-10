@@ -44,7 +44,8 @@
                                 <div class="product-details">
                                     <span class="product-catagory">Clothes</span>
                                     <h4>
-                                        <a href="{{route('product.buy',[Str::random(15),$prod->id,Str::random(15)])}}">{{$prod->name_en}}</a>
+                                        {{-- <a href="{{route('product.buy',[Str::random(15),$prod->id,Str::random(15)])}}">{{$prod->name_en}}</a>--}}
+                                        <a href="{{route('product.buy',$prod->id)}}">{{$prod->name_en}}</a>
                                     </h4>
                                     <p>{{$prod->desc}}</p>
                                     <div class="product-bottom-details">
@@ -59,7 +60,7 @@
 
                                         <div class="product-links ">
                                             <a class="btn btn-primary"
-                                               href="{{route('product.show',[Str::random(15) , $prod->id , Str::random(15)])}}">Buy</a>
+                                               href="{{route('product.show',[ $prod->id,Str::random(15),Str::random(15)])}}">Buy</a>
                                             <a href="#">
                                                 <i class="fa fa-heart"></i>
                                             </a>
@@ -69,7 +70,7 @@
                                                 </a>
                                             @else
                                                 {{-- <livewire:cart.add-to-cart :product_id="$prod->id"/>--}}
-                                                <a href="{{route('product.to.cart',[Str::random(15),$prod->id,Str::random(15)])}}">
+                                                <a href="{{route('product.to.cart',[$prod->id,Str::random(15),Str::random(15)])}}">
                                                     <i class="fa fa-shopping-cart"></i>
                                                 </a>
                                             @endif
