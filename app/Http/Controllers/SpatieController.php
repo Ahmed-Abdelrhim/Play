@@ -12,13 +12,14 @@ class SpatieController extends Controller
     public function handle()
     {
         $author = Auth::guard('author')->user();
-         // $role = Role::query()->find(4);
-//        $permission = Permission::query()->create(['name' => 'create product']);
-//        $permission = Permission::query()->create(['name' => 'update product']);
-//        $permission = Permission::query()->create(['name' => 'delete product']);
+         $role = Role::query()->find(4);
+//         $permission1 = Permission::query()->create(['name' => 'create product']);
+         $permission2 = Permission::query()->create(['name' => 'update product']);
+         $permission3 = Permission::query()->create(['name' => 'delete product']);
 
-        // $role->givePermissionTo($permission);
+         $role->givePermissionTo([$permission2,$permission3]);
 
+         session()->flash('success','Permissions Added Successfully');
 
 
         //        return count($author);
@@ -27,14 +28,14 @@ class SpatieController extends Controller
         //        return 'No';
         // return $avatars = $author->getMedia();
         // return view('spatie.index',['avatars' => $avatars]);
-        return 'No Specified Action Till Now';
+        // return 'No Specified Action Till Now';
     }
 
     public function download()
     {
         $user = auth()->guard('author')->user();
         return $user->getFirstMedia('images');
-            //->toMediaCollection();
+        //->toMediaCollection();
     }
 
     public function downloadImageProfile()
@@ -52,7 +53,7 @@ class SpatieController extends Controller
         //
         //        $role->givePermissionTo(['create product' , 'update product'  , 'delete product']);
 
-        session()->flash('success' ,'Product Permission Created Successfully');
+        session()->flash('success', 'Product Permission Created Successfully');
     }
 }
 

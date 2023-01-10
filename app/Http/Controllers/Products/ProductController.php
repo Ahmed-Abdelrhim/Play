@@ -31,15 +31,15 @@ class ProductController extends Controller
                 return $row->id;
             })
             ->addColumn('action', function ($row) {
-                return view('products._action',['row' => $row]);
+                return view('products._action', ['row' => $row]);
             })
             ->addColumn('name', function (Product $product) {
                 return $product->name_en;
             })
-            ->addColumn('price',function(Product $product) {
-                return $product->price ;
+            ->addColumn('price', function (Product $product) {
+                return $product->price;
             })
-            ->editColumn('discount' , function(Product $product) {
+            ->editColumn('discount', function (Product $product) {
                 return $product->price;
             })
             ->rawColumns(['action'])
@@ -47,28 +47,28 @@ class ProductController extends Controller
 
     }
 
-    public function show($id, $start = null,$end = null): Factory|View|Application
+    public function show($id, $start = null, $end = null): Factory|View|Application
     {
         $product = Product::query()->with('cart')->find($id);
         if (!$product)
             return view('errors.404');
-        return view('products.show',['prod' => $product]);
+        return view('products.show', ['prod' => $product]);
     }
 
     public function showCreateProductForm(): Factory|View|Application
     {
         $cats = Category::query()->get();
-        return view('products.create',['cats' => $cats]);
+        return view('products.create', ['cats' => $cats]);
     }
 
-    public function showUpdateProductForm($start , $id , $end): Factory|View|Application
+    public function showUpdateProductForm($start, $id, $end): Factory|View|Application
     {
         if (!is_numeric($id))
             return view('errors.404');
         $product = Product::query()->find($id);
         if (!$product)
             return view('errors.404');
-        return view('products.update',['product' => $product]);
+        return view('products.update', ['product' => $product]);
     }
 
     public function deleteProduct($id): View|Factory|RedirectResponse|Application
@@ -79,18 +79,18 @@ class ProductController extends Controller
         if (!$product)
             return view('errors.404');
         $product->delete();
-        session()->flash('success' , 'Successfully Deleted Product');
+        session()->flash('success', 'Successfully Deleted Product');
         return redirect()->back();
     }
 
-    public function buyProduct($start,$id,$end): Factory|View|Application
+    public function buyProduct($start, $id, $end): Factory|View|Application
     {
         if (!is_numeric($id))
             return view('errors.404');
         $product = Product::query()->find($id);
         if (!$product)
             return view('errors.404');
-        return view('products.buy' ,['intent' => auth()->guard('author')->user()->createSetupIntent()]);
+        return view('products.buy', ['intent' => auth()->guard('author')->user()->createSetupIntent()]);
     }
 
     public function success(): string
@@ -105,7 +105,7 @@ class ProductController extends Controller
 
     public function sessionMethod(): string
     {
-        if (session()->has('success'))
+        if (auth()->guard('author')->user()->hasPermissionTo('update product'))
             return 'Yes';
         return 'No';
         //        $products = Product::query()->with('cart')->paginate(10);

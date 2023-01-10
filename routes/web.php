@@ -162,20 +162,20 @@ Route::group(['middleware' => 'disable_back_btn'], function () {
             Route::get('buy/{id}', [PaymentController::class, 'pay'])->name('buy');
 
             Route::get('edit/product/{start?}/{id}/{end}', [ProductController::class, 'showUpdateProductForm'])->name('edit')
-                ->middleware('permission:update product');
+                 ->middleware('permission:update product');
 
 
             Route::delete('delete/product/{id}', [ProductController::class, 'deleteProduct'])
-                ->middleware('permission:delete product')
+                 ->middleware('permission:delete product')
                 ->name('delete');
         });
 
     });
     Route::get('hash', function () {
         $user = auth()->guard('author')->user();
-        return $user->hasPermissionTo('delete product');
+         return $user->hasPermissionTo('delete product');
 
-        // return bcrypt('12345678');
+//         return bcrypt('12345678');
     });
 
     Route::get('sweet', [ImagesController::class, 'sweet']);
