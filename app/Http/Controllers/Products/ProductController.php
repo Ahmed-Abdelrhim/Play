@@ -43,7 +43,8 @@ class ProductController extends Controller
                 return $product->price;
             })
             ->rawColumns(['action'])
-            ->make(true);
+            ->tojson();
+        //->make(true);
 
     }
 
