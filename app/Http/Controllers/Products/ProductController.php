@@ -49,7 +49,7 @@ class ProductController extends Controller
 
     public function show($id, $start = null,$end = null): Factory|View|Application
     {
-        $product = Product::query()->find($id);
+        $product = Product::query()->with('cart')->find($id);
         if (!$product)
             return view('errors.404');
         return view('products.show',['prod' => $product]);

@@ -37,13 +37,20 @@
             <p>{{$prod->desc}}</p>
             <div class="product-bottom-details">
                 <div class="product-price"><small>{{$prod->$prod + $prod->discount}}</small>{{$prod->price}} EGP</div>
-
                 <div class="product-links">
                     <a class="btn btn-primary" href="{{route('product.buy', [Str::random(15) , $prod->id , Str::random(15) ] )}}">
                         Confirm
                     </a>
-                    <a href="#"><i class="fa fa-heart"></i></a>
-                    <a href="{{route('product.to.cart',[ $prod->id ,Str::random(15) , Str::random(15) ])}}"><i class="fa fa-shopping-cart"></i></a>
+                    @if(isset($prod->cart[0]))
+                        <a href="{{route('product.destroy.cart',$prod->id)}}">
+                            <i class="fa fa-shopping-cart" style="color: #007bff"></i>
+                        </a>
+                    @else
+                        <a href="#"><i class="fa fa-heart"></i></a>
+                        <a href="{{route('product.to.cart',[ $prod->id ,Str::random(15) , Str::random(15) ])}}">
+                            <i class="fa fa-shopping-cart"></i>
+                        </a>
+                    @endisset
                 </div>
             </div>
         </div>
