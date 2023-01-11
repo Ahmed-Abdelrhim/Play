@@ -98,3 +98,9 @@
 ############################## Nexmo Credentials ##############################
 // NEXMO_KEY=26df5740
 // NEXMO_SECRET=9C2AE7FXrQTfpvK8
+
+
+
+// httpd -K install
+
+// https://www.youtube.com/watch?v=qpPYYX-i1cs&ab_channel=Aryans%26Sierra
