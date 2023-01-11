@@ -9,12 +9,9 @@ use Livewire\WithPagination;
 class ProductsView extends Component
 {
     use WithPagination;
-//    public $products ;
+    protected $listeners = ['taskAdded' => '$refresh'];
+    protected $paginationTheme = 'bootstrap';
 
-    public function mount($products)
-    {
-//        $this->products = $products;
-    }
 
     public function render()
     {

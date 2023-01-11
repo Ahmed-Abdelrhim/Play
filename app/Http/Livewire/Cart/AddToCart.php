@@ -46,12 +46,14 @@ class AddToCart extends Component
         } catch (\Exception $e) {
             DB::rollBack();
             return $e;
-            session()->flash('error', 'Something Went Wrong');
-            return redirect()->back();
+            // session()->flash('error', 'Something Went Wrong');
+            // return redirect()->back();
         }
         DB::commit();
         session()->flash('success', 'Product Added To Cart');
-        return route('session');
+        $this->emit('taskAdded');
+
+        // return route('session');
     }
 
 
