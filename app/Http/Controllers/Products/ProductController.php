@@ -45,7 +45,6 @@ class ProductController extends Controller
             ->rawColumns(['action'])
             ->tojson();
         //->make(true);
-
     }
 
     public function show($id, $start = null, $end = null): Factory|View|Application
