@@ -126,10 +126,15 @@ class PaymentController extends Controller
 
     public function checkout($ids)
     {
-        return $ids;
-//        return unserialize($ids);
-        // $product_id = serialize($ids);
-        // return strlen($ids);
+        $ids = json_decode($ids);
+        $total = 0;
+        foreach ($ids as $id) {
+            $product = Product::query()->find($id);
+            if (!$product)
+                return view('errors.404');
+            $total += $product->price;
+        }
+        return $total;
     }
 
 
