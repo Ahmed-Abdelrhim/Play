@@ -27,17 +27,27 @@
                                         {{$cart->product->name}}
                                     </a>
                                 </div>
-                                <div class="price-field produtc-price"><p class="price">{{$cart->product->price}}</p></div>
+                                <div class="price-field produtc-price"><p class="price">{{$cart->product->price}}</p>
+                                </div>
                                 <div class="quantity">
+
                                     <div class="quantity-input">
                                         <input type="text" name="product-quatity" value="{{$cart->qty}}" data-max="120"
                                                pattern="[0-9]*">
-                                        <livewire:cart-qty :cart="$cart"/>
+                                        <a class="btn btn-increase" href="{{route('product.inc.qty',[$cart->id])}}"></a>
+
+                                        @if($cart->qty >=2)
+                                            <a class="btn btn-reduce" href="{{route('product.dec.qty',[$cart->id])}}"></a>
+                                        @else
+                                            <a class="btn btn-reduce" href="#"></a>
+                                        @endif
+
+                                        <!-- <livewire:cart-qty :cart="$cart"/> -->
                                     </div>
                                 </div>
-                                <div class="price-field sub-total"><p class="price">{{$cart->product->price}}</p></div>
+                                <div class="price-field sub-total"><p class="price">{{$cart->product->price * $cart->qty }} </p></div>
                                 <div class="delete">
-                                    <a href="#" class="btn btn-delete" title="">
+                                    <a href="{{route('product.destroy.cart',$cart->id)}}" class="btn btn-delete" title="">
                                         <span>Delete from your cart</span>
                                         <i class="fa fa-times-circle" aria-hidden="true"></i>
                                     </a>
@@ -73,3 +83,6 @@
     </div>
     <!--end container-->
 @endsection
+{{--@section('script')--}}
+
+{{--@endsection--}}

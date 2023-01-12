@@ -76,4 +76,26 @@ class CartController extends Controller
         return view('products.cart.index',['carts' => $carts]);
     }
 
+    public function incrementQty($id): View|Factory|RedirectResponse|Application
+    {
+        $cart = Cart::query()->find($id);
+        if (!$cart)
+            return view('errors.404',['msg' => 'product not found']);
+        $cart->qty +=1 ;
+        $cart->save();
+        return redirect()->back();
+    }
+
+    public function decrementQty($id)
+    {
+        $cart = Cart::query()->find($id);
+        if (!$cart)
+            return view('errors.404',['msg' => 'product not found']);
+        if ($cart->qty >=2) {
+            $cart->qty -=1 ;
+            $cart->save();
+        }
+        return redirect()->back();
+    }
+
 }

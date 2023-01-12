@@ -41,6 +41,9 @@
 <!--footer area-->
 @include('layouts.footer')
 
+
+@stack('script')
+
 {{--<script src="assets/js/jquery-1.12.4.minb8ff.js?ver=1.12.4"></script>--}}
 {{--<script src="assets/js/bootstrap.min.js"></script>--}}
 {{--<script src="assets/js/chosen.jquery.min.js"></script>--}}

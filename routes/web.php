@@ -156,6 +156,11 @@ Route::group(['middleware' => 'disable_back_btn'], function () {
 
             Route::get('cart/{id}/{start?}/{end?}', [CartController::class, 'addToCart'])->name('to.cart');
 
+            Route::get('cart',[CartController::class,'viewCartPage'])->name('view.cart');
+            Route::get('increment/quantity/{id}' , [CartController::class,'incrementQty'])->name('inc.qty');
+            Route::get('decrement/quantity/{id}' , [CartController::class,'decrementQty'])->name('dec.qty');
+
+
 
             Route::get('destroy/{id}', [CartController::class, 'deleteFromCart'])->name('destroy.cart');
 
@@ -243,4 +248,3 @@ Route::get('session', [ProductController::class, 'sessionMethod'])->name('sessio
 // composer create-project --prefer-dist laravel/laravel name:8.*
 
 
-Route::get('cart',[CartController::class,'viewCartPage'])->name('view.cart');

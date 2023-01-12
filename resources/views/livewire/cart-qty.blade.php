@@ -8,4 +8,4 @@
 
     <a class="btn btn-increase" wire:click="like"></a>
 
-    <a class="btn btn-reduce" href="#" wire:click.prevent="decrease('{{$cart->id}}')"></a>
+    <a class="btn btn-reduce" href="#" wire:click="decrease('{{$cart->id}}')"></a>
