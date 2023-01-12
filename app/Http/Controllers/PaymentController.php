@@ -17,6 +17,7 @@ use App\Models\Transaction;
 use Illuminate\Support\Facades\DB;
 use App\Models\Payment;
 use Illuminate\Support\Str;
+
 class PaymentController extends Controller
 {
     protected $gateway;
@@ -95,7 +96,7 @@ class PaymentController extends Controller
             $transaction = Transaction::query()->where('invoiceId', $invoice_id)->get()->last();
             DB::beginTransaction();
             Payment::query()->create([
-                'invoiceId' => $invoiceData['Data']['InvoiceId'],
+                'invoiceId' => $invoice_id,
                 'customer_id' => $transaction->customer_id,
                 'product_id' => $transaction->product_id,
                 'created_date' => $invoiceData['Data']['CreatedDate'],
@@ -113,18 +114,18 @@ class PaymentController extends Controller
         }
         DB::commit();
         session()->flash('success', 'Success Transaction , Your Order Was Bought Successfully');
-        return redirect()->route('product.show',[Str::random(15),$transaction->product_id,Str::random(15)]);
+        return redirect()->route('product.show', [Str::random(15), $transaction->product_id, Str::random(15)]);
     }
 
     public function play(): RedirectResponse
     {
         session()->flash('success', 'Success Transaction , Your Order Was Bought Successfully');
         $msg = 'Success Transaction , Your Order Was Bought Successfully';
-        return redirect()->route('product.show',[Str::random(15),4,Str::random(15)])->with(['success' => $msg]);
+        return redirect()->route('product.show', [Str::random(15), 4, Str::random(15)])->with(['success' => $msg]);
 
     }
 
-    public function checkout($ids)
+    public function checkout($ids): View|Factory|string|Application
     {
         $ids = json_decode($ids);
         $total = 0;
@@ -134,11 +135,17 @@ class PaymentController extends Controller
                 return view('errors.404');
             $total += $product->price;
         }
-        return $total;
+        return $this->buyCollection($total,$ids);
+    }
+
+    public function buyCollection($total_pay,$products_ids): String
+    {
+        return '';
     }
 
 
 }
+
 // T-Shirt Python     تيشيرت بايثون  Solid colors: 100% Cotton; Heather Grey: 90% Cotton, 10% Polyester; All Other Heathers: 50% Cotton, 50% Polyester        SuaIz2fH1672766239.png
 // Developers T-Shirt تيشيرت للمبرمجين               8    JsR1zuD1672766440.jpg
 // Node.js T-Shirt تيشيرت نود جي اس  BADhUinz1672766526.jpg
