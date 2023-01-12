@@ -35,16 +35,23 @@ class PaymentController extends Controller
         return view('payment.pay')->with(['currencies' => $currencies, 'plats' => $paymentPlatforms]);
     }
 
-    public function pay($id): View|Factory|Redirector|RedirectResponse|Application
+    public function pay($id ,$collection = null ): View|Factory|Redirector|RedirectResponse|Application
     {
         $author = Auth::guard('author')->user();
         $product = Product::query()->find($id);
-        if (!$product)
-            return view('error.404', ['msg' => 'Sorry! Product have selected is not more available']);
+        $price = 0;
+        if ($collection == null ) {
+            if (!$product)
+                return view('error.404', ['msg' => 'Sorry! Product have selected is not more available']);
+            $price = $product->price;
+        }  else {
+            $price = $collection;
+        }
+
         $data = [
             'CustomerName' => $author->name,
             'NotificationOption' => 'Lnk', // 'SMS' , 'EML' , or 'ALL'
-            'InvoiceValue' => $product->price,
+            'InvoiceValue' => $price,
             "MobileCountryCode" => "+20",
             "CustomerMobile" => $author->phone,
             'CustomerEmail' => $author->email,
