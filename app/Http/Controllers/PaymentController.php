@@ -126,8 +126,10 @@ class PaymentController extends Controller
 
     public function checkout($ids)
     {
-        $product_id = serialize($ids);
-        return $product_id;
+        return $ids;
+//        return unserialize($ids);
+        // $product_id = serialize($ids);
+        // return strlen($ids);
     }
 
 

@@ -75,14 +75,15 @@
                                             // $ids[] .= $cart->product_id;
                                             array_push($ids,$cart->product_id);
                                         }
-                                        $serializedArray = serialize($ids);
-                                        // $serializedArray = json_encode($ids);
+                                         $serializedArray = serialize($ids);
+                                         // $serializedArray = json_encode($ids);
                                 @endphp
                                 ${{$total}}
                             @endif
                         </b>
                     </p>
                     <p class="summary-info"><span class="title">Shipping</span><b class="index">Free Shipping</b></p>
+                    {{-- <p class="summary-info"><span class="title">Shipping</span><b class="index">{{var_dump($serializedArray)}}</b></p>--}}
                     <p class="summary-info total-info "><span class="title">Total</span>
                         <b class="index">
                             @if(isset($total))
@@ -95,7 +96,8 @@
                     <label class="checkbox-field">
                         <input class="frm-input " name="have-code" id="have-code" value="" type="checkbox"><span>I have promo code</span>
                     </label>
-                    <a class="btn btn-checkout" href="{{route('product.checkout',$ids)}}">Check out</a>
+                    <a class="btn btn-checkout" href="{{route('product.checkout',json_encode($ids), '{}')  }}">Check
+                        out</a>
                     <a class="link-to-shop" href="#">Continue Shopping<i class="fa fa-arrow-circle-right"
                                                                          aria-hidden="true"></i></a>
                 </div>
@@ -104,10 +106,12 @@
                     <a class="btn btn-update" href="#">Update Shopping Cart</a>
                 </div>
             </div>
-        </div><!--end main content area-->
+        </div>
+        <!--end main content area-->
     </div>
     <!--end container-->
 @endsection
 {{--@section('script')--}}
 
 {{--@endsection--}}
+

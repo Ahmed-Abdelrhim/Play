@@ -164,7 +164,7 @@ Route::group(['middleware' => 'disable_back_btn'], function () {
             Route::get('destroy/{id}', [CartController::class, 'deleteFromCart'])->name('destroy.cart');
 
             Route::get('buy/{id}', [PaymentController::class, 'pay'])->name('buy');
-            Route::get('checkout/{ids?}', [PaymentController::class, 'checkout'])->name('checkout');
+            Route::get('checkout/{ids}', [PaymentController::class, 'checkout'])->name('checkout');
 
             Route::get('edit/product/{start?}/{id}/{end}', [ProductController::class, 'showUpdateProductForm'])->name('edit')
                 ->middleware('permission:update product');
