@@ -243,3 +243,4 @@ Route::get('session', [ProductController::class, 'sessionMethod'])->name('sessio
 // composer create-project --prefer-dist laravel/laravel name:8.*
 
 
+Route::get('cart',[CartController::class,'viewCartPage'])->name('view.cart');

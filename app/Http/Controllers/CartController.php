@@ -64,4 +64,16 @@ class CartController extends Controller
         return redirect()->back();
     }
 
+    public function viewCartPage()
+    {
+        $author = auth()->guard('author')->user();
+        $carts = Cart::query()
+            ->where('customer_id',$author->id)
+            ->with('product')
+            ->get();
+        // return $carts;
+
+        return view('products.cart.index',['carts' => $carts]);
+    }
+
 }
