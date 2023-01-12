@@ -20,8 +20,8 @@
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/style.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/color-01.css')}}">
 </head>
-<body class=" shopping-cart page ">
 
+<body class=" shopping-cart page ">
 <!-- mobile menu -->
 <div class="mercado-clone-wrap">
     <div class="mercado-panels-actions-wrap">
@@ -41,12 +41,12 @@
 <!--footer area-->
 @include('layouts.footer')
 
-<script src="assets/js/jquery-1.12.4.minb8ff.js?ver=1.12.4"></script>
-<script src="assets/js/bootstrap.min.js"></script>
-<script src="assets/js/chosen.jquery.min.js"></script>
-<script src="assets/js/owl.carousel.min.js"></script>
-<script src="assets/js/jquery.sticky.js"></script>
-<script src="assets/js/functions.js"></script>
+{{--<script src="assets/js/jquery-1.12.4.minb8ff.js?ver=1.12.4"></script>--}}
+{{--<script src="assets/js/bootstrap.min.js"></script>--}}
+{{--<script src="assets/js/chosen.jquery.min.js"></script>--}}
+{{--<script src="assets/js/owl.carousel.min.js"></script>--}}
+{{--<script src="assets/js/jquery.sticky.js"></script>--}}
+{{--<script src="assets/js/functions.js"></script>--}}
 <!--footer area-->
 </body>
 </html>

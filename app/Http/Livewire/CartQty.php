@@ -3,33 +3,42 @@
 namespace App\Http\Livewire;
 
 use App\Models\Cart;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use JetBrains\PhpStorm\NoReturn;
 use Livewire\Component;
 
 class CartQty extends Component
 {
-    public $cart;
+    public Cart $cart;
 
 
-    public function render()
+    public function render(): Factory|View|Application
     {
         return view('livewire.cart-qty');
     }
 
-    public function increase($id)
+    #[NoReturn] public function increase()
     {
-        dd($id);
-        $cart = Cart::query()->find($id);
-        $cart->qty += 1 ;
-        $cart->save();
+        dd('Triggered');
+    //        $cart = Cart::query()->find($id);
+    //        $cart->qty += 1 ;
+    //        $cart->save();
     }
 
-    public function decrease($id)
+    #[NoReturn] public function decrease($id)
     {
         dd($id);
-        $cart = Cart::query()->find($id);
-        if($cart->qty != 1 ) {
-            $cart->qty -= 1;
-            $cart->save();
-        }
+        //        $cart = Cart::query()->find($id);
+        //        if($cart->qty != 1 ) {
+        //            $cart->qty -= 1;
+        //            $cart->save();
+        //        }
+    }
+
+    #[NoReturn] public function like()
+    {
+        dd('Yes Function Triggered');
     }
 }
