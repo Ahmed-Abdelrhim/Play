@@ -104,3 +104,7 @@
 // httpd -K install
 
 // https://www.youtube.com/watch?v=qpPYYX-i1cs&ab_channel=Aryans%26Sierra
+
+
+// SALT_MAC=D<QE0vdlILA\cHP;OF*Z;TY6l/*KGO"D0>v
+// SALT_CODE=BxT6;<cXWgR9j\PVp;PA0*np-UIc7"XM;HL>JG/
