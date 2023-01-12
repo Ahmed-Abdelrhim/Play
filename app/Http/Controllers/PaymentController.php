@@ -124,6 +124,13 @@ class PaymentController extends Controller
 
     }
 
+    public function checkout($ids)
+    {
+        $product_id = serialize($ids);
+        return $product_id;
+    }
+
+
 }
 // T-Shirt Python     تيشيرت بايثون  Solid colors: 100% Cotton; Heather Grey: 90% Cotton, 10% Polyester; All Other Heathers: 50% Cotton, 50% Polyester        SuaIz2fH1672766239.png
 // Developers T-Shirt تيشيرت للمبرمجين               8    JsR1zuD1672766440.jpg

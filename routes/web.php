@@ -156,29 +156,29 @@ Route::group(['middleware' => 'disable_back_btn'], function () {
 
             Route::get('cart/{id}/{start?}/{end?}', [CartController::class, 'addToCart'])->name('to.cart');
 
-            Route::get('cart',[CartController::class,'viewCartPage'])->name('view.cart');
-            Route::get('increment/quantity/{id}' , [CartController::class,'incrementQty'])->name('inc.qty');
-            Route::get('decrement/quantity/{id}' , [CartController::class,'decrementQty'])->name('dec.qty');
-
+            Route::get('cart', [CartController::class, 'viewCartPage'])->name('view.cart');
+            Route::get('increment/quantity/{id}', [CartController::class, 'incrementQty'])->name('inc.qty');
+            Route::get('decrement/quantity/{id}', [CartController::class, 'decrementQty'])->name('dec.qty');
 
 
             Route::get('destroy/{id}', [CartController::class, 'deleteFromCart'])->name('destroy.cart');
 
             Route::get('buy/{id}', [PaymentController::class, 'pay'])->name('buy');
+            Route::get('checkout/{ids?}', [PaymentController::class, 'checkout'])->name('checkout');
 
             Route::get('edit/product/{start?}/{id}/{end}', [ProductController::class, 'showUpdateProductForm'])->name('edit')
-                 ->middleware('permission:update product');
+                ->middleware('permission:update product');
 
 
             Route::delete('delete/product/{id}', [ProductController::class, 'deleteProduct'])
-                 ->middleware('permission:delete product')
+                ->middleware('permission:delete product')
                 ->name('delete');
         });
 
     });
     Route::get('hash', function () {
         $user = auth()->guard('author')->user();
-         return $user->hasPermissionTo('delete product');
+        return $user->hasPermissionTo('delete product');
 
 //         return bcrypt('12345678');
     });

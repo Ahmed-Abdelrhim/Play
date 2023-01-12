@@ -69,9 +69,14 @@
                             @if(isset($carts))
                                 @php
                                     $total = 0;
-                                        foreach($carts as $key => $cart ) {
+                                    $ids = [];
+                                        foreach($carts as $cart ) {
                                             $total += $cart->product->price;
+                                            // $ids[] .= $cart->product_id;
+                                            array_push($ids,$cart->product_id);
                                         }
+                                        $serializedArray = serialize($ids);
+                                        // $serializedArray = json_encode($ids);
                                 @endphp
                                 ${{$total}}
                             @endif
@@ -90,9 +95,9 @@
                     <label class="checkbox-field">
                         <input class="frm-input " name="have-code" id="have-code" value="" type="checkbox"><span>I have promo code</span>
                     </label>
-                    <a class="btn btn-checkout" href="checkout.html">Check out</a>
-                    <a class="link-to-shop" href="shop.html">Continue Shopping<i class="fa fa-arrow-circle-right"
-                                                                                 aria-hidden="true"></i></a>
+                    <a class="btn btn-checkout" href="{{route('product.checkout',$ids)}}">Check out</a>
+                    <a class="link-to-shop" href="#">Continue Shopping<i class="fa fa-arrow-circle-right"
+                                                                         aria-hidden="true"></i></a>
                 </div>
                 <div class="update-clear">
                     <a class="btn btn-clear" href="#">Clear Shopping Cart</a>
