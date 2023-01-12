@@ -1,40 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Shopping Cart</title>
-    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.ico">
-    <link
-        href="https://fonts.googleapis.com/css?family=Lato:300,400,400italic,700,700italic,900,900italic&amp;subset=latin,latin-ext"
-        rel="stylesheet">
-    <link
-        href="https://fonts.googleapis.com/css?family=Open%20Sans:300,400,400italic,600,600italic,700,700italic&amp;subset=latin,latin-ext"
-        rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/animate.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/font-awesome.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/bootstrap.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/owl.carousel.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/chosen.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/style.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/color-01.css')}}">
-</head>
-<body class=" shopping-cart page ">
-
-<!-- mobile menu -->
-<div class="mercado-clone-wrap">
-    <div class="mercado-panels-actions-wrap">
-        <a class="mercado-close-btn mercado-close-panels" href="#">x</a>
-    </div>
-    <div class="mercado-panels"></div>
-</div>
-
-<!--header-->
-
-<!--main area-->
-<main id="main" class="main-site">
-
+@extends('layouts.cart')
+@section('cart')
     <div class="container">
 
         <div class="wrap-breadcrumb">
@@ -48,25 +13,30 @@
             <div class="wrap-iten-in-cart">
                 <h3 class="box-title">Products Name</h3>
                 <ul class="products-cart">
-                   @if(isset($carts))
-                       @foreach($carts as $cart)
+                    @if(isset($carts))
+                        @foreach($carts as $cart)
                             <li class="pr-cart-item">
                                 <div class="product-image">
-                                    <figure><img src="{{}}" alt=""></figure>
+                                    <figure><img
+                                            src="{{asset('storage/products/'.$cart->product->main_image.'/'.$cart->product->main_image)}}"
+                                            alt=""></figure>
                                 </div>
                                 <div class="product-name">
-                                    <a class="link-to-product" href="#">Radiant-360 R6 Wireless Omnidirectional Speaker
-                                        [White]</a>
+                                    <a class="link-to-product" href="#">
+                                        {{--Radiant-360 R6 Wireless Omnidirectional Speaker [White]--}}
+                                        {{$cart->product->name}}
+                                    </a>
                                 </div>
-                                <div class="price-field produtc-price"><p class="price">$256.00</p></div>
+                                <div class="price-field produtc-price"><p class="price">{{$cart->product->price}}</p></div>
                                 <div class="quantity">
                                     <div class="quantity-input">
-                                        <input type="text" name="product-quatity" value="1" data-max="120" pattern="[0-9]*">
+                                        <input type="text" name="product-quatity" value="1" data-max="120"
+                                               pattern="[0-9]*">
                                         <a class="btn btn-increase" href="#"></a>
                                         <a class="btn btn-reduce" href="#"></a>
                                     </div>
                                 </div>
-                                <div class="price-field sub-total"><p class="price">$256.00</p></div>
+                                <div class="price-field sub-total"><p class="price">{{$cart->product->price}}</p></div>
                                 <div class="delete">
                                     <a href="#" class="btn btn-delete" title="">
                                         <span>Delete from your cart</span>
@@ -76,12 +46,8 @@
                             </li>
                         @endforeach
                     @endif
-
-
-
                 </ul>
             </div>
-
             <div class="summary">
                 <div class="order-summary">
                     <h4 class="title-box">Order Summary</h4>
@@ -102,28 +68,10 @@
                     <a class="btn btn-update" href="#">Update Shopping Cart</a>
                 </div>
             </div>
-
-
-
         </div><!--end main content area-->
-    </div><!--end container-->
-
-</main>
-<!--main area-->
-
-<!--footer area-->
-@include('layouts.footer')
-
-<script src="assets/js/jquery-1.12.4.minb8ff.js?ver=1.12.4"></script>
-<script src="assets/js/bootstrap.min.js"></script>
-<script src="assets/js/chosen.jquery.min.js"></script>
-<script src="assets/js/owl.carousel.min.js"></script>
-<script src="assets/js/jquery.sticky.js"></script>
-<script src="assets/js/functions.js"></script>
-<!--footer area-->
-</body>
-</html>
-
+    </div>
+    <!--end container-->
+@endsection
 
 
 
@@ -168,8 +116,6 @@
                             </a>
                         </div>
                     </li>--}}
-
-
 
 
 {{--<!DOCTYPE html>--}}
