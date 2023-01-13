@@ -15,7 +15,7 @@
                                              alt="poster">
                                     </div>
                                     <div class="product-details">
-                                        <span class="product-catagory">Clothes</span>
+                                        <span class="product-catagory">Section</span>
                                         <h4>
                                             <a href="{{route('product.buy',$movie['title'])}}">{{$movie['title']}}</a>
                                         </h4>
@@ -28,7 +28,7 @@
 
                                             <div class="product-links " style="display: flex; ">
                                                 <a class="btn btn-primary"
-                                                   href="#">Buy</a>
+                                                   href="#">Show </a>
                                                 <a href="#" style="margin-left: 20px;">
                                                     <i class="fa fa-heart"></i>
                                                 </a>
