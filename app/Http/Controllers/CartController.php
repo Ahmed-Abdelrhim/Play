@@ -45,7 +45,7 @@ class CartController extends Controller
         }
         DB::commit();
         session()->flash('success', 'Product Added To Cart');
-        // Session::put('success', 'Product Added To Cart');
+        // Session::put('success', 'Product Added To Your Cart');
         return redirect()->back();
     }
 
