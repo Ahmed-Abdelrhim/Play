@@ -5,6 +5,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\Comments\CommentsController;
 use App\Http\Controllers\LearnController;
 use App\Http\Controllers\MailController;
+use App\Http\Controllers\MoviesController;
 use App\Http\Controllers\PaymentController;
 use App\Models\PaymentPlatform;
 use Illuminate\Support\Facades\Route;
@@ -243,8 +244,8 @@ Route::get('error/transaction', [ProductController::class, 'error']);
 
 Route::get('session', [ProductController::class, 'sessionMethod'])->name('session');
 
-Route::get('movies',[CartController::class,'movies']);
-
+Route::get('movies',[MoviesController::class,'index'])->name('movie.index');
+Route::get('show/movie/{id}',[MoviesController::class,'showMovie'])->name('movie.show');
 
 
 // composer create-project --prefer-dist laravel/laravel name:8.*

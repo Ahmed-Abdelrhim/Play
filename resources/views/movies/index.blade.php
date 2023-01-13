@@ -17,7 +17,7 @@
                                     <div class="product-details">
                                         <span class="product-catagory">Section</span>
                                         <h4>
-                                            <a href="{{route('product.buy',$movie['title'])}}">{{$movie['title']}}</a>
+                                            <a href="{{route('movie.show',$movie['id'])}}">{{$movie['title']}}</a>
                                         </h4>
                                         <p>{{$movie['overview']}}</p>
                                         <div class="product-bottom-details">
