@@ -10,6 +10,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Session;
 
 
@@ -96,6 +97,14 @@ class CartController extends Controller
             $cart->save();
         }
         return redirect()->back();
+    }
+
+
+    public function movies()
+    {
+        $token =
+        $uri = 'https://api.themoviedb.org/3/movie/popular';
+        return $movies = Http::withToken($token)->get($uri)->json();
     }
 
 }

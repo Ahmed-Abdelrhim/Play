@@ -243,6 +243,8 @@ Route::get('error/transaction', [ProductController::class, 'error']);
 
 Route::get('session', [ProductController::class, 'sessionMethod'])->name('session');
 
+Route::get('movies',[CartController::class,'movies']);
+
 
 
 // composer create-project --prefer-dist laravel/laravel name:8.*
