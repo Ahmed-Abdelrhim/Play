@@ -106,7 +106,8 @@ class CartController extends Controller
     {
         $token = env('MOVIE_TOKEN');
         $uri = 'https://api.themoviedb.org/3/movie/popular';
-        return $movies = Http::withToken($this->token)->get($uri)->json();
+        $movies = Http::withToken($this->token)->get($uri)->json()['results'];
+        return view('movies.index',['movies' => $movies]);
     }
 
 }
