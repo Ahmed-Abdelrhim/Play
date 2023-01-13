@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
+    public string $token = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3MDVkMjU4ZDQxMWE2MzVjMDIyZjYyOWEwMzI0YjkxNSIsInN1YiI6IjYyMWMxOWQzMmZhZjRkMDA0MzdiOTQwOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.TmXbQbpSqB2LWNX-fpivUi8mBaQvewaLKEoJr_tIxZM';
+
     public function addToCart($product_id, $start = null ,$end = null): View|Factory|Application|RedirectResponse
     {
         if (!is_numeric($product_id))
@@ -102,9 +104,9 @@ class CartController extends Controller
 
     public function movies()
     {
-        $token =
+        $token = env('MOVIE_TOKEN');
         $uri = 'https://api.themoviedb.org/3/movie/popular';
-        return $movies = Http::withToken($token)->get($uri)->json();
+        return $movies = Http::withToken($this->token)->get($uri)->json();
     }
 
 }
