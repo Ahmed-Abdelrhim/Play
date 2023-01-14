@@ -6,12 +6,13 @@
             <div class="row justify-content-center">
                 <div class="col-md-8">
                     <div class="row">
+
                         @if(isset($movies))
                             @foreach($movies as $movie)
                                 <div class="product-card">
                                     <div class="badge">Hot</div>
                                     <div class="product-tumb">
-                                        <img src="{{'https://image.tmdb.org/t/p/w500' . $movie['poster_path']}}"
+                                        <img src="{{'https://image.tmdb.org/t/p/w500' . $movie[0]['poster_path']}}"
                                              alt="poster">
                                     </div>
                                     <div class="product-details">
