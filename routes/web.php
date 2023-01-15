@@ -251,3 +251,4 @@ Route::get('show/movie/{id}',[MoviesController::class,'showMovie'])->name('movie
 // composer create-project --prefer-dist laravel/laravel name:8.*
 
 
+// done
