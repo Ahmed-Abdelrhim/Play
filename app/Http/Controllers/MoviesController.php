@@ -17,6 +17,10 @@ class MoviesController extends Controller
 {
     public string $token = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3MDVkMjU4ZDQxMWE2MzVjMDIyZjYyOWEwMzI0YjkxNSIsInN1YiI6IjYyMWMxOWQzMmZhZjRkMDA0MzdiOTQwOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.TmXbQbpSqB2LWNX-fpivUi8mBaQvewaLKEoJr_tIxZM';
 
+    public function PlayingWithBlogPosts(Request $request)
+    {
+        return $request;
+    }
     public function index()
     {
         return $posts = BlogPost::query()->get(['id','title','author_id']);

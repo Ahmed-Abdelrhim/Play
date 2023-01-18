@@ -247,6 +247,7 @@ Route::get('session', [ProductController::class, 'sessionMethod'])->name('sessio
 Route::get('movies',[MoviesController::class,'index'])->name('movie.index');
 Route::get('show/movie/{id}',[MoviesController::class,'showMovie'])->name('movie.show');
 
+Route::get('Playing/With/BlogPosts',[MoviesController::class,'PlayingWithBlogPosts'])->name('playing.posts');
 
 // composer create-project --prefer-dist laravel/laravel name:8.*
 
