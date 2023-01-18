@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BlogPost;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+
 //use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use GuzzleHttp\Client;
@@ -17,31 +19,33 @@ class MoviesController extends Controller
 
     public function index()
     {
-        $token = env('MOVIE_TOKEN');
-        $uri = 'https://api.themoviedb.org/3/movie/popular';
+        return $posts = BlogPost::query()->get(['id','title','author_id']);
 
-
-        $headers = [
-            'Content-Type' => 'application/json',
-            'authorization' => 'Bearer '. $this->token
-        ];
-        $client_request = new Client;
-
-        $request = new Request('GET', $uri , $headers);
-
-        $response = $client_request->send($request);
-        $response->getBody();
-
-
-        //        return $movies = Http::withToken($this->token)->get($uri)->json()['results'];
-                return view('movies.index',['movies' => $response->getBody()]);
+        //        $token = env('MOVIE_TOKEN');
+        //        $uri = 'https://api.themoviedb.org/3/movie/popular';
+        //
+        //
+        //        $headers = [
+        //            'Content-Type' => 'application/json',
+        //            'authorization' => 'Bearer ' . $this->token
+        //        ];
+        //        $client_request = new Client;
+        //
+        //        $request = new Request('GET', $uri, $headers);
+        //
+        //        $response = $client_request->send($request);
+        //        $response->getBody();
+        //
+        //
+        //        // return $movies = Http::withToken($this->token)->get($uri)->json()['results'];
+        //        return view('movies.index', ['movies' => $response->getBody()]);
     }
 
     public function showMovie($id)
     {
 
 
-        $uri = 'https://api.themoviedb.org/3/movie/'.$id;
+        $uri = 'https://api.themoviedb.org/3/movie/' . $id;
         return $movie = Http::withToken($this->token)->get($uri)->json();
     }
 }
