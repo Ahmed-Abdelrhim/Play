@@ -28,7 +28,7 @@ class HomeController extends Controller
     //        $this->middleware('auth');
     //    }
 
-    public function change_locale(string $locale): string|RedirectResponse
+    public function change_locale(string $locale)
     {
         $language = Language::query()->where('iso', '=', $locale)->first();
         if (!$language)

@@ -10,7 +10,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use GuzzleHttp\Client;
-//use GuzzleHttp\Psr7\Request;
+// use GuzzleHttp\Psr7\Request;
 
 
 class MoviesController extends Controller
@@ -19,6 +19,7 @@ class MoviesController extends Controller
 
     public function PlayingWithBlogPosts(Request $request)
     {
+        return $request;
         $post = BlogPost::query()->findOrFail($request->get('post'));
 
         return $request;

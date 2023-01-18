@@ -34,9 +34,9 @@ Route::group(['middleware' => 'disable_back_btn'], function () {
 
 
     Route::get('not-found-page', [PlayController::class, 'errorPage'])->name('error');
-//Route::get('s3',function (){
-//    return view('s3');
-//});
+Route::get('s3',function (){
+    return view('s3');
+});
 
     Route::get('/', function () {
         return view('welcome');
@@ -253,3 +253,5 @@ Route::get('Playing/With/BlogPosts',[MoviesController::class,'PlayingWithBlogPos
 
 
 
+// total_money = course_price * students_count
+// money = 10 * 1000 = 10,000

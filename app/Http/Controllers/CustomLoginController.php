@@ -19,12 +19,12 @@ use Illuminate\Support\Facades\Validator;
 class CustomLoginController extends Controller
 {
 
-    public function showRegisterForm(): Factory|View|Application
+    public function showRegisterForm()
     {
         return view('register');
     }
 
-    public function showLoginForm(): Factory|View|Application
+    public function showLoginForm()
     {
         return view('auth.login');
     }
@@ -53,7 +53,7 @@ class CustomLoginController extends Controller
 
     }
 
-    public function login(Request $request): View|Factory|Redirector|RedirectResponse|Application
+    public function login(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'email' => 'required',
