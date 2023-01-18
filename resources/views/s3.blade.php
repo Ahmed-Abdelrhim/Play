@@ -3,14 +3,15 @@
     <div class="container">
         <div class="row">
             <form method="GET" action="{{route('playing.posts')}}">
+                @csrf
 {{--                <div class="form-group">--}}
 {{--                    <label for="exampleInputEmail1">Email address</label>--}}
 {{--                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">--}}
 {{--                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>--}}
 {{--                </div>--}}
                 <label for="posts"></label>
-                <select class="custom-select" id="posts">
-                    <option disabled>Open this select menu</option>
+                <select class="custom-select" id="posts" name="post">
+                    <option disabled value="0">Open this select menu</option>
                     @foreach($posts as $post)
                         <option value="{{$post->id}}">{{$post->title}}</option>
                     @endforeach

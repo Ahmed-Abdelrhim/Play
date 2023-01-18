@@ -7,10 +7,10 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 
-//use Illuminate\Http\Request;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use GuzzleHttp\Client;
-use GuzzleHttp\Psr7\Request;
+//use GuzzleHttp\Psr7\Request;
 
 
 class MoviesController extends Controller
@@ -19,12 +19,14 @@ class MoviesController extends Controller
 
     public function PlayingWithBlogPosts(Request $request)
     {
+        $post = BlogPost::query()->findOrFail($request->get('post'));
+
         return $request;
     }
     public function index()
     {
         return $posts = BlogPost::query()->get(['id','title','author_id']);
-
+        return view('s3',['posts' => $posts]);
         //        $token = env('MOVIE_TOKEN');
         //        $uri = 'https://api.themoviedb.org/3/movie/popular';
         //
