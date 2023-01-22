@@ -252,7 +252,3 @@ Route::get('Playing/With/BlogPosts',[MoviesController::class,'PlayingWithBlogPos
 // composer create-project --prefer-dist laravel/laravel name:8.*
 
 
-
-// total_money = course_price * students_count
-// money = 10 * 1000 = 10,000
-
