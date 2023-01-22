@@ -255,3 +255,4 @@ Route::get('Playing/With/BlogPosts',[MoviesController::class,'PlayingWithBlogPos
 
 // total_money = course_price * students_count
 // money = 10 * 1000 = 10,000
+
