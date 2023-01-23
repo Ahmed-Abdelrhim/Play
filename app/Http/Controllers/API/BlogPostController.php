@@ -58,7 +58,7 @@ class BlogPostController extends Controller
         if ($validate->fails())
             return response()->json(['data' => $validate->errors(),'status' => 400 , 'msg' => 'error']);
             // return $this->apiResponse($validate->errors(), 400, 'Validation Error');
-        $post = BlogPost::find($id);
+        $post = BlogPost::query()->find($id);
         if (!$post)
             return $this->apiResponse(null, 404, 'BlogPost Not Found To Be Updated');
         $post->update($request->all());
