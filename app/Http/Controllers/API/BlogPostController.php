@@ -7,8 +7,11 @@ use App\Http\Requests\Requests\BlogPostRequest;
 use App\Http\Resources\BlogPostResource;
 use App\Models\Author;
 use App\Models\BlogPost;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
@@ -16,22 +19,22 @@ class BlogPostController extends Controller
 {
     use BlogPostTrait;
 
-    public function index(): \Illuminate\Http\Response|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory
+    public function index(): Response|Application|ResponseFactory
     {
         $posts = BlogPost::all();
         return $this->apiResponse($posts, 200, 'Success');
     }
 
-    public function show($id): \Illuminate\Http\Response|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory
+    public function show($id): Response|Application|ResponseFactory
     {
-        $post = BlogPost::find($id);
+        $post = BlogPost::query()->find($id);
         if (!$post)
             return $this->apiResponse(null, 400, 'Not Found');
         $blog = new BlogPostResource($post);
         return $this->apiResponse($blog, 200, 'Success');
     }
 
-    public function storePost(Request $request): \Illuminate\Http\Response|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory
+    public function storePost(Request $request): Response|Application|ResponseFactory
     {
         $validate = Validator::make($request->all(), [
             'author_id' => 'required|exists:authors,id',
@@ -41,11 +44,11 @@ class BlogPostController extends Controller
 
         if ($validate->fails())
             return $this->apiResponse($validate->errors(), 400, 'Validation Error');
-        $post = BlogPost::create($request->all());
-        return $this->apiResponse($post, 201, 'Post Inserted Successfully Into DataBase');
+        $post = BlogPost::query()->create($request->all());
+        return $this->apiResponse($post, 200, 'Post Inserted Successfully Into DataBase');
     }
 
-    public function updateBlogPost(Request $request, $id): \Illuminate\Http\Response|JsonResponse|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory
+    public function updateBlogPost(Request $request, $id): Response|JsonResponse|Application|ResponseFactory
     {
         $validate = Validator::make($request->all(), [
             'author_id' => 'required|exists:authors,id',
@@ -74,7 +77,7 @@ class BlogPostController extends Controller
 
         if($validator->fails())
             return response()->json(['data' => $validator->errors(), 'status' => 400 , 'msg' =>'Validation Error']);
-        $user = Author::create($request->all());
+        $user = Author::query()->create($request->all());
         $user->password = bcrypt($request->password);
         $user->save();
         return response()->json(['status' => 200 , 'msg' => 'Successfully Created User']);
@@ -120,3 +123,4 @@ class BlogPostController extends Controller
     }
 }
 // login03121011 video prime
+// 1|84DY9YpppzT8vXCQClxa9F2V3OUJJdptdFvfNfMV

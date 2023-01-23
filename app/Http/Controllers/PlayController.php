@@ -118,7 +118,7 @@ class PlayController extends Controller
     public function addBlogPost(BlogPostRequest $request): RedirectResponse
     {
         $id = Auth::guard('author')->user()->id;
-        $post = BlogPost::create([
+        $post = BlogPost::query()->create([
             'title' => $request->input('title'),
             'content' => $request->input('content'),
             'author_id' => $id,
