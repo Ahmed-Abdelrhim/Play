@@ -56,6 +56,10 @@ class MoviesController extends Controller
 
     public function playWithData()
     {
+        // This Is Called Eager Loading
+        $author = auth()->guard('author')->user();
+        $posts = BlogPost::query()->where('author_id',$author->id)->with('author:id,name')->get();
 
+        return $posts[0];
     }
 }
