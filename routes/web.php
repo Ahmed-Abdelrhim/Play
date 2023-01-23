@@ -254,3 +254,4 @@ Route::get('play/with/data',[MoviesController::class,'playWithData'])->name('pla
 // composer create-project --prefer-dist laravel/laravel name:8.*
 
 
+// (11, 11, 'Mohammed Khalil', NULL, NULL, NULL, NULL, 'b', '$2y$10$vnCj.qU1uNwlTtBaIbESjOnXTlavSyJomK4ywgDa8.O4XrNNt3LtW', '11', 1, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 1, 1, NULL, NULL),
