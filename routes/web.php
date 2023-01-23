@@ -249,6 +249,8 @@ Route::get('show/movie/{id}',[MoviesController::class,'showMovie'])->name('movie
 
 Route::get('Playing/With/BlogPosts',[MoviesController::class,'PlayingWithBlogPosts'])->name('playing.posts');
 
+Route::get('play/with/data',[MoviesController::class,'playWithData'])->name('play.with.data');
+
 // composer create-project --prefer-dist laravel/laravel name:8.*
 
 

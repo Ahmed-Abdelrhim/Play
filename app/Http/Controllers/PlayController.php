@@ -38,11 +38,11 @@ class PlayController extends Controller
         $author = Author::findOrFail($id);
 
 
-//        $image =  Storage::disk('s3')->response('thumbnails/' . '1666802816.jpg');
-//        $image =  Storage::disk('s3')->url('thumbnails/' . '1666802816.jpg');
-//        $image =  Storage::disk('s3')->temporaryUrl('thumbnails/' . '1666802816.jpg',now()->addMinutes(10));
-//        $image =  Storage::disk('s3')->url('thumbnails/' . $post->images()->first()->src);
-//        return $post->image != null ? $post->image()->first()->src : 'No Image';
+        //        $image =  Storage::disk('s3')->response('thumbnails/' . '1666802816.jpg');
+        //        $image =  Storage::disk('s3')->url('thumbnails/' . '1666802816.jpg');
+        //        $image =  Storage::disk('s3')->temporaryUrl('thumbnails/' . '1666802816.jpg',now()->addMinutes(10));
+        //        $image =  Storage::disk('s3')->url('thumbnails/' . $post->images()->first()->src);
+        //        return $post->image != null ? $post->image()->first()->src : 'No Image';
         if ($author->image != null) {
             $name = $author->image()->first()->src;
             $image_time_name = substr($name, strpos($name, 'profiles/') + 9); // 9
@@ -51,17 +51,17 @@ class PlayController extends Controller
         }
         return $post;
 
-//        if ($post->images != null) {
-//            return $post->images()->first();
-//        }
-//        return 'Post Has No Images';
-        // return $post->comments()->get();
+    //        if ($post->images != null) {
+    //            return $post->images()->first();
+    //        }
+    //        return 'Post Has No Images';
+            // return $post->comments()->get();
 
-//        (new Carbon\Carbon() )
-//        return Carbon::createFromDate($post->createdt_at)->diffForHumans();
-//        $author = Author::findOrFail($id);
-        //return $author->post()->get();
-//        return $author->with('posts')->first();
+    //        (new Carbon\Carbon() )
+    //        return Carbon::createFromDate($post->createdt_at)->diffForHumans();
+    //        $author = Author::findOrFail($id);
+            //return $author->post()->get();
+    //        return $author->with('posts')->first();
     }
 
     public function play($id)

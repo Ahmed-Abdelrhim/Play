@@ -50,9 +50,12 @@ class MoviesController extends Controller
 
     public function showMovie($id)
     {
-
-
         $uri = 'https://api.themoviedb.org/3/movie/' . $id;
         return $movie = Http::withToken($this->token)->get($uri)->json();
+    }
+
+    public function playWithData()
+    {
+
     }
 }
