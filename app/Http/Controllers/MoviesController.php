@@ -10,6 +10,8 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use GuzzleHttp\Client;
+use Spatie\Permission\Models\Role;
+
 // use GuzzleHttp\Psr7\Request;
 
 
@@ -62,4 +64,16 @@ class MoviesController extends Controller
 
         return $posts[0];
     }
+
+    public function play()
+    {
+        return view('play.index');
+    }
+
+    public function playWithRole($id)
+    {
+        $role = Role::query()->find($id);
+        return view('play.edit', ['role' => $role]);
+    }
+
 }

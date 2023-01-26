@@ -205,6 +205,10 @@ Route::get('s3',function (){
     Route::get('image', [FilesController::class, 'PlayWithImages']);
     Route::get('give/any/name', [FilesController::class, 'methodName'])->name('give.any.name');
 
+
+    Route::get('play',[MoviesController::class,'play']);
+    Route::get('play/{id}/{role}',[MoviesController::class,'playWithRole']);
+
     ####################################################################################################################
 
 
