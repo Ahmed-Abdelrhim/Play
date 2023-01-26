@@ -1,21 +1,19 @@
 {{--<div class="modal fade text-left" id="modalCreate" tabindex="-1" role="dialog" aria-hidden="true">--}}
-<div class="modal fade text-left" id="modalCreate" tabindex="-1" >
-{{--    <div class="modal-dialog modal-lg" role="document">--}}
-    <div class="modal-dialog modal-lg" >
+<div class="modal fade text-left" id="modalCreate" tabindex="-1">
+    {{--    <div class="modal-dialog modal-lg" role="document">--}}
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">Title</h4>
-                <button class="close" data-dismiss="modal" aria-label="close">
-                    <span aria-hidden="true">&times;</span>
+                {{-- <button class="close" data-dismiss="modal" aria-label="close">--}}
+                <button class="close" data-dismiss="modal">
+                    {{-- <span aria-hidden="true">&times;</span>--}}
+                    <span>&times;</span>
                 </button>
             </div>
         </div>
     </div>
 </div>
-
-
-
-
 
 
 {{--{{ Form::model($role, ['route' => ['roles.update', $role->id], 'method' => 'PUT']) }}--}}
