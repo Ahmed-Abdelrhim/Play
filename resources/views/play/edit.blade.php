@@ -1,10 +1,10 @@
 {{--<div class="modal fade text-left" id="modalCreate" tabindex="-1" role="dialog" aria-hidden="true">--}}
-<div class="modal fade text-left" id="modalCreate" tabindex="-1">
+<div class="modal fade text-left" id="modalCreate{{$role->id}}" tabindex="-1">
     {{--    <div class="modal-dialog modal-lg" role="document">--}}
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">@if(isset($role)) {{$role->name}}@endif</h4>
+                <h4 class="modal-title"> {{$role->name}}</h4>
                 {{-- <button class="close" data-dismiss="modal" aria-label="close">--}}
                 <button class="close" data-dismiss="modal">
                     {{-- <span aria-hidden="true">&times;</span>--}}

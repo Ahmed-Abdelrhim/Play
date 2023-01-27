@@ -65,10 +65,10 @@ class MoviesController extends Controller
         return $posts[0];
     }
 
-    public function play()
+    public function play(): Factory|View|Application
     {
-        return $roles = Role::query()->get(['id','name']);
-        return view('play.index');
+        $roles = Role::query()->get(['id','name']);
+        return view('play.index',['roles' => $roles]);
     }
 
     public function playWithRole($id)
