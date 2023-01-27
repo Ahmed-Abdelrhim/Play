@@ -67,6 +67,7 @@ class MoviesController extends Controller
 
     public function play()
     {
+        return $roles = Role::query()->get(['id','name']);
         return view('play.index');
     }
 

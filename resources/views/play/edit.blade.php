@@ -4,7 +4,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Title</h4>
+                <h4 class="modal-title">@if(isset($role)) {{$role->name}}@endif</h4>
                 {{-- <button class="close" data-dismiss="modal" aria-label="close">--}}
                 <button class="close" data-dismiss="modal">
                     {{-- <span aria-hidden="true">&times;</span>--}}

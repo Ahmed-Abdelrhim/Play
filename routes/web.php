@@ -207,7 +207,7 @@ Route::get('s3',function (){
 
 
     Route::get('play',[MoviesController::class,'play']);
-    Route::get('play/{id}/{role}',[MoviesController::class,'playWithRole']);
+    Route::get('play/{id}/role',[MoviesController::class,'playWithRole']);
 
     ####################################################################################################################
 
