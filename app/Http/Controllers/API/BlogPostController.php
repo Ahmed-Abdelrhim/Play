@@ -63,7 +63,7 @@ class BlogPostController extends Controller
             return $this->apiResponse(null, 404, 'BlogPost Not Found To Be Updated');
         $post->update($request->all());
         //return response()->json(['status' => 200 , 'msg' => 'Success' , 'data' => $post]);
-        return $this->apiResponse($post, 201, 'Post Updated Successfully ');
+        return $this->apiResponse($post, 200, 'Post Updated Successfully ');
 
     }
 

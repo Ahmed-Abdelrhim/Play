@@ -40,9 +40,9 @@ Route::post('login/comments',[CommentsController::class,'login']);
 
 Route::group(['middleware'=> 'auth:sanctum'],function() {
     Route::get('posts',[BlogPostController::class,'index']);
-    Route::get('post/{id}',[BlogPostController::class,'show']);
     Route::post('store/post',[BlogPostController::class,'storePost']);
     Route::post('update/post/{id}',[BlogPostController::class,'updateBlogPost']);
+    Route::get('post/{id}',[BlogPostController::class,'show']);
     Route::post('go/logout',[BlogPostController::class,'logout']);
 
     Route::get('comments/all' , [CommentsController::class,'index']);
@@ -52,5 +52,4 @@ Route::group(['middleware'=> 'auth:sanctum'],function() {
     ########################## Comments Controller  ##########################
 
 });
-
 // Bearer 8|bvdJN5psvglirLsO2DVWWm84tMCOGNwUHumxElpy
